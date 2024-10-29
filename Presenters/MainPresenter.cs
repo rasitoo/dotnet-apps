@@ -23,8 +23,8 @@ internal class MainPresenter : IPresenter
     }
     private void OnListBoxItemSelected(object sender, EventArgs e)
     {
-        string selectedItem = _view.SelectedItem;
-        Producto pr = repository.ProductoRepository1.Consultar(selectedItem);
+        int selectedItem = _view.SelectedItem;
+        Producto pr = repository.ProductoRepository1.buscarDesdePosicion(selectedItem);
         Mostrar(pr);
     }
 
@@ -42,7 +42,7 @@ internal class MainPresenter : IPresenter
 
     private void OnProductoAnadir_Click(object sender, EventArgs e)
     {
-        Producto pr = new Producto("", "", 0.0, new Categoria(""));
+        Producto pr = new Producto("", "", 0.0, 0);
         repository.ProductoRepository1.Anadir(pr);
         _view.cambiarLista(ListarProductos());
         Mostrar(pr);
@@ -55,7 +55,8 @@ internal class MainPresenter : IPresenter
     }
     private void OnButtonModificar_Click(object sender, EventArgs e)
     {
-        repository.ProductoRepository1.Modificar(_view.DisplayNombre, new Producto(_view.DisplayNombre, _view.DisplayDescripcion, Double.Parse(_view.DisplayPrecio), new Categoria("x")));
+        
+        repository.ProductoRepository1.Modificar(int.Parse(_view.DisplayId), new Producto(_view.DisplayNombre, _view.DisplayDescripcion, Double.Parse(_view.DisplayPrecio), 0));
     }
 
 
