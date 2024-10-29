@@ -14,6 +14,11 @@ internal class CategoriaRepository : IRepository<Categoria>
 
     public void Anadir(Categoria categoria)
     {
+
+        if (Categorias.Count != 0)
+            categoria.Id = Categorias.Last().Id + 1;
+        else
+            categoria.Id = 0;
         Categorias.Add(categoria);
     }
 

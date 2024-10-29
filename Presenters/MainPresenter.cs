@@ -42,7 +42,7 @@ internal class MainPresenter : IPresenter
 
     private void OnProductoAnadir_Click(object sender, EventArgs e)
     {
-        Producto pr = new Producto("", "", 0.0, 0);
+        Producto pr = new Producto("Null", "", 0.0, 0);
         repository.ProductoRepository1.Anadir(pr);
         _view.cambiarLista(ListarProductos());
         Mostrar(pr);
@@ -60,6 +60,16 @@ internal class MainPresenter : IPresenter
         {
             repository.ProductoRepository1.Modificar(int.Parse(_view.DisplayId), new Producto(_view.DisplayNombre, _view.DisplayDescripcion, Double.Parse(_view.DisplayPrecio), ct.Id));
 
+        }
+        else
+        {
+            DialogResult resultado = MessageBox.Show("La categoría introducida no existe, ¿desea crearla?", "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if(resultado == DialogResult.OK)
+            {
+                repository.CategoriaRepository.Anadir(new Categoria(_view.DisplayPertenencia));
+                ct = repository.CategoriaRepository.ConsultarNombre(_view.DisplayPertenencia);
+                repository.ProductoRepository1.Modificar(int.Parse(_view.DisplayId), new Producto(_view.DisplayNombre, _view.DisplayDescripcion, Double.Parse(_view.DisplayPrecio), ct.Id));
+            }
         }
     }
 

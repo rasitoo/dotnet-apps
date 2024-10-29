@@ -33,7 +33,10 @@ internal class ProductoRepository : IRepository<Producto>
 
     public void Anadir(Producto producto)
     {
-        producto.Id = Productos.Count;
+        if (Productos.Count != 0)
+            producto.Id = Productos.Last().Id + 1;
+        else
+            producto.Id = 0;
         Productos.Add(producto);
 
     }
