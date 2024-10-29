@@ -36,7 +36,7 @@ internal class MainPresenter : IPresenter
             _view.DisplayNombre = pr.Nombre;
             _view.DisplayDescripcion = pr.Descripcion;
             _view.DisplayPrecio = pr.Precio.ToString();
-            _view.DisplayPertenencia = pr.Categoria.Nombre;
+            _view.DisplayPertenencia = repository.CategoriaRepository.Consultar(pr.IdCategoria).Nombre;
         }
     }
 

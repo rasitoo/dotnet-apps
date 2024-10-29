@@ -17,20 +17,20 @@ internal class CategoriaRepository : IRepository<Categoria>
         Categorias.Add(categoria);
     }
 
-    public void Borrar(string nombre)
+    public void Borrar(int id)
     {
-        int posicion = buscarPosicion(nombre);
+        int posicion = buscarPosicion(id);
         if (posicion != -1)
         {
             Categorias.RemoveAt(posicion);
         }
     }
 
-    public Categoria Consultar(string nombre)
+    public Categoria Consultar(int id)
     {
         foreach (var categoria in Categorias)
         {
-            if (categoria.Nombre.Equals(nombre))
+            if (categoria.Id == id)
             {
                 return categoria;
             }
@@ -39,14 +39,14 @@ internal class CategoriaRepository : IRepository<Categoria>
         return null;
     }
 
-    public int buscarPosicion(string nombre)
+    public int buscarPosicion(int id)
     {
-        return Categorias.FindIndex(c => c.Nombre.Equals(nombre));
+        return Categorias.FindIndex(c => c.Id == id);
     }
 
-    public void Modificar(string nombre, Categoria categoria)
+    public void Modificar(int id, Categoria categoria)
     {
-        int posicion = buscarPosicion(nombre);
+        int posicion = buscarPosicion(id);
         if (posicion != -1)
         {
             Categorias[posicion] = categoria;

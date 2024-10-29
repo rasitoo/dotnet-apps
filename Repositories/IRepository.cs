@@ -3,7 +3,7 @@
 public interface IRepository<T>
 {
     void Anadir(T objeto);
-    void Modificar(string nombre, T objeto);
-    T Consultar(string nombre);
-    void Borrar(string nombre);
+    void Modificar(int id, T objeto);
+    T Consultar(int id);
+    void Borrar(int id);
 }

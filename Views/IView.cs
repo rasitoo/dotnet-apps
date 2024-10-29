@@ -12,7 +12,7 @@ internal interface IView
     public object DisplayPertenecientes { get; set; }
     public string DisplayPertenencia { get; set; }
     public string DisplayPrecio { get; set; }
-    string SelectedItem { get; }
+    int SelectedItem { get; }
     public string DisplayDescripcion { get; set; }
     void cambiarLista(List<String> lista);
 }

@@ -6,7 +6,7 @@ namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Views;
 public partial class MainView : Form, IView
 {
     internal MainPresenter Presenter { get; set; }
-    public string SelectedItem => listBox1.SelectedItem?.ToString();
+    public int SelectedItem => listBox1.SelectedIndex;
     public string DisplayId { get => textBoxId.Text; set => textBoxId.Text = value; }
     public string DisplayNombre { get => textBoxNombre.Text; set => textBoxNombre.Text = value; }
     public string DisplayPertenencia { get => textBoxInfo.Text; set => textBoxInfo.Text = value; }
