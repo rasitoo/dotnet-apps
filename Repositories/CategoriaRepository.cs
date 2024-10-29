@@ -38,6 +38,18 @@ internal class CategoriaRepository : IRepository<Categoria>
 
         return null;
     }
+    public Categoria ConsultarNombre(String nombre)
+    {
+        foreach (var categoria in Categorias)
+        {
+            if (categoria.Nombre.Equals(nombre))
+            {
+                return categoria;
+            }
+        }
+
+        return null;
+    }
 
     public int buscarPosicion(int id)
     {

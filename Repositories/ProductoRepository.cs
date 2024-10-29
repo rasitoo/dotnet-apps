@@ -38,12 +38,11 @@ internal class ProductoRepository : IRepository<Producto>
 
     }
 
-    public void Borrar(int id)
+    public void Borrar(int pos)
     {
-        int posicion = buscarPosicion(id);
-        if (posicion != -1)
+        if (pos != -1)
         {
-            Productos.RemoveAt(posicion);
+            Productos.RemoveAt(pos);
         }
     }
 
@@ -68,15 +67,28 @@ internal class ProductoRepository : IRepository<Producto>
 
         return null;
     }
+    public Producto ConsultarNombre(string nombre)
+    {
+        foreach (var producto in Productos)
+        {
+            if (producto.Nombre.Equals(nombre))
+            {
+                return producto;
+            }
+        }
+
+        return null;
+    }
 
     public void Modificar(int id, Producto producto)
     {
         int posicion = buscarPosicion(id);
         if (posicion != -1)
         {
+            int ident = Productos[posicion].Id;
+            producto.Id = ident;
             Productos[posicion] = producto;
         }
     }
-
 
 }

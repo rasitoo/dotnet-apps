@@ -55,8 +55,12 @@ internal class MainPresenter : IPresenter
     }
     private void OnButtonModificar_Click(object sender, EventArgs e)
     {
-        
-        repository.ProductoRepository1.Modificar(int.Parse(_view.DisplayId), new Producto(_view.DisplayNombre, _view.DisplayDescripcion, Double.Parse(_view.DisplayPrecio), 0));
+        Categoria ct = repository.CategoriaRepository.ConsultarNombre(_view.DisplayPertenencia);
+        if (!(ct is null))
+        {
+            repository.ProductoRepository1.Modificar(int.Parse(_view.DisplayId), new Producto(_view.DisplayNombre, _view.DisplayDescripcion, Double.Parse(_view.DisplayPrecio), ct.Id));
+
+        }
     }
 
 
