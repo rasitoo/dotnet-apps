@@ -47,9 +47,13 @@ internal class ProductoRepository : IRepository<Producto>
         }
     }
 
-    private int buscarPosicion(int id)
+    public int buscarPosicion(int id)
     {
         return Productos.FindIndex(c => c.Id == id);
+    }
+    public Producto buscarDesdePosicion(int pos)
+    {
+        return Productos.ElementAt(pos);
     }
 
     public Producto Consultar(int id)
@@ -73,4 +77,6 @@ internal class ProductoRepository : IRepository<Producto>
             Productos[posicion] = producto;
         }
     }
+
+
 }

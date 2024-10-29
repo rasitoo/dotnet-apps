@@ -43,6 +43,10 @@ internal class CategoriaRepository : IRepository<Categoria>
     {
         return Categorias.FindIndex(c => c.Id == id);
     }
+    public Categoria buscarDesdePosicion(int pos)
+    {
+        return Categorias.ElementAt(pos);
+    }
 
     public void Modificar(int id, Categoria categoria)
     {
