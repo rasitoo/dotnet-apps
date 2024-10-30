@@ -1,6 +1,6 @@
 using P03_02_DI_Contactos_TAPIADOR_rodrigo.Models;
+using P03_02_DI_Contactos_TAPIADOR_rodrigo.Models.repositories;
 using P03_02_DI_Contactos_TAPIADOR_rodrigo.Presenters;
-using P03_02_DI_Contactos_TAPIADOR_rodrigo.Repositories;
 using P03_02_DI_Contactos_TAPIADOR_rodrigo.Views;
 
 namespace P03_02_DI_Contactos_TAPIADOR_rodrigo;

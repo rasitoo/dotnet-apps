@@ -1,6 +1,6 @@
 ﻿namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Views;
 
-partial class MainView : IView
+partial class MainView
 {
     private System.ComponentModel.IContainer components = null;
     private SplitContainer splitContainer1;
@@ -25,7 +25,7 @@ partial class MainView : IView
     private TableLayoutPanel tableLayoutPanel1;
     private PictureBox pictureBox1;
     private ToolStripMenuItem productosToolStripMenuItem;
-    private ToolStripMenuItem categoríasToolStripMenuItem;
+    private ToolStripMenuItem categoriasToolStripMenuItem;
     private Label headerNombre;
     private Label headerDesc;
     private Label headerPrecio;
@@ -35,10 +35,6 @@ partial class MainView : IView
     private TextBox textBoxPrecio;
     private TextBox textBoxInfo;
     private ListBox listBoxInfo;
-    private Label headerId;
-    private TextBox textBoxId;
-    private Button buttonModificar;
-    private Button buttonEliminar;
 
 
 
@@ -48,6 +44,7 @@ partial class MainView : IView
         listBox1 = new ListBox();
         tableLayoutPanel1 = new TableLayoutPanel();
         pictureBox1 = new PictureBox();
+        buttonModificar = new Button();
         listBoxInfo = new ListBox();
         headerCategoria = new Label();
         textBoxInfo = new TextBox();
@@ -59,6 +56,7 @@ partial class MainView : IView
         textBoxNombre = new TextBox();
         headerId = new Label();
         textBoxId = new TextBox();
+        buttonEliminar = new Button();
         menuStrip1 = new MenuStrip();
         archivoToolStripMenuItem = new ToolStripMenuItem();
         nuevoToolStripMenuItem = new ToolStripMenuItem();
@@ -77,9 +75,7 @@ partial class MainView : IView
         irAToolStripMenuItem = new ToolStripMenuItem();
         verToolStripMenuItem = new ToolStripMenuItem();
         productosToolStripMenuItem = new ToolStripMenuItem();
-        categoríasToolStripMenuItem = new ToolStripMenuItem();
-        buttonEliminar = new Button();
-        buttonModificar = new Button();
+        categoriasToolStripMenuItem = new ToolStripMenuItem();
         ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
         splitContainer1.Panel1.SuspendLayout();
         splitContainer1.Panel2.SuspendLayout();
@@ -146,8 +142,8 @@ partial class MainView : IView
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.0685072F));
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.0685072F));
         tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.0685072F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 7.582938F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1374407F));
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 8.530806F));
+        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10.1895733F));
         tableLayoutPanel1.Size = new Size(531, 422);
         tableLayoutPanel1.TabIndex = 0;
         // 
@@ -160,6 +156,18 @@ partial class MainView : IView
         pictureBox1.Size = new Size(525, 87);
         pictureBox1.TabIndex = 0;
         pictureBox1.TabStop = false;
+        // 
+        // buttonModificar
+        // 
+        buttonModificar.BackColor = Color.YellowGreen;
+        tableLayoutPanel1.SetColumnSpan(buttonModificar, 2);
+        buttonModificar.Dock = DockStyle.Fill;
+        buttonModificar.Location = new Point(3, 381);
+        buttonModificar.Name = "buttonModificar";
+        buttonModificar.Size = new Size(258, 38);
+        buttonModificar.TabIndex = 10;
+        buttonModificar.Text = "Guardar";
+        buttonModificar.UseVisualStyleBackColor = false;
         // 
         // listBoxInfo
         // 
@@ -252,6 +260,17 @@ partial class MainView : IView
         textBoxId.Name = "textBoxId";
         textBoxId.Size = new Size(125, 27);
         textBoxId.TabIndex = 18;
+        // 
+        // buttonEliminar
+        // 
+        buttonEliminar.BackColor = Color.IndianRed;
+        buttonEliminar.Dock = DockStyle.Fill;
+        buttonEliminar.Location = new Point(267, 381);
+        buttonEliminar.Name = "buttonEliminar";
+        buttonEliminar.Size = new Size(261, 38);
+        buttonEliminar.TabIndex = 11;
+        buttonEliminar.Text = "Eliminar";
+        buttonEliminar.UseVisualStyleBackColor = false;
         // 
         // menuStrip1
         // 
@@ -366,7 +385,7 @@ partial class MainView : IView
         // 
         // verToolStripMenuItem
         // 
-        verToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { productosToolStripMenuItem, categoríasToolStripMenuItem });
+        verToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { productosToolStripMenuItem, categoriasToolStripMenuItem });
         verToolStripMenuItem.Name = "verToolStripMenuItem";
         verToolStripMenuItem.Size = new Size(44, 24);
         verToolStripMenuItem.Text = "Ver";
@@ -377,34 +396,11 @@ partial class MainView : IView
         productosToolStripMenuItem.Size = new Size(163, 26);
         productosToolStripMenuItem.Text = "Productos";
         // 
-        // categoríasToolStripMenuItem
+        // categoriasToolStripMenuItem
         // 
-        categoríasToolStripMenuItem.Name = "categoríasToolStripMenuItem";
-        categoríasToolStripMenuItem.Size = new Size(163, 26);
-        categoríasToolStripMenuItem.Text = "Categorías";
-        // 
-        // buttonEliminar
-        // 
-        buttonEliminar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-        buttonEliminar.BackColor = Color.IndianRed;
-        buttonEliminar.Location = new Point(350, 377);
-        buttonEliminar.Name = "buttonEliminar";
-        buttonEliminar.Size = new Size(94, 42);
-        buttonEliminar.TabIndex = 11;
-        buttonEliminar.Text = "Eliminar";
-        buttonEliminar.UseVisualStyleBackColor = false;
-        // 
-        // buttonModificar
-        // 
-        buttonModificar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-        buttonModificar.BackColor = Color.YellowGreen;
-        tableLayoutPanel1.SetColumnSpan(buttonModificar, 2);
-        buttonModificar.Location = new Point(85, 377);
-        buttonModificar.Name = "buttonModificar";
-        buttonModificar.Size = new Size(94, 42);
-        buttonModificar.TabIndex = 10;
-        buttonModificar.Text = "Guardar";
-        buttonModificar.UseVisualStyleBackColor = false;
+        categoriasToolStripMenuItem.Name = "categoriasToolStripMenuItem";
+        categoriasToolStripMenuItem.Size = new Size(163, 26);
+        categoriasToolStripMenuItem.Text = "Categorías";
         // 
         // MainView
         // 
@@ -429,6 +425,7 @@ partial class MainView : IView
         ResumeLayout(false);
         PerformLayout();
     }
+
     protected override void Dispose(bool disposing)
     {
         if (disposing && (components != null))
@@ -437,4 +434,9 @@ partial class MainView : IView
         }
         base.Dispose(disposing);
     }
+
+    private Label headerId;
+    private TextBox textBoxId;
+    private Button buttonModificar;
+    private Button buttonEliminar;
 }

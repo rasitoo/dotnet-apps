@@ -1,6 +1,4 @@
-﻿using P03_02_DI_Contactos_TAPIADOR_rodrigo.Models;
-
-namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Repositories;
+﻿namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Models.repositories;
 
 public interface IRepository<T>
 {

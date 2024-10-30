@@ -1,6 +1,6 @@
-﻿using P03_02_DI_Contactos_TAPIADOR_rodrigo.Models;
+﻿using P03_02_DI_Contactos_TAPIADOR_rodrigo.Models.dataclases;
 
-namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Repositories;
+namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Models.repositories;
 
 internal class ProductoRepository : IRepository<Producto>
 {

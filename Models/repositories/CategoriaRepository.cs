@@ -1,6 +1,6 @@
-﻿using P03_02_DI_Contactos_TAPIADOR_rodrigo.Models;
+﻿using P03_02_DI_Contactos_TAPIADOR_rodrigo.Models.dataclases;
 
-namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Repositories;
+namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Models.repositories;
 
 internal class CategoriaRepository : IRepository<Categoria>
 {
@@ -22,28 +22,34 @@ internal class CategoriaRepository : IRepository<Categoria>
         Categorias.Add(categoria);
     }
 
-    public void Borrar(int id)
+    public void Borrar(int pos)
     {
-        int posicion = buscarPosicion(id);
-        if (posicion != -1)
+        if (pos != -1)
         {
-            Categorias.RemoveAt(posicion);
+            Categorias.RemoveAt(pos);
         }
     }
 
     public Categoria Consultar(int id)
     {
-        foreach (var categoria in Categorias)
+        if (id == -1)
         {
-            if (categoria.Id == id)
+            return new Categoria("null");
+        }
+        else
+        {
+            foreach (var categoria in Categorias)
             {
-                return categoria;
+                if (categoria.Id == id)
+                {
+                    return categoria;
+                }
             }
         }
 
         return null;
     }
-    public Categoria ConsultarNombre(String nombre)
+    public Categoria ConsultarNombre(string nombre)
     {
         foreach (var categoria in Categorias)
         {
@@ -62,7 +68,9 @@ internal class CategoriaRepository : IRepository<Categoria>
     }
     public Categoria buscarDesdePosicion(int pos)
     {
-        return Categorias.ElementAt(pos);
+        if (Categorias.Count > 0)
+            return Categorias.ElementAt(pos);
+        return new Categoria("null");
     }
 
     public void Modificar(int id, Categoria categoria)
@@ -70,6 +78,8 @@ internal class CategoriaRepository : IRepository<Categoria>
         int posicion = buscarPosicion(id);
         if (posicion != -1)
         {
+            int ident = Categorias[posicion].Id;
+            categoria.Id = ident;
             Categorias[posicion] = categoria;
         }
     }
