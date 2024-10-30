@@ -3,12 +3,12 @@ using P03_02_DI_Contactos_TAPIADOR_rodrigo.Models.repositories;
 
 namespace P03_02_DI_Contactos_TAPIADOR_rodrigo.Models;
 
-internal class CounterModel : IModel
+internal class Model : IModel
 {
     internal CategoriaRepository CategoriaRepository { get; set; }
     internal ProductoRepository ProductoRepository { get; set; }
 
-    public CounterModel()
+    public Model()
     {
         CategoriaRepository = new();
         ProductoRepository = new();
@@ -16,72 +16,90 @@ internal class CounterModel : IModel
 
     public void AnadirProducto(Producto product)
     {
-        throw new NotImplementedException();
+        ProductoRepository.Anadir(product);
     }
 
     public void AnadirCategoria(Categoria categoria)
     {
-        throw new NotImplementedException();
+        CategoriaRepository.Anadir(categoria);
     }
 
     public void ModificarProducto(int id, Producto product)
     {
-        throw new NotImplementedException();
+        ProductoRepository.Modificar(BuscarPosicionProducto(id), product);
     }
 
     public void ModificarCategoria(int id, Categoria categoria)
     {
-        throw new NotImplementedException();
+        CategoriaRepository.Modificar(BuscarPosicionCategoria(id), categoria);
     }
 
     public Producto ConsultarProducto(int id)
     {
-        throw new NotImplementedException();
+        return ProductoRepository.Consultar(id);
     }
 
     public Categoria ConsultarCategoria(int id)
     {
-        throw new NotImplementedException();
+        return CategoriaRepository.Consultar(id);
     }
 
     public Producto ConsultarNombreProducto(string nombre)
     {
-        throw new NotImplementedException();
+        foreach (var producto in ProductoRepository.Productos)
+        {
+            if (producto.Nombre.Equals(nombre))
+            {
+                return producto;
+            }
+        }
+
+        return null;
     }
 
     public Categoria ConsultarNombreCategoria(string nombre)
     {
-        throw new NotImplementedException();
+        foreach (var categoria in CategoriaRepository.Categorias)
+        {
+            if (categoria.Nombre.Equals(nombre))
+            {
+                return categoria;
+            }
+        }
+
+        return null;
     }
 
     public void BorrarProducto(int id)
     {
-        throw new NotImplementedException();
+        ProductoRepository.Borrar(id);
     }
 
     public void BorrarCategoria(int id)
     {
-        throw new NotImplementedException();
+        CategoriaRepository.Borrar(id);
     }
 
     public int BuscarPosicionProducto(int id)
     {
-        throw new NotImplementedException();
+        return ProductoRepository.Productos.FindIndex(c => c.Id == id);
     }
 
     public int BuscarPosicionCategoria(int id)
     {
-        throw new NotImplementedException();
+        return CategoriaRepository.Categorias.FindIndex(c => c.Id == id);
     }
 
     public Producto BuscarProductoDesdePosicion(int pos)
     {
-        throw new NotImplementedException();
+        return ProductoRepository.Productos.ElementAt(pos);
     }
 
     public Categoria BuscarCategoriaDesdePosicion(int pos)
     {
-        throw new NotImplementedException();
+        if (CategoriaRepository.Categorias.Count > 0)
+            return CategoriaRepository.Categorias.ElementAt(pos);
+        return new Categoria("null");
     }
     public void ActualizarCategoriaDeProductos(int ctid)
     {

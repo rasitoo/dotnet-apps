@@ -48,16 +48,6 @@ internal class ProductoRepository : IRepository<Producto>
             Productos.RemoveAt(pos);
         }
     }
-
-    public int buscarPosicion(int id)
-    {
-        return Productos.FindIndex(c => c.Id == id);
-    }
-    public Producto buscarDesdePosicion(int pos)
-    {
-        return Productos.ElementAt(pos);
-    }
-
     public Producto Consultar(int id)
     {
         foreach (var producto in Productos)
@@ -70,27 +60,13 @@ internal class ProductoRepository : IRepository<Producto>
 
         return null;
     }
-    public Producto ConsultarNombre(string nombre)
+    public void Modificar(int pos, Producto producto)
     {
-        foreach (var producto in Productos)
+        if (pos != -1)
         {
-            if (producto.Nombre.Equals(nombre))
-            {
-                return producto;
-            }
-        }
-
-        return null;
-    }
-
-    public void Modificar(int id, Producto producto)
-    {
-        int posicion = buscarPosicion(id);
-        if (posicion != -1)
-        {
-            int ident = Productos[posicion].Id;
+            int ident = Productos[pos].Id;
             producto.Id = ident;
-            Productos[posicion] = producto;
+            Productos[pos] = producto;
         }
     }
 

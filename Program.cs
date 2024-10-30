@@ -13,8 +13,8 @@ internal static class Program
         ApplicationConfiguration.Initialize();
 
         MainView mainView = new();
-        MainRepository repository = new();
-        MainPresenter mainPresenter = new MainPresenter(mainView, repository);
+        Model model = new();
+        MainPresenter mainPresenter = new MainPresenter(mainView, model);
 
         Application.Run(mainView);
     }

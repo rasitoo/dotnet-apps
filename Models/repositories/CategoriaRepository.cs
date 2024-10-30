@@ -49,38 +49,13 @@ internal class CategoriaRepository : IRepository<Categoria>
 
         return null;
     }
-    public Categoria ConsultarNombre(string nombre)
+    public void Modificar(int pos, Categoria categoria)
     {
-        foreach (var categoria in Categorias)
+        if (pos != -1)
         {
-            if (categoria.Nombre.Equals(nombre))
-            {
-                return categoria;
-            }
-        }
-
-        return null;
-    }
-
-    public int buscarPosicion(int id)
-    {
-        return Categorias.FindIndex(c => c.Id == id);
-    }
-    public Categoria buscarDesdePosicion(int pos)
-    {
-        if (Categorias.Count > 0)
-            return Categorias.ElementAt(pos);
-        return new Categoria("null");
-    }
-
-    public void Modificar(int id, Categoria categoria)
-    {
-        int posicion = buscarPosicion(id);
-        if (posicion != -1)
-        {
-            int ident = Categorias[posicion].Id;
+            int ident = Categorias[pos].Id;
             categoria.Id = ident;
-            Categorias[posicion] = categoria;
+            Categorias[pos] = categoria;
         }
     }
 }
