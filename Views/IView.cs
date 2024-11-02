@@ -12,6 +12,8 @@ internal interface IView
     event EventHandler categoriasToolStripMenuItem_Click;
     event EventHandler ListBoxInfoItemClicked;
     event EventHandler categoriaAnadir_Click;
+    event EventHandler guardarToolStripMenuItem_Click;
+
 
 
 

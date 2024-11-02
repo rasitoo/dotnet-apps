@@ -10,6 +10,7 @@ public class Categoria
         return $"{nameof(Nombre)}: {Nombre}";
     }
 
+    public Categoria() { }
     public Categoria(string nombre)
     {
         Nombre = nombre;

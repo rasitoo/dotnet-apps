@@ -92,6 +92,10 @@ internal class Model : IModel
 
     public Producto BuscarProductoDesdePosicion(int pos)
     {
+        if (pos < 0 || pos >= ProductoRepository.Productos.Count)
+        {
+            return new("","",0,-1);
+        }
         return ProductoRepository.Productos.ElementAt(pos);
     }
 
@@ -148,5 +152,11 @@ internal class Model : IModel
             lista.Add(categoria.Nombre);
         }
         return lista;
+    }
+
+    public void GuardarEnXML()
+    {
+        ProductoRepository.GuardarEnXml();
+        CategoriaRepository.GuardarEnXml();
     }
 }

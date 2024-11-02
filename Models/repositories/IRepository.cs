@@ -6,5 +6,7 @@ public interface IRepository<T>
     void Modificar(int pos, T objeto);
     T Consultar(int id);
     void Borrar(int id);
+    public void GuardarEnXml();
+    public void CargarDesdeXml();
 
 }

@@ -23,4 +23,5 @@ internal interface IModel
     List<String> listarProductosPorCategoria(Categoria categoria);
     List<String> ListarProductos();
     List<String> ListarCategorias();
+    void GuardarEnXML();
 }

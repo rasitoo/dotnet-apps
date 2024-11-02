@@ -22,7 +22,14 @@ internal class MainPresenter : IPresenter
         _view.productosToolStripMenuItem_Click += OnproductosToolStripMenuItem_Click;
         _view.categoriasToolStripMenuItem_Click += OncategoriasToolStripMenuItem_Click;
         _view.ListBoxInfoItemClicked += OnListBoxInfoItemClicked;
+        _view.guardarToolStripMenuItem_Click += OnGuardarToolStripMenuItem_Click;
     }
+
+    private void OnGuardarToolStripMenuItem_Click(object? sender, EventArgs e)
+    {
+        _model.GuardarEnXML();
+    }
+
     private void OncategoriaAnadir_Click(object? sender, EventArgs e)
     {
         Categoria ct = new Categoria("null");
@@ -91,6 +98,7 @@ internal class MainPresenter : IPresenter
             }
             else
             {
+                //TODO Metodo ShowMessage en la vista para no crear el mensaje desde presentador
                 if (_view.DisplayPertenencia.Equals("null") || _view.DisplayPertenencia.Equals(""))
                 {
                     MessageBox.Show("La categoría no puede estar vacía o con valor null", "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
@@ -144,7 +152,7 @@ internal class MainPresenter : IPresenter
             _view.DisplayNombre = pr.Nombre;
             _view.DisplayDescripcion = pr.Descripcion;
             _view.DisplayPrecio = pr.Precio.ToString();
-            _view.DisplayPertenencia = _model.ConsultarCategoria(pr.IdCategoria).Nombre;
+            _view.DisplayPertenencia = "null";
         }
     }
     private void MostrarCategoria(Categoria ct)
