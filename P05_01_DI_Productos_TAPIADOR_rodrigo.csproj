@@ -10,14 +10,9 @@
 
   <ItemGroup>
     <Folder Include="Data\DbContext\" />
-    <Folder Include="Data\Entities\" />
     <Folder Include="Services\Dtos\" />
-    <Folder Include="Services\Services\" />
-    <Folder Include="UI\" />
     <Folder Include="UI\Themes\" />
-    <Folder Include="UI\Views\" />
     <Folder Include="UI\ViewModels\" />
-    <Folder Include="Data\Repositories\" />
   </ItemGroup>
 
 </Project>
