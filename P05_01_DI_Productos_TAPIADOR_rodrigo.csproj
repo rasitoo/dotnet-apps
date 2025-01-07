@@ -10,9 +10,13 @@
 
   <ItemGroup>
     <Folder Include="Data\DbContext\" />
+    <Folder Include="Properties\" />
     <Folder Include="Services\Dtos\" />
     <Folder Include="UI\Themes\" />
-    <Folder Include="UI\ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
   </ItemGroup>
 
 </Project>

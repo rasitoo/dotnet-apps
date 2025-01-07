@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo"
              StartupUri="UI/Views/MainWindow.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

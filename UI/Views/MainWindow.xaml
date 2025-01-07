@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo"
+        xmlns:vm="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo.UI.ViewModels"
         mc:Ignorable="d"
+        xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <RadioButton Content="Inicio"
+                         Command="{Binding ActivateHomeViewCommand}" IsChecked="True" GroupName="SideMenu" />
+            <RadioButton Content="Productos"
+                         Command="{Binding ActivateProductViewCommand}" GroupName="SideMenu" />
+            <RadioButton Content="Categorias"
+                         Command="{Binding ActivateCategoryViewCommand}" GroupName="SideMenu" />
+        </StackPanel>
+        <ContentControl Name="Content" Content="{Binding ActiveView}" Grid.Column="1" />
     </Grid>
 </Window>
