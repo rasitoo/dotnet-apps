@@ -6,13 +6,15 @@
              xmlns:local="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo.UI.Views"
              mc:Ignorable="d" 
                           xmlns:vm="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo.UI.ViewModels"
+                     xmlns:p="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo.Properties"
+
 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
         <vm:CategoryViewModel />
     </UserControl.DataContext>
     <Grid>
-        <TextBlock Text="Categorias" Foreground="Black" FontSize="100"
+        <TextBlock Text="{x:Static p:Resources.Category}" Foreground="Black" FontSize="100"
  HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </UserControl>

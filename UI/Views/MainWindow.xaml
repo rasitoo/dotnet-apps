@@ -17,7 +17,7 @@
         <vm:MainViewModel />
     </Window.DataContext>
     <StackPanel>
-        <ui:TitleBar Title="Catálogo Productos"/>
+        <ui:TitleBar Title="{x:Static p:Resources.Title}"/>
         <Grid>
 
             <Grid.ColumnDefinitions>
