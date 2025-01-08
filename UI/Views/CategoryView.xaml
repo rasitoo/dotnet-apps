@@ -8,11 +8,18 @@
              xmlns:vm="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo.UI.ViewModels"
              xmlns:p="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo.Properties"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/P05_01_DI_Productos_TAPIADOR_rodrigo;component/UI/Themes/Generics.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <UserControl.DataContext>
         <vm:CategoryViewModel />
     </UserControl.DataContext>
     <Grid>
-        <TextBlock Text="{x:Static p:Resources.Category}" Foreground="Black" FontSize="100"
+        <TextBlock Text="{x:Static p:Resources.Category}" 
  HorizontalAlignment="Center" VerticalAlignment="Center" />
     </Grid>
 </UserControl>

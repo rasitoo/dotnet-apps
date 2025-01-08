@@ -12,7 +12,6 @@
     <Folder Include="Data\DbContext\" />
     <Folder Include="Resources\" />
     <Folder Include="Services\Dtos\" />
-    <Folder Include="UI\Themes\" />
   </ItemGroup>
 
   <ItemGroup>

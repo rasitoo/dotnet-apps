@@ -8,19 +8,26 @@
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:vm="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo.UI.ViewModels"
              xmlns:p="clr-namespace:P05_01_DI_Productos_TAPIADOR_rodrigo.Properties">
-        <UserControl.DataContext>
-            <vm:SettingsViewModel/>
-        </UserControl.DataContext>
-        <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/P05_01_DI_Productos_TAPIADOR_rodrigo;component/UI/Themes/Generics.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:SettingsViewModel/>
+    </UserControl.DataContext>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-            <TextBlock Text="{x:Static p:Resources.Language}" Foreground="Black" FontSize="100"
-                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <TextBlock Text="{x:Static p:Resources.Language}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" />
         <ComboBox x:Name="comboBox" Grid.Row="1" SelectedItem="{Binding SelectedItem}" SelectionChanged="ComboBox_SelectionChanged">
             <ComboBoxItem Content="es"/>
             <ComboBoxItem Content="en"/>
         </ComboBox>
-        </Grid>
+    </Grid>
 </UserControl>
