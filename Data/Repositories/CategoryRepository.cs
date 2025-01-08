@@ -1,30 +1,64 @@
 ﻿using P05_01_DI_Productos_TAPIADOR_rodrigo.Data.Entities;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace P05_01_DI_Productos_TAPIADOR_rodrigo.Data.Repositories;
 
 internal class CategoryRepository : IRepository<Category>
 {
-    public void Add(Category objeto)
+    private string filePath = "./Category.xml";
+    public List<Category> Categories { get; set; }
+    public CategoryRepository()
     {
-        throw new NotImplementedException();
+        Categories = new();
     }
-
-    public void Delete(int id)
+    public void Add(Category Category)
     {
-        throw new NotImplementedException();
-    }
 
+        if (Categories.Count != 0)
+            Category.Id = Categories.Last().Id + 1;
+        else
+            Category.Id = 0;
+        Categories.Add(Category);
+    }
+    public void Delete(int pos)
+    {
+        if (pos != -1)
+        {
+            Categories.RemoveAt(pos);
+        }
+    }
     public Category Get(int id)
     {
-        throw new NotImplementedException();
+        if (id == -1)
+        {
+            return new Category("null");
+        }
+        else
+        {
+            foreach (var Category in Categories)
+            {
+                if (Category.Id == id)
+                {
+                    return Category;
+                }
+            }
+        }
+
+        return null;
     }
+    public void Update(int pos, Category Category)
+    {
+        if (pos != -1)
+        {
+            int ident = Categories[pos].Id;
+            Category.Id = ident;
+            Categories[pos] = Category;
+        }
+    }
+
 
     public List<Category> GetAll()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(int pos, Category objeto)
     {
         throw new NotImplementedException();
     }

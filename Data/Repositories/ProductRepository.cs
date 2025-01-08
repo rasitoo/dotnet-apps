@@ -1,30 +1,58 @@
 ﻿using P05_01_DI_Productos_TAPIADOR_rodrigo.Data.Entities;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace P05_01_DI_Productos_TAPIADOR_rodrigo.Data.Repositories;
 
 internal class ProductRepository : IRepository<Product>
 {
-    public void Add(Product objeto)
+    private string filePath = "Product.xml";
+    public List<Product> Products { get; set; }
+    public ProductRepository()
     {
-        throw new NotImplementedException();
+        Products = new();
     }
 
-    public void Delete(int id)
+    public void Add(Product Product)
     {
-        throw new NotImplementedException();
+        if (Products.Count != 0)
+            Product.Id = Products.Last().Id + 1;
+        else
+            Product.Id = 0;
+        Products.Add(Product);
+
     }
 
+    public void Delete(int pos)
+    {
+        if (pos != -1)
+        {
+            Products.RemoveAt(pos);
+        }
+    }
     public Product Get(int id)
     {
-        throw new NotImplementedException();
+        foreach (var Product in Products)
+        {
+            if (Product.Id == id)
+            {
+                return Product;
+            }
+        }
+
+        return null;
+    }
+    public void Update(int pos, Product Product)
+    {
+        if (pos != -1)
+        {
+            int ident = Products[pos].Id;
+            Product.Id = ident;
+            Products[pos] = Product;
+        }
     }
 
     public List<Product> GetAll()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Update(int pos, Product objeto)
     {
         throw new NotImplementedException();
     }
