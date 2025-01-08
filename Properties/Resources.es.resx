@@ -123,6 +123,9 @@
   <data name="Home" xml:space="preserve">
     <value>Inicio</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
   <data name="NavCategories" xml:space="preserve">
     <value>Categorias</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="NavProducts" xml:space="preserve">
     <value>Productos</value>
+  </data>
+  <data name="NavSettings" xml:space="preserve">
+    <value>Ajustes</value>
   </data>
   <data name="Product" xml:space="preserve">
     <value>Producto</value>

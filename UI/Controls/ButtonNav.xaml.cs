@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace P05_01_DI_Productos_TAPIADOR_rodrigo.UI.Controls;
 

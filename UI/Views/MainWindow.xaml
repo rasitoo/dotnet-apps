@@ -29,7 +29,7 @@
 
                 <!--
                 Menú de navegación hecho con WPF-UI, sacado de https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui.Gallery/Views/Pages/Navigation/NavigationViewPage.xaml
-                Ejemplo con todos los controles posibles en: https://apps.microsoft.com/detail/9n9lkv8r9vgm?cid=windows-lp-hero&hl=en-US&gl=US
+                Ejemplo con todos los controles en: https://apps.microsoft.com/detail/9n9lkv8r9vgm?cid=windows-lp-hero&hl=en-US&gl=US
                 
                 <ui:NavigationView
                 MinHeight="300"
@@ -63,7 +63,11 @@
                 <c:ButtonNav Text="{x:Static p:Resources.NavHome}" Icon="Home" IsChecked="True" Command="{Binding ActivateHomeViewCommand}" GroupName="SideMenu"/>
                 <c:ButtonNav Text="{x:Static p:Resources.NavProducts}" Icon="Library"  Command="{Binding ActivateProductViewCommand}" GroupName="SideMenu" />
                 <c:ButtonNav Text="{x:Static p:Resources.NavCategories}" Icon="Library" Command="{Binding ActivateCategoryViewCommand}" GroupName="SideMenu" />
+                <c:ButtonNav Text="{x:Static p:Resources.NavSettings}" Icon="Settings" Command="{Binding ActivateSettingsViewCommand}" GroupName="SideMenu" />
+
+
             </StackPanel>
+
             <ContentControl Name="Content" Content="{Binding ActiveView}" Grid.Column="1" />
         </Grid>
     </StackPanel>

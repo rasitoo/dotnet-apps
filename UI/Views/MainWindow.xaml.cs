@@ -1,6 +1,4 @@
-﻿using System.Windows.Media;
-
-namespace P05_01_DI_Productos_TAPIADOR_rodrigo;
+﻿namespace P05_01_DI_Productos_TAPIADOR_rodrigo;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -14,7 +12,7 @@ public partial class MainWindow
     }
     private void LoadSettings()
     {
-        Properties.Settings.Default.Language = "es";
+        Thread.CurrentThread.CurrentUICulture = new(Properties.Settings.Default.Language);
         Properties.Settings.Default.Save();
     }
 

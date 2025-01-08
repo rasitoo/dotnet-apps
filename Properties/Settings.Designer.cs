@@ -25,7 +25,7 @@ namespace P05_01_DI_Productos_TAPIADOR_rodrigo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("es")]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
         public string Language {
             get {
                 return ((string)(this["Language"]));

@@ -79,6 +79,15 @@ namespace P05_01_DI_Productos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Categories.
         /// </summary>
         public static string NavCategories {
@@ -102,6 +111,15 @@ namespace P05_01_DI_Productos_TAPIADOR_rodrigo.Properties {
         public static string NavProducts {
             get {
                 return ResourceManager.GetString("NavProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Settings.
+        /// </summary>
+        public static string NavSettings {
+            get {
+                return ResourceManager.GetString("NavSettings", resourceCulture);
             }
         }
         
