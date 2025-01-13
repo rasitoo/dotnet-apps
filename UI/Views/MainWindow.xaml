@@ -1,5 +1,4 @@
-﻿<!--ui es WPF-UI, en principio iba a hacer la interfaz con esa biblioteca pero al final no (esta comentado) y solo he dejado la FluentWindow y el TitleBar, los iconos los he sacado de FluentIcons.Wpf -->
-    <ui:FluentWindow x:Class="P06_01_DI_Contactos_TAPIADOR_rodrigo.MainWindow"
+﻿<Window x:Class="P06_01_DI_Contactos_TAPIADOR_rodrigo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,65 +7,31 @@
         mc:Ignorable="d"
         xmlns:vm="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels"
         xmlns:c="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Controls"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" 
         xmlns:p="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.Properties"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
-    <StackPanel>
-        <ui:TitleBar Title="{x:Static p:Resources.Title}"/>
         <Grid>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
             <StackPanel>
-
-                <!--
-                Menú de navegación hecho con WPF-UI, sacado de https://github.com/lepoco/wpfui/blob/main/src/Wpf.Ui.Gallery/Views/Pages/Navigation/NavigationViewPage.xaml
-                Ejemplo con todos los controles en: https://apps.microsoft.com/detail/9n9lkv8r9vgm?cid=windows-lp-hero&hl=en-US&gl=US
-                
-                <ui:NavigationView
-                MinHeight="300"
-                Margin="0"
-                IsBackButtonVisible="Collapsed"
-                IsPaneToggleVisible="True"
-                PaneDisplayMode="Left"
-                >
-                    <ui:NavigationView.MenuItems>
-                        <ui:NavigationViewItem
-                        Content="Inicio"
-                        Icon="{ui:SymbolIcon Home24}"
-                        Command="{Binding ActivateHomeViewCommand}"
-                         />
-                        <ui:NavigationViewItem
-                        Content="Productos"
-                        Icon="{ui:SymbolIcon Library24}"
-                        Command="{Binding ActivateProductViewCommand}"
-                        
-                        />
-                        <ui:NavigationViewItem
-                        Content="Categorías"
-                        Icon="{ui:SymbolIcon Library24}"
-                        Command="{Binding ActivateCategoryViewCommand}"
-                        />
-                    </ui:NavigationView.MenuItems>
-                </ui:NavigationView>
-                -->
-
-
-                <c:ButtonNav Text="{x:Static p:Resources.NavHome}" Icon="Home" IsChecked="True" Command="{Binding ActivateHomeViewCommand}" GroupName="SideMenu"/>
-                <c:ButtonNav Text="{x:Static p:Resources.NavProducts}" Icon="Library"  Command="{Binding ActivateProductViewCommand}" GroupName="SideMenu" />
+                <c:ButtonNav Text="{x:Static p:Resources.NavHome}" Icon="Home" IsChecked="True" Command="{Binding ActivateHomeViewCommand}" GroupName="SideMenu" />
+                <c:ButtonNav Text="{x:Static p:Resources.NavProducts}" Icon="Library" Command="{Binding ActivateProductViewCommand}" GroupName="SideMenu" />
                 <c:ButtonNav Text="{x:Static p:Resources.NavCategories}" Icon="Library" Command="{Binding ActivateCategoryViewCommand}" GroupName="SideMenu" />
                 <c:ButtonNav Text="{x:Static p:Resources.NavSettings}" Icon="Settings" Command="{Binding ActivateSettingsViewCommand}" GroupName="SideMenu" />
-
-
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+            <c:ButtonNav Text="{x:Static p:Resources.NavExit}" Icon="ArrowExit" Command="{Binding ExitCommand}" />
             </StackPanel>
 
-            <ContentControl Name="Content" Content="{Binding ActiveView}" Grid.Column="1" />
+            <ContentControl Name="Content" Content="{Binding ActiveView}" Grid.Column="1" Grid.RowSpan="2" />
         </Grid>
-    </StackPanel>
-</ui:FluentWindow>
+</Window>

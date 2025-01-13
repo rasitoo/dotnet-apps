@@ -97,6 +97,15 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Exit.
+        /// </summary>
+        public static string NavExit {
+            get {
+                return ResourceManager.GetString("NavExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Home.
         /// </summary>
         public static string NavHome {

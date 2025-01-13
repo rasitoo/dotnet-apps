@@ -129,6 +129,9 @@
   <data name="NavCategories" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="NavExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
   <data name="NavHome" xml:space="preserve">
     <value>Home</value>
   </data>
