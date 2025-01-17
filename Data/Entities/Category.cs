@@ -2,17 +2,17 @@
 
 internal class Category
 {
-    public string Nombre { get; set; }
+    public string Name { get; set; }
     public int Id { get; set; }
 
     public override string ToString()
     {
-        return $"{nameof(Nombre)}: {Nombre}";
+        return Name;
     }
 
     public Category() { }
     public Category(string nombre)
     {
-        Nombre = nombre;
+        Name = nombre;
     }
 }

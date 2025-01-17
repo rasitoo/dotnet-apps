@@ -7,25 +7,29 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Repositories;
 internal class CategoryRepository : IRepository<Category>
 {
     private string filePath = "./Category.xml";
-    public List<Category> Categories { get; set; }
+    private List<Category> _categories;
     public CategoryRepository()
     {
-        Categories = new();
+        _categories = new();
+        _categories.Add( new("Verduras"));
+        _categories.Add(new("Carnes"));
+        _categories.Add(new("Herramientas"));
+        _categories.Add(new("Menaje"));
     }
     public void Add(Category Category)
     {
 
-        if (Categories.Count != 0)
-            Category.Id = Categories.Last().Id + 1;
+        if (_categories.Count != 0)
+            Category.Id = _categories.Last().Id + 1;
         else
             Category.Id = 0;
-        Categories.Add(Category);
+        _categories.Add(Category);
     }
     public void Delete(int pos)
     {
         if (pos != -1)
         {
-            Categories.RemoveAt(pos);
+            _categories.RemoveAt(pos);
         }
     }
     public Category Get(int id)
@@ -36,7 +40,7 @@ internal class CategoryRepository : IRepository<Category>
         }
         else
         {
-            foreach (var Category in Categories)
+            foreach (var Category in _categories)
             {
                 if (Category.Id == id)
                 {
@@ -51,15 +55,15 @@ internal class CategoryRepository : IRepository<Category>
     {
         if (pos != -1)
         {
-            int ident = Categories[pos].Id;
+            int ident = _categories[pos].Id;
             Category.Id = ident;
-            Categories[pos] = Category;
+            _categories[pos] = Category;
         }
     }
 
 
     public List<Category> GetAll()
     {
-        throw new NotImplementedException();
+        return _categories.ToList();
     }
 }

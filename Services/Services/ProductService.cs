@@ -5,7 +5,7 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 
 internal class ProductService : IRepositoryService<Product>
 {
-    internal ProductRepository ProductRepository { get; set; }
+    internal ProductRepository ProductRepository { get; set; } = new();
     public void Add(Product objeto)
     {
         ProductRepository.Add(objeto);

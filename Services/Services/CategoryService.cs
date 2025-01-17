@@ -5,7 +5,7 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 
 internal class CategoryService : IRepositoryService<Category>
 {
-    internal CategoryRepository CategoryRepository { get; set; }
+    internal CategoryRepository CategoryRepository { get; set; } = new();
     public void Add(Category objeto)
     {
         CategoryRepository.Add(objeto);
