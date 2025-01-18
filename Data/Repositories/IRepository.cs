@@ -4,7 +4,7 @@ internal interface IRepository<T>
 {
     T Get(int id);
     List<T> GetAll();
-    void Add(T objeto);
-    void Delete(int id);
-    void Update(int pos, T objeto);
+    void Add(T item);
+    void Delete(T item);
+    void Update(T item);
 }
