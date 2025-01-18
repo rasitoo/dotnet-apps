@@ -9,7 +9,6 @@ internal class Product
     public int Id { get; set; }
 
 
-    public Product() { }
     public Product(string nombre, string descripcion, double precio, int categoria)
     {
         Name = nombre;

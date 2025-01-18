@@ -6,7 +6,6 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Repositories;
 
 internal class ProductRepository : IRepository<Product>
 {
-    private string filePath = "Product.xml";
     private List<Product> _products;
     public ProductRepository()
     {

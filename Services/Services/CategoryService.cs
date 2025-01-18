@@ -3,9 +3,8 @@ using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Repositories;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 
-internal class CategoryService : IRepositoryService<Category>
+internal class CategoryService(IRepository<Category> CategoryRepository) : IRepositoryService<Category>
 {
-    internal CategoryRepository CategoryRepository { get; set; } = new();
     public void Add(Category objeto)
     {
         CategoryRepository.Add(objeto);

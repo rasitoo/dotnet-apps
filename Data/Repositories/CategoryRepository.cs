@@ -6,7 +6,6 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Repositories;
 
 internal class CategoryRepository : IRepository<Category>
 {
-    private string filePath = "./Category.xml";
     private List<Category> _categories;
     public CategoryRepository()
     {

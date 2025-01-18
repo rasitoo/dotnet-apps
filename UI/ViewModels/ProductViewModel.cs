@@ -5,14 +5,15 @@ using System.Collections.ObjectModel;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
-partial class ProductViewModel : ObservableObject
+partial class ProductViewModel(IRepositoryService<Product> productService) : ObservableObject
 {
-    private static IRepositoryService<Product> productRepository { get; set; } = new ProductService();
 
     [ObservableProperty]
     private object _activeView;
 
 
     [ObservableProperty]
-    private ObservableCollection<Product> _products = new(productRepository.GetAll());
+    private ObservableCollection<Product> _products = new(productService.GetAll());
+
+
 }

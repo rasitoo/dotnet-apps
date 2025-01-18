@@ -33,6 +33,7 @@ public partial class SettingsView : UserControl
             catch (CultureNotFoundException ex)
             {
                 MessageBox.Show($"Cultura '{selectedLanguage[1]}' inválida.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
         }
     }

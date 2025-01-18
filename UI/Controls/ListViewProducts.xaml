@@ -6,10 +6,9 @@
              xmlns:local="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Controls"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels"
+             d:DataContext="{d:DesignInstance vm:ProductViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <vm:ProductViewModel />
-    </UserControl.DataContext>
+
     <Grid>
         <ListView ItemsSource="{Binding Products}"
                   HorizontalAlignment="Center"

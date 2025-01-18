@@ -3,9 +3,8 @@ using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Repositories;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 
-internal class ProductService : IRepositoryService<Product>
+internal class ProductService(IRepository<Product> ProductRepository) : IRepositoryService<Product>
 {
-    internal ProductRepository ProductRepository { get; set; } = new();
     public void Add(Product objeto)
     {
         ProductRepository.Add(objeto);
