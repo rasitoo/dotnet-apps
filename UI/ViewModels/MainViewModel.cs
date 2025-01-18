@@ -1,21 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
+using P06_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Views;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
 
 
-partial class MainViewModel : ObservableObject
+partial class MainViewModel(IRepositoryService<Product> productService,IRepositoryService<Category> categoryService) : ObservableObject
 {
+
+    [ObservableProperty]
+    private ObservableCollection<Product> _products = new(productService.GetAll());
+    [ObservableProperty]
+    private ObservableCollection<Category> _categories = new(categoryService.GetAll());
+    public HomeView HomeView { get; } = new HomeView();
     [ObservableProperty]
     private object _activeView;
-    public HomeView HomeView { get; } = new HomeView();
     public ProductView ProductView { get; } = new ProductView();
     public CategoryView CategoryView { get; } = new CategoryView();    
     public SettingsView SettingsView { get; } = new SettingsView();
-    public MainViewModel() => ActiveView = HomeView;
     [RelayCommand]
     private void ActivateHomeView() => ActiveView = HomeView;
     [RelayCommand]
