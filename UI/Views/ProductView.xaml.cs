@@ -1,12 +1,15 @@
-﻿using System.Windows.Controls;
+﻿using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
+using P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
+using System.Windows.Controls;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Views;
 
 
 public partial class ProductView : UserControl
 {
-    public ProductView()
+    public ProductView(ProductViewModel viewModel)
     {
         InitializeComponent();
+        this.DataContext = viewModel;
     }
 }

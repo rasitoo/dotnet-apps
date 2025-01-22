@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Repositories;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
-using P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Controls;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Views;
 using System.Windows;
@@ -14,40 +13,25 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo;
 
 public partial class App : Application
 {
-
+    public static IServiceProvider ServiceProvider { get; private set; }
     protected override void OnStartup(StartupEventArgs e)
     {
-        base.OnStartup(e);
+        var serviceCollection = new ServiceCollection();
+        ConfigureServices(serviceCollection);
+        ServiceProvider = serviceCollection.BuildServiceProvider();
+        //GenerarDummies();
 
-        ServiceCollection services = new();
-
-        services.AddTransient<MainWindow>();
-        services.AddTransient<MainViewModel>();
-        services.AddTransient<CategoryView>();
-        services.AddTransient<ListViewCategories>();
-        services.AddTransient<CategoryViewModel>();
-        services.AddTransient<ProductView>();
-        services.AddTransient<ListViewProducts>();
-        services.AddTransient<ProductViewModel>();
-        services.AddTransient<SettingsView>();
-        services.AddTransient<SettingsViewModel>();
-        services.AddTransient<HomeView>();
-        services.AddTransient<HomeViewModel>();
-        services.AddScoped<IRepositoryService<Product>, ProductService>();
-        services.AddScoped<IRepositoryService<Category>, CategoryService>();
-        services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost,1433;User Id=sa;Password=Interfaces-2425;TrustServerCertificate=true;"));
-        services.AddScoped<IRepository<Product>,ProductRepository>();
-        services.AddScoped<IRepository<Category>, CategoryRepository>();
-
-        var serviceProvider = services.BuildServiceProvider();
-
-
-        // Solo para cargar datos dummy, quitar en aplicación en producción. Generado con Copilot
-        using (var scope = serviceProvider.CreateScope())
+        var mainWindow = ServiceProvider.GetService<MainWindow>();
+        mainWindow.DataContext = ServiceProvider.GetRequiredService<MainViewModel>();
+        mainWindow.Show();
+    }
+    // Solo para cargar datos dummy, quitar en aplicación en producción. Generado con Copilot
+    private void GenerarDummies()
+    {
+        using (var scope = ServiceProvider.CreateScope())
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             dbContext.Database.EnsureCreated();
-
             if (dbContext.Categories.Count<Category>() == 0)
             {
                 var categories = new List<Category>
@@ -57,10 +41,8 @@ public partial class App : Application
                     new Category { Name = "Herramientas" },
                     new Category { Name = "Menaje" }
                 };
-
                 dbContext.Categories.AddRange(categories);
                 dbContext.SaveChanges();
-
                 var products = new List<Product>
                 {
                     // Verduras
@@ -91,29 +73,28 @@ public partial class App : Application
                     new Product { Name = "Tenedor", Description = "Tenedor de acero inoxidable", Price = 1.5, CategoryId = categories[3].Id, ImageUri = "https://picsum.photos/250/250" },
                     new Product { Name = "Cuchillo", Description = "Cuchillo de cocina", Price = 2.5, CategoryId = categories[3].Id, ImageUri = "https://picsum.photos/250/250" }
                 };
-
                 dbContext.Products.AddRange(products);
                 dbContext.SaveChanges();
             }
         }
-        //
-
-
-        var view = serviceProvider.GetService<MainWindow>();
-        view.DataContext = serviceProvider.GetService<MainViewModel>();
-
-        var listViewProducts = serviceProvider.GetService<ListViewProducts>();
-        listViewProducts.DataContext = serviceProvider.GetService<ProductViewModel>();
-
-        // var ProductView = serviceProvider.GetService<ProductView>();
-        //ProductView.DataContext = serviceProvider.GetService<ProductViewModel>();
-
-         var listViewCategories = serviceProvider.GetService<ListViewCategories>();
-        listViewCategories.DataContext = serviceProvider.GetService<CategoryViewModel>();
-
-        // var CategoryView = serviceProvider.GetService<CategoryView>();
-        //CategoryView.DataContext = serviceProvider.GetService<CategoryViewModel>();
-
-        view.Show();
+    }
+    //
+    private void ConfigureServices(IServiceCollection services)
+    {
+        services.AddTransient<MainWindow>();
+        services.AddTransient<MainViewModel>();
+        services.AddTransient<CategoryView>();
+        services.AddTransient<CategoryViewModel>();
+        services.AddTransient<ProductView>();
+        services.AddTransient<ProductViewModel>();
+        services.AddTransient<SettingsView>();
+        services.AddTransient<SettingsViewModel>();
+        services.AddTransient<HomeView>();
+        services.AddTransient<HomeViewModel>();
+        services.AddScoped<IRepository<Product>, ProductRepository>();
+        services.AddScoped<IRepository<Category>, CategoryRepository>();
+        services.AddScoped<IRepositoryService<Product>, ProductService>();
+        services.AddScoped<IRepositoryService<Category>, CategoryService>();
+        services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost,1433;User Id=sa;Password=Interfaces-2425;TrustServerCertificate=true;"));
     }
 }
