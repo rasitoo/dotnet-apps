@@ -1,4 +1,6 @@
 ﻿using P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
+using System.Collections;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Controls;
@@ -11,4 +13,13 @@ public partial class ListViewProducts : UserControl
     {
         InitializeComponent();
     }
+    public IEnumerable ItemsSource
+    {
+        get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+        set { SetValue(ItemsSourceProperty, value); }
+    }
+
+    public static readonly DependencyProperty ItemsSourceProperty =
+        DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListViewProducts), new PropertyMetadata(null));
+
 }
