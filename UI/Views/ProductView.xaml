@@ -24,13 +24,16 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border Height="50" 
-                Background="MediumPurple"
-                Margin="0,0,0,10">
+        Background="MediumPurple"
+        Margin="0,0,0,10"
+        Grid.ColumnSpan="2">
             <TextBlock Text="{x:Static p:Resources.Product}" 
-               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" />
         </Border>
-        <c:ListViewProducts ItemsSource="{Binding Products}" Grid.Row="1"/>
+        <c:ListViewProducts ItemsSource="{Binding Products}" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

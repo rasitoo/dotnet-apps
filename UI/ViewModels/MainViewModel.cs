@@ -9,13 +9,8 @@ using System.Windows;
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
 
-partial class MainViewModel(HomeView homeView, ProductView productView, CategoryView categoryView, SettingsView settingsView) : ObservableObject
+public partial class MainViewModel(HomeView homeView, ProductView productView, CategoryView categoryView, SettingsView settingsView) : ObservableObject
 {
-
-    //[ObservableProperty]
-    //private ObservableCollection<Product> _products = new(productService.GetAll());
-    //[ObservableProperty]
-    //private ObservableCollection<Category> _categories = new(categoryService.GetAll());
     [ObservableProperty]
     private object? _activeView = homeView;
     [RelayCommand]

@@ -24,29 +24,15 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border Height="50" 
-                Background="MediumPurple"
-                Margin="0,0,0,10">
+        Background="MediumPurple"
+        Margin="0,0,0,10"
+        Grid.ColumnSpan="2">
             <TextBlock Text="{x:Static p:Resources.Category}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
-        <ListView Grid.Row="1"
-          ItemsSource="{Binding Categories}"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5">
-                        <StackPanel Orientation="Horizontal">
-                            <!--<Image Source="{Binding ImageUri}" Width="50" Height="50" Margin="0,0,10,0" />-->
-                            <StackPanel>
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold" />
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <c:ListViewCategories ItemsSource="{Binding Categories}" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

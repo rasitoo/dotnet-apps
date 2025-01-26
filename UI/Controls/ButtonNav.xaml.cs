@@ -56,4 +56,5 @@ public partial class ButtonNav : UserControl
         get { return (string)GetValue(TextProperty); }
         set { SetValue(TextProperty, value); }
     }
+
 }

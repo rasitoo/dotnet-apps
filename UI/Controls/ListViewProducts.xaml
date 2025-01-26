@@ -12,7 +12,7 @@
         <ListView x:Name="ListProductos"
                   ItemsSource="{Binding ItemsSource, ElementName=lista}"
                   HorizontalAlignment="Center"
-                  VerticalAlignment="Center" >
+                  VerticalAlignment="Center">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5">

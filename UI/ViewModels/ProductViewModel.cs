@@ -8,7 +8,5 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 public partial class ProductViewModel(IRepositoryService<Product> productService) : ObservableObject
 {
     [ObservableProperty]
-    private object _activeView;
-    [ObservableProperty]
     private ObservableCollection<Product> _products = new(productService.GetAll());
 }

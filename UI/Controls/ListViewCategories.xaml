@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Controls"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels"
+             x:Name="root"
              d:DataContext="{d:DesignInstance vm:CategoryViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
 
