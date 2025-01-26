@@ -12,6 +12,7 @@
 
     <Grid>
         <ListView ItemsSource="{Binding ItemsSource, ElementName=root}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center">
             <ListView.ItemTemplate>
@@ -26,6 +27,13 @@
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Editar" Command="{Binding EditCommand}"  />
+                    <MenuItem Header="Eliminar" Command="{Binding DeleteCommand}"  />
+                </ContextMenu>
+            </ListView.ContextMenu>
+
         </ListView>
     </Grid>
 </UserControl>

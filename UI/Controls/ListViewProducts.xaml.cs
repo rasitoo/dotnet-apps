@@ -22,4 +22,13 @@ public partial class ListViewProducts : UserControl
     public static readonly DependencyProperty ItemsSourceProperty =
         DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListViewProducts), new PropertyMetadata(null));
 
+    public Object SelectedItem
+    {
+        get { return (Object)GetValue(SelectedItemProperty); }
+        set { SetValue(SelectedItemProperty, value); }
+    }
+
+    public static readonly DependencyProperty SelectedItemProperty =
+        DependencyProperty.Register("SelectedItem", typeof(Object), typeof(ListViewProducts), new PropertyMetadata(null));
+
 }

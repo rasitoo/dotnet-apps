@@ -33,6 +33,6 @@
             <TextBlock Text="{x:Static p:Resources.Category}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
-        <c:ListViewCategories ItemsSource="{Binding Categories}" Grid.Row="1" VerticalAlignment="Top"/>
+        <c:ListViewCategories ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

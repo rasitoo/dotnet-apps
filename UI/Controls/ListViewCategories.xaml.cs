@@ -19,5 +19,13 @@ public partial class ListViewCategories : UserControl
 
     public static readonly DependencyProperty ItemsSourceProperty =
         DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListViewCategories), new PropertyMetadata(null));
+    public Object SelectedItem
+    {
+        get { return (Object)GetValue(SelectedItemProperty); }
+        set { SetValue(SelectedItemProperty, value); }
+    }
+
+    public static readonly DependencyProperty SelectedItemProperty =
+        DependencyProperty.Register("SelectedItem", typeof(Object), typeof(ListViewCategories), new PropertyMetadata(null));
 }
 

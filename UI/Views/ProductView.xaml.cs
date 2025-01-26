@@ -11,5 +11,8 @@ public partial class ProductView : UserControl
     {
         InitializeComponent();
         this.DataContext = viewModel;
+    }   
+    public ProductView()
+    {
     }
 }

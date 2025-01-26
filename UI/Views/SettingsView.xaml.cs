@@ -15,6 +15,10 @@ public partial class SettingsView : UserControl
         InitializeComponent();
         this.DataContext = viewModel;
         _serviceProvider = serviceProvider;
+    }   
+    public SettingsView()
+    {
+
     }
 
     private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

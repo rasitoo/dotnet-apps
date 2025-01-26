@@ -10,5 +10,8 @@ public partial class HomeView : UserControl
     {
         InitializeComponent();
         DataContext = viewModel;
+    }    
+    public HomeView()
+    {
     }
 }

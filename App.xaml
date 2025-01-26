@@ -16,6 +16,12 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:ProductViewModel}">
                 <v:ProductView/>
+            </DataTemplate>            
+            <DataTemplate DataType="{x:Type vm:CategoryViewModel}">
+                <v:CategoryView/>
+            </DataTemplate>           
+            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                <v:SettingsView/>
             </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Light" />

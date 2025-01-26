@@ -11,6 +11,7 @@
 
         <ListView x:Name="ListProductos"
                   ItemsSource="{Binding ItemsSource, ElementName=lista}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center">
             <ListView.ItemTemplate>
@@ -27,5 +28,11 @@
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        <ListView.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Editar" Command="{Binding EditCommand}"  />
+                <MenuItem Header="Eliminar" Command="{Binding DeleteCommand}"  />
+            </ContextMenu>
+        </ListView.ContextMenu>
+    </ListView>
 </UserControl>
