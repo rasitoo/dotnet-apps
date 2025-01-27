@@ -13,18 +13,38 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     private ObservableCollection<Product> _products = new(productService.GetAll());
 
     [ObservableProperty]
-    private Product _selectedItem;
+    private Product? _selectedItem;
 
     [RelayCommand]
-    private void Edit(Category category)
+    private void Edit()
     {
-        MessageBox.Show($"Editando el producto:{_selectedItem.Name}");
+        if (SelectedItem != null)
+        {
+            productService.Update(SelectedItem);
+            MessageBox.Show($"Se ha editado el producto: {SelectedItem.Name}");
+        }
+        else
+        {
+            MessageBox.Show("No hay producto seleccionado para editar.");
+        }
     }
 
     [RelayCommand]
-    private void Delete(Category category)
+    private void Delete()
     {
-        MessageBox.Show($"Borrando el producto: {_selectedItem.Name}");
-
+        if (SelectedItem != null)
+        {
+            var result = MessageBox.Show($"¿Está seguro de que desea borrar el producto: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                productService.Delete(SelectedItem);
+                Products.Remove(SelectedItem);
+                MessageBox.Show("El producto ha sido borrado.");
+            }
+        }
+        else
+        {
+            MessageBox.Show("No hay producto seleccionado para borrar.");
+        }
     }
 }

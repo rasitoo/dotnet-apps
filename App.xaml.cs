@@ -13,22 +13,29 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo;
 
 public partial class App : Application
 {
-    public static IServiceProvider ServiceProvider { get; private set; }
     protected override void OnStartup(StartupEventArgs e)
     {
         var serviceCollection = new ServiceCollection();
         ConfigureServices(serviceCollection);
-        ServiceProvider = serviceCollection.BuildServiceProvider();
-        //GenerarDummies();
+        ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
+        if (serviceProvider == null)
+        {
+            throw new InvalidOperationException("ServiceProvider no se pudo inicializar.");
+        }
+        GenerarDummies(serviceProvider);
 
-        var mainWindow = ServiceProvider.GetService<MainWindow>();
-        mainWindow.DataContext = ServiceProvider.GetRequiredService<MainViewModel>();
+        var mainWindow = serviceProvider.GetService<MainWindow>();
+        if (mainWindow == null)
+        {
+            throw new InvalidOperationException("MainWindow no se pudo inicializar.");
+        }
+        mainWindow.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
         mainWindow.Show();
     }
     // Solo para cargar datos dummy, quitar en aplicación en producción. Generado con Copilot
-    private void GenerarDummies()
+    private void GenerarDummies(ServiceProvider serviceProvider)
     {
-        using (var scope = ServiceProvider.CreateScope())
+        using (var scope = serviceProvider.CreateScope())
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             dbContext.Database.EnsureCreated();

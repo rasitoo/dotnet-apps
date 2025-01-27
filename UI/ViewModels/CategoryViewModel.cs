@@ -13,18 +13,39 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
     private ObservableCollection<Category> _categories = new(categoryService.GetAll());
     
     [ObservableProperty]
-    private Category _selectedItem;
+    private Category? _selectedItem;
+
 
     [RelayCommand]
-    private void Edit(Category category)
+    private void Edit()
     {
-        MessageBox.Show($"Editando la categoría:{_selectedItem.Name}");
+        if (SelectedItem != null)
+        {
+            categoryService.Update(SelectedItem);
+            MessageBox.Show($"Se ha editado el producto: {SelectedItem.Name}");
+        }
+        else
+        {
+            MessageBox.Show("No hay producto seleccionado para editar.");
+        }
     }
 
     [RelayCommand]
-    private void Delete(Category category)
+    private void Delete()
     {
-        MessageBox.Show($"Borrando la categoría:{_selectedItem.Name}");
-
+        if (SelectedItem != null)
+        {
+            var result = MessageBox.Show($"¿Está seguro de que desea borrar el producto: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                categoryService.Delete(SelectedItem);
+                Categories.Remove(SelectedItem);
+                MessageBox.Show("El producto ha sido borrado.");
+            }
+        }
+        else
+        {
+            MessageBox.Show("No hay producto seleccionado para borrar.");
+        }
     }
 }

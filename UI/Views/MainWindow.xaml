@@ -30,6 +30,6 @@
             <c:ButtonNav Text="{x:Static p:Resources.NavExit}" Icon="ArrowExit" Command="{Binding ExitCommand}" />
             </StackPanel>
 
-            <ContentControl Name="Content" Content="{Binding ActiveView}" Grid.Column="1" Grid.RowSpan="2" />
+            <ContentControl Content="{Binding ActiveView}" Grid.Column="1" Grid.RowSpan="2" />
         </Grid>
 </Window>

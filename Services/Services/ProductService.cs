@@ -15,7 +15,7 @@ internal class ProductService(IRepository<Product> ProductRepository) : IReposit
         ProductRepository.Delete(item);
     }
 
-    public Product Get(int id)
+    public Product? Get(int id)
     {
         return ProductRepository.Get(id);
     }
