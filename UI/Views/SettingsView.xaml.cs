@@ -12,13 +12,5 @@ public partial class SettingsView : UserControl
         InitializeComponent();
         this.DataContext = viewModel;
     }
-
-    public static readonly DependencyProperty SelectedItemProperty =
-        DependencyProperty.Register("SelectedItem", typeof(string), typeof(SettingsView), new PropertyMetadata(null));
-    public string SelectedItem
-    {
-        get { return (string)GetValue(SelectedItemProperty); }
-        set { SetValue(SelectedItemProperty, value); }
-    }
 }
 

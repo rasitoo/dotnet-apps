@@ -61,6 +61,15 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Category.
         /// </summary>
         public static string Category {
@@ -93,6 +102,15 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Image link.
+        /// </summary>
+        public static string ImageLink {
+            get {
+                return ResourceManager.GetString("ImageLink", resourceCulture);
             }
         }
         

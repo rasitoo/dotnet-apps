@@ -5,14 +5,13 @@ namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Repositories;
 
 internal class ProductRepository(AppDbContext context) : IRepository<Product>
 {
-    private readonly AppDbContext _context = context;
-    public List<Product> GetAll() => _context.Products.ToList();
-    public void Add(Product product) => _context.Add(product);
-    public void Delete(Product product) { _context.Products.Remove(product).State = EntityState.Deleted; _context.SaveChanges(); }
-    public Product? Get(int id) => _context.Products.Find(id);
+    public List<Product> GetAll() => context.Products.ToList();
+    public void Add(Product product) {context.Add(product).State = EntityState.Added; context.SaveChanges();}
+    public void Delete(Product product) { context.Products.Remove(product).State = EntityState.Deleted; context.SaveChanges(); }
+    public Product? Get(int id) => context.Products.Find(id);
     public void Update(Product product)
     {
-        _context.Entry(product).State = EntityState.Modified;
-        _context.SaveChanges();
+        context.Entry(product).State = EntityState.Modified;
+        context.SaveChanges();
     }
 }

@@ -15,14 +15,22 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
-        var serviceCollection = new ServiceCollection();
-        ConfigureServices(serviceCollection);
-        ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider() ?? throw new InvalidOperationException("ServiceProvider no se pudo inicializar.");
-        GenerarDummies(serviceProvider);
+        try
+        {
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+            ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider() ?? throw new InvalidOperationException("ServiceProvider no se pudo inicializar.");
+            GenerarDummies(serviceProvider);
 
-        var mainWindow = serviceProvider.GetService<MainWindow>() ?? throw new InvalidOperationException("MainWindow no se pudo inicializar.");
-        mainWindow.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
-        mainWindow.Show();
+            var mainWindow = serviceProvider.GetService<MainWindow>() ?? throw new InvalidOperationException("MainWindow no se pudo inicializar.");
+            mainWindow.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
+            mainWindow.Show();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ocurrió un error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Current.Shutdown();
+        }
     }
     // Solo para cargar datos dummy, quitar en aplicación en producción. Generado con Copilot
     private static void GenerarDummies(ServiceProvider serviceProvider)

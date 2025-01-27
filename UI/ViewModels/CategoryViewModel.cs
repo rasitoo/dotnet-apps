@@ -17,16 +17,21 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
 
 
     [RelayCommand]
-    private void Edit()
+    private void Save()
     {
-        if (SelectedItem != null)
+        if (SelectedItem != null && SelectedItem.Id != 0)
         {
             categoryService.Update(SelectedItem);
-            MessageBox.Show($"Se ha editado el producto: {SelectedItem.Name}");
+            MessageBox.Show($"Se ha editado la categoría: {SelectedItem.Name}");
         }
         else
         {
-            MessageBox.Show("No hay producto seleccionado para editar.");
+            if (SelectedItem != null)
+            {
+                Category pr = new() { Name = SelectedItem.Name };
+                categoryService.Add(pr);
+                Categories.Add(pr);
+            }
         }
     }
 
@@ -35,17 +40,22 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
     {
         if (SelectedItem != null)
         {
-            var result = MessageBox.Show($"¿Está seguro de que desea borrar el producto: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show($"¿Está seguro de que desea borrar la categoría: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 categoryService.Delete(SelectedItem);
                 Categories.Remove(SelectedItem);
-                MessageBox.Show("El producto ha sido borrado.");
+                MessageBox.Show("La categoría ha sido borrada.");
             }
         }
         else
         {
-            MessageBox.Show("No hay producto seleccionado para borrar.");
+            MessageBox.Show("No hay categoría seleccionada para borrar.");
         }
+    }
+    [RelayCommand]
+    private void Add()
+    {
+        SelectedItem = new();
     }
 }
