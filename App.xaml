@@ -2,27 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-                          xmlns:local="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo"
+             xmlns:local="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo"
              xmlns:v="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Views"
              xmlns:vm="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels">
     
     <Application.Resources>
         <ResourceDictionary>
-            <DataTemplate DataType="{x:Type vm:MainViewModel}">
-                <local:MainWindow/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:HomeViewModel}">
-                <v:HomeView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:ProductViewModel}">
-                <v:ProductView/>
-            </DataTemplate>            
-            <DataTemplate DataType="{x:Type vm:CategoryViewModel}">
-                <v:CategoryView/>
-            </DataTemplate>           
-            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
-                <v:SettingsView/>
-            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />

@@ -33,7 +33,5 @@
             <TextBlock Text="{x:Static p:Resources.Home}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
-        <c:ListViewCategories ItemsSource="{Binding Categories}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"/>
-        <c:ListViewProducts ItemsSource="{Binding Products}" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

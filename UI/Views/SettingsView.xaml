@@ -24,9 +24,8 @@
         </Grid.RowDefinitions>
         <TextBlock Text="{x:Static p:Resources.Language}"
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <ComboBox x:Name="comboBox" Grid.Row="1" SelectedItem="{Binding SelectedItem}" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem Content="es"/>
-            <ComboBoxItem Content="en"/>
-        </ComboBox>
+        <ComboBox Grid.Row="1" 
+                  ItemsSource="{Binding Languages}" 
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>
     </Grid>
 </UserControl>

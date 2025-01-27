@@ -11,8 +11,4 @@ public partial class CategoryView : UserControl
         InitializeComponent();
         this.DataContext = viewModel;
     }    
-    public CategoryView()
-    {
-
-    }
 }

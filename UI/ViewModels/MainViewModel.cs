@@ -19,6 +19,6 @@ public partial class MainViewModel(HomeView homeView, ProductView productView, C
     [RelayCommand]
     private void ActivateSettingsView() => ActiveView = settingsView;
     [RelayCommand]
-    private void Exit() => Application.Current.Shutdown();
+    private static void Exit() => Application.Current.Shutdown();
 }
 

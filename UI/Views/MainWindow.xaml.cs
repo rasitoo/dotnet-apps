@@ -7,7 +7,7 @@ public partial class MainWindow
         LoadSettings();
         InitializeComponent();
     }
-    private void LoadSettings()
+    private static void LoadSettings()
     {
         Thread.CurrentThread.CurrentUICulture = new(Properties.Settings.Default.Language);
         Properties.Settings.Default.Save();
