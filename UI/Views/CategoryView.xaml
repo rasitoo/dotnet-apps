@@ -23,7 +23,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border Height="50" 
@@ -34,5 +34,35 @@
                        HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
         <c:ListViewCategories ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}" Grid.Row="1" VerticalAlignment="Top"/>
+        <ScrollViewer Grid.Column="1" Grid.Row="1">
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock HorizontalAlignment="Left"  Text="{x:Static p:Resources.Category}" Grid.Row="0" Margin="10"/>
+                        <TextBox  Text="{Binding SelectedItem.Name, Mode=TwoWay}" FontWeight="Bold"  Grid.Row="0" Grid.Column="1" Margin="10"/>
+
+                        <TextBlock HorizontalAlignment="Left"  Text="{x:Static p:Resources.NavProducts}" Grid.Row="1" Margin="10"/>
+                        <c:ListViewProducts ItemsSource="{Binding ProductsByCategory}" Grid.Row="1" Grid.Column="1"/>
+
+
+
+                    </Grid>
+                </Border>
+
+                <Button Content="{x:Static p:Resources.Save}" Command="{Binding SaveCommand}" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="150" Margin="0,25,0,0"/>
+                <Button Content="{x:Static p:Resources.Delete}" Command="{Binding DeleteCommand}" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="150" Margin="5"/>
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

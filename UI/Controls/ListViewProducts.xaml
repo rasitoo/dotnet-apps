@@ -17,7 +17,7 @@
                   VerticalAlignment="Center">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5" MaxWidth="300">
+                    <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5" Width="300">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{Binding ImageUri}" Width="50" Height="50" Margin="0,0,10,0" />
                             <StackPanel>
