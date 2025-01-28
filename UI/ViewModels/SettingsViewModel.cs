@@ -10,15 +10,12 @@ public partial class SettingsViewModel(IServiceProvider serviceProvider) : Obser
 {
     [ObservableProperty]
     private string _selectedItem = Properties.Settings.Default.Language;
-
     private readonly IServiceProvider _serviceProvider = serviceProvider;
-
     public ObservableCollection<string> Languages { get; } =
     [
         "en",
         "es"
     ];
-
     partial void OnSelectedItemChanged(string value)
     {
         var temp = (SelectedItem)?.ToString();
@@ -30,7 +27,6 @@ public partial class SettingsViewModel(IServiceProvider serviceProvider) : Obser
                 Properties.Settings.Default.Language = selectedLanguage[0];
                 Properties.Settings.Default.Save();
                 Thread.CurrentThread.CurrentUICulture = new(Properties.Settings.Default.Language);
-
                 var newWindow = _serviceProvider.GetService<MainWindow>();
                 if (newWindow != null)
                 {
@@ -56,7 +52,3 @@ public partial class SettingsViewModel(IServiceProvider serviceProvider) : Obser
         }
     }
 }
-
-
-
-

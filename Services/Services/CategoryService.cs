@@ -9,22 +9,18 @@ internal class CategoryService(IRepository<Category> CategoryRepository) : IRepo
     {
         CategoryRepository.Add(objeto);
     }
-
     public void Delete(Category item)
     {
         CategoryRepository.Delete(item);
     }
-
     public Category? Get(int id)
     {
         return CategoryRepository.Get(id);
     }
-
     public List<Category> GetAll()
     {
         return CategoryRepository.GetAll();
     }
-
     public void Update(Category objeto)
     {
         CategoryRepository.Update(objeto);

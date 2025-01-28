@@ -11,4 +11,3 @@ public partial class SettingsView : UserControl
         this.DataContext = viewModel;
     }
 }
-

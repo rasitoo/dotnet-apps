@@ -21,4 +21,3 @@ public partial class MainViewModel(HomeView homeView, ProductView productView, C
     [RelayCommand]
     private static void Exit() => Application.Current.Shutdown();
 }
-

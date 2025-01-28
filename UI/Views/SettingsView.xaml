@@ -22,8 +22,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Text="{x:Static p:Resources.Language}"
+        <Border Height="50" 
+            Background="MediumPurple"
+            Margin="0,0,0,10"
+            Grid.ColumnSpan="2">
+            <TextBlock Text="{x:Static p:Resources.NavSettings}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
         <ComboBox Grid.Row="1" 
                   ItemsSource="{Binding Languages}" 
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"/>

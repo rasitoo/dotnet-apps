@@ -14,10 +14,8 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
     private ObservableCollection<Category> _categories = new(categoryService.GetAll());
     [ObservableProperty]
     private ObservableCollection<Product>? _productsByCategory;
-
     [ObservableProperty]
     private Category? _selectedItem;
-
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
@@ -27,7 +25,6 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
             ProductsByCategory = new(productService.GetAll().Where(p => p.CategoryId == SelectedItem?.Id));
         }
     }
-
     [RelayCommand]
     private void Save()
     {
@@ -36,7 +33,6 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
             MessageBox.Show("No se puede crear o editar una categoría llamada 'Sin categoría'.");
             return;
         }
-
         if (SelectedItem != null && SelectedItem.Id != 0)
         {
             categoryService.Update(SelectedItem);
@@ -53,7 +49,6 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
             }
         }
     }
-
     [RelayCommand]
     private void Delete()
     {
@@ -64,7 +59,6 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
                 MessageBox.Show("No se puede borrar la categoría 'Sin categoría'.");
                 return;
             }
-
             var result = MessageBox.Show($"¿Está seguro de que desea borrar la categoría: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
@@ -86,7 +80,6 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
                     product.CategoryId = null;
                     productService.Update(product);
                 }
-
                 categoryService.Delete(SelectedItem);
                 Categories = new(categoryService.GetAll());
                 MessageBox.Show("La categoría ha sido borrada.");
@@ -97,7 +90,6 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
             MessageBox.Show("No hay categoría seleccionada para borrar.");
         }
     }
-
     [RelayCommand]
     private void Add()
     {

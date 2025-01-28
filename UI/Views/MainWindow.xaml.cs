@@ -1,6 +1,6 @@
 ﻿namespace P06_01_DI_Contactos_TAPIADOR_rodrigo;
 
-public partial class MainWindow 
+public partial class MainWindow
 {
     public MainWindow()
     {

@@ -9,22 +9,18 @@ internal class ProductService(IRepository<Product> ProductRepository) : IReposit
     {
         ProductRepository.Add(objeto);
     }
-
     public void Delete(Product item)
     {
         ProductRepository.Delete(item);
     }
-
     public Product? Get(int id)
     {
         return ProductRepository.Get(id);
     }
-
     public List<Product> GetAll()
     {
         return ProductRepository.GetAll();
     }
-
     public void Update(Product objeto)
     {
         ProductRepository.Update(objeto);

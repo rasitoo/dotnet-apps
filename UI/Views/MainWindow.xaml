@@ -9,7 +9,7 @@
         xmlns:c="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Controls"
         xmlns:p="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.Properties"
         d:DataContext="{d:DesignInstance vm:MainViewModel}"
-        Title="MainWindow" Height="700" Width="800">
+        Title="MainWindow" Height="700" Width="800" Top="0">
     <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

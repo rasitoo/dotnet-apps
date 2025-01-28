@@ -12,13 +12,10 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
 {
     [ObservableProperty]
     private ObservableCollection<Product> _products = new(productService.GetAll());
-
     [ObservableProperty]
     private Product? _selectedItem = new();
-
     [ObservableProperty]
     private string? _categoryName;
-    
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
@@ -27,7 +24,6 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
             CategoryName = SelectedItem?.Category?.Name;
         }
     }
-
     [RelayCommand]
     private void Save()
     {
@@ -48,7 +44,6 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
             MessageBox.Show($"Se ha creado el producto: {SelectedItem.Name}");
         }
     }
-
     public Category? CategoryExistsOrCreate(string nombre)
     {
         var categories = categoryService.GetAll();
@@ -56,13 +51,11 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
         {
             return null;
         }
-
         var category = categories.Find(c => c.Name?.Equals(nombre) == true);
         if (category != null)
         {
             return category;
         }
-
         var result = MessageBox.Show($"La categoría '{nombre}' no existe. ¿Desea crearla?", "Categoría no encontrada", MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (result == MessageBoxResult.Yes)
         {
@@ -70,7 +63,6 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
             categoryService.Add(newCategory);
             return newCategory;
         }
-
         return null;
     }
     [RelayCommand]
@@ -94,6 +86,6 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     [RelayCommand]
     private void Add()
     {
-        SelectedItem = new() { Category = new() { Name="Otros" } };
+        SelectedItem = new() { Category = new() { Name = "Otros" } };
     }
 }
