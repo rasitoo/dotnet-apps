@@ -46,28 +46,32 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock HorizontalAlignment="Left"  Text="{x:Static p:Resources.Product}" Margin="10"/>
-                        <TextBox  Text="{Binding SelectedItem.Name, Mode=TwoWay}"  FontWeight="Bold" Grid.Column="1" Margin="10"/>
+                        <TextBlock HorizontalAlignment="Left"  Text="{x:Static p:Resources.ImageLink}" Grid.Row="0" Margin="10"/>
+                        <TextBox  Text="{Binding SelectedItem.ImageUri, Mode=TwoWay}"  Grid.Row="0" Grid.Column="1" Margin="10"/>
+                        
+                        <TextBlock HorizontalAlignment="Left"  Text="{x:Static p:Resources.Product}" Grid.Row="1" Margin="10"/>
+                        <TextBox  Text="{Binding SelectedItem.Name, Mode=TwoWay}"  FontWeight="Bold" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
-                        <TextBlock HorizontalAlignment="Left" Text="{x:Static p:Resources.Description}" Grid.Row="1" Margin="10"/>
-                        <TextBox Text="{Binding SelectedItem.Description, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" Margin="10"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static p:Resources.Description}" Grid.Row="2" Margin="10"/>
+                        <TextBox Text="{Binding SelectedItem.Description, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="10"/>
 
-                        <TextBlock HorizontalAlignment="Left" Text="{x:Static p:Resources.Price}" Grid.Row="2" Margin="10"/>
-                        <TextBox Text="{Binding SelectedItem.Price, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="10"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static p:Resources.Price}" Grid.Row="3" Margin="10"/>
+                        <TextBox Text="{Binding SelectedItem.Price, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Margin="10"/>
 
-                        <TextBlock HorizontalAlignment="Left" Text="{x:Static p:Resources.Category}" Grid.Row="3" Margin="10"/>
-                        <TextBox Text="{Binding SelectedItem.Category.Name, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Margin="10"/>
+                        <TextBlock HorizontalAlignment="Left" Text="{x:Static p:Resources.Category}" Grid.Row="4" Margin="10"/>
+                        <TextBox Text="{Binding SelectedItem.Category.Name, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Margin="10"/>
                     </Grid>
                 </Border>
 
-                <Button Content="{x:Static p:Resources.Save}" Command="{Binding SaveCommand}" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="150" Margin="0,25,0,0"/>
-                <Button Content="{x:Static p:Resources.Delete}" Command="{Binding DeleteCommand}" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="150" Margin="5"/>
+                <Button Content="{x:Static p:Resources.Save}" Command="{Binding SaveCommand}" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="150" Margin="0,25,0,0"/>
+                <Button Content="{x:Static p:Resources.Delete}" Command="{Binding DeleteCommand}" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Center" Width="150" Margin="5"/>
 
             </StackPanel>
         </ScrollViewer>
