@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
-public partial class CategoryViewModel(IRepositoryService<Category> categoryService) : ObservableObject
+public partial class CategoryViewModel(IRepositoryService<Category> categoryService, IRepositoryService<Product> productService) : ObservableObject
 {
     [ObservableProperty]
     private ObservableCollection<Category> _categories = new(categoryService.GetAll());
@@ -43,6 +43,15 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
             var result = MessageBox.Show($"¿Está seguro de que desea borrar la categoría: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
+                var products = productService.GetAll().Where(p => p.CategoryId == SelectedItem.Id).ToList();
+                Category ct = new() { Name = "Sin categoría" };
+                foreach (var product in products)
+                {
+                    product.Category = ct;
+                    product.CategoryId = null;
+                    productService.Update(product);
+                }
+
                 categoryService.Delete(SelectedItem);
                 Categories.Remove(SelectedItem);
                 MessageBox.Show("La categoría ha sido borrada.");

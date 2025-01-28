@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 using System.Collections.ObjectModel;
-using System.Globalization;
+using System.ComponentModel;
 using System.Windows;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
@@ -16,29 +16,40 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     [ObservableProperty]
     private Product? _selectedItem = new();
 
-    [RelayCommand]
-    private void Save()
+    [ObservableProperty]
+    private string? _categoryName;
+    
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
-        SelectedItem ??= new();
-        SelectedItem.Category ??= new();
-        if (SelectedItem.Id != 0)
+        base.OnPropertyChanged(e);
+        if (e.PropertyName == nameof(SelectedItem))
         {
-            SelectedItem.Category = SearchCategory(SelectedItem.Category.Name ?? "Otros");
-            productService.Update(SelectedItem);
-            MessageBox.Show($"Se ha editado el producto: {SelectedItem.Name}");
-        }
-        else 
-        {
-
-            Product pr = new() { Name = SelectedItem.Name, Description = SelectedItem.Description, Price = SelectedItem.Price, Category = SearchCategory(SelectedItem.Category.Name ?? "Otros") };
-            productService.Add(pr);
-            Products.Add(pr);
-            MessageBox.Show($"Se ha creado el producto: {SelectedItem.Name}");
-
+            CategoryName = SelectedItem?.Category?.Name;
         }
     }
 
-    public Category? SearchCategory(string nombre)
+    [RelayCommand]
+    private void Save()
+    {
+        SelectedItem ??= new() { Category = new() { Name = "Otros" } };
+        SelectedItem.Category ??= CategoryExistsOrCreate("Otros");
+
+        if (SelectedItem.Id != 0)
+        {
+            SelectedItem.Category = CategoryExistsOrCreate(CategoryName ?? "Otros");
+            productService.Update(SelectedItem);
+            MessageBox.Show($"Se ha editado el producto: {SelectedItem.Name}");
+        }
+        else
+        {
+            Product pr = new() { Name = SelectedItem.Name, Description = SelectedItem.Description, Price = SelectedItem.Price, Category = CategoryExistsOrCreate(CategoryName ?? "Otros") };
+            productService.Add(pr);
+            Products.Add(pr);
+            MessageBox.Show($"Se ha creado el producto: {SelectedItem.Name}");
+        }
+    }
+
+    public Category? CategoryExistsOrCreate(string nombre)
     {
         var categories = categoryService.GetAll();
         if (categories == null)
@@ -46,22 +57,22 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
             return null;
         }
 
-        var category = categories.Find(c => c.Name?.Equals(nombre) == true) ;
+        var category = categories.Find(c => c.Name?.Equals(nombre) == true);
         if (category != null)
+        {
             return category;
+        }
 
         var result = MessageBox.Show($"La categoría '{nombre}' no existe. ¿Desea crearla?", "Categoría no encontrada", MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (result == MessageBoxResult.Yes)
         {
             Category newCategory = new() { Name = nombre };
             categoryService.Add(newCategory);
-
             return newCategory;
         }
 
         return null;
     }
-
     [RelayCommand]
     private void Delete()
     {
@@ -83,6 +94,6 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     [RelayCommand]
     private void Add()
     {
-        SelectedItem = new();
+        SelectedItem = new() { Category = new() { Name="Otros" } };
     }
 }

@@ -8,6 +8,7 @@
              xmlns:c="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.Controls"
              xmlns:vm="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels"
              xmlns:p="clr-namespace:P06_01_DI_Contactos_TAPIADOR_rodrigo.Properties"
+             x:Name="this"
              d:DataContext="{d:DesignInstance vm:ProductViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -55,7 +56,7 @@
 
                         <TextBlock HorizontalAlignment="Left"  Text="{x:Static p:Resources.ImageLink}" Grid.Row="0" Margin="10"/>
                         <TextBox  Text="{Binding SelectedItem.ImageUri, Mode=TwoWay}"  Grid.Row="0" Grid.Column="1" Margin="10"/>
-                        
+
                         <TextBlock HorizontalAlignment="Left"  Text="{x:Static p:Resources.Product}" Grid.Row="1" Margin="10"/>
                         <TextBox  Text="{Binding SelectedItem.Name, Mode=TwoWay}"  FontWeight="Bold" Grid.Row="1" Grid.Column="1" Margin="10"/>
 
@@ -66,7 +67,7 @@
                         <TextBox Text="{Binding SelectedItem.Price, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Margin="10"/>
 
                         <TextBlock HorizontalAlignment="Left" Text="{x:Static p:Resources.Category}" Grid.Row="4" Margin="10"/>
-                        <TextBox Text="{Binding SelectedItem.Category.Name, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Margin="10"/>
+                        <TextBox Text="{Binding CategoryName, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" Margin="10"/>
                     </Grid>
                 </Border>
 
@@ -75,6 +76,5 @@
 
             </StackPanel>
         </ScrollViewer>
-        
     </Grid>
 </UserControl>
