@@ -13,7 +13,7 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     [ObservableProperty]
     private ObservableCollection<Product> _products = new(productService.GetAll());
     [ObservableProperty]
-    private Product? _selectedProduct = new() { ImageUri= "https://picsum.photos/250/250" };
+    private Product? _selectedProduct = new() { Category = new() { Name = "Otros" } };
     [ObservableProperty]
     private string? _categoryName;    
     [ObservableProperty]
@@ -24,6 +24,9 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     private double? _price;
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
+        //No me gusta usar este evento pero si no, se verían cambios de productos en las listas aunque
+        //no se guardaran en la base de datos, además cambiaría el nombre de categoría a todos los prductos
+        //en vez de cambiar la categoría del producto concreto
         base.OnPropertyChanged(e);
         if (e.PropertyName == nameof(SelectedProduct))
         {
@@ -42,15 +45,18 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
         if (SelectedProduct.Id != 0)
         {
             SelectedProduct.Category = CategoryExistsOrCreate(CategoryName ?? "Otros");
+            SelectedProduct.Name = Name;
+            SelectedProduct.Description = Desc;
+            SelectedProduct.Price = Price;
             productService.Update(SelectedProduct);
-            MessageBox.Show($"Se ha editado el producto: {SelectedProduct.Name}");
+            MessageBox.Show($"Se ha editado el producto: {Name}");
         }
         else
         {
-            Product pr = new() { Name = SelectedProduct.Name, Description = SelectedProduct.Description, Price = SelectedProduct.Price, Category = CategoryExistsOrCreate(CategoryName ?? "Otros") };
+            Product pr = new() { Name = Name, Description = Desc, Price = Price, Category = CategoryExistsOrCreate(CategoryName ?? "Otros") };
             productService.Add(pr);
             Products.Add(pr);
-            MessageBox.Show($"Se ha creado el producto: {SelectedProduct.Name}");
+            MessageBox.Show($"Se ha creado el producto: {Name}");
         }
     }
     public Category? CategoryExistsOrCreate(string nombre)
@@ -77,14 +83,15 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     [RelayCommand]
     private void Delete()
     {
-        if (SelectedProduct != null)
+        if (SelectedProduct != null && SelectedProduct.Id != 0)
         {
-            var result = MessageBox.Show($"¿Está seguro de que desea borrar el producto: {SelectedProduct.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show($"¿Está seguro de que desea borrar el producto: {Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 productService.Delete(SelectedProduct);
                 Products.Remove(SelectedProduct);
                 MessageBox.Show("El producto ha sido borrado.");
+                Add();
             }
         }
         else

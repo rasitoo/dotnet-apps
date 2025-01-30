@@ -40,6 +40,7 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
         }
         if (SelectedItem != null && SelectedItem.Id != 0)
         {
+            SelectedItem.Name = CategoryName;
             categoryService.Update(SelectedItem);
             MessageBox.Show($"Se ha editado la categoría: {SelectedItem.Name}");
         }
@@ -47,7 +48,7 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
         {
             if (SelectedItem != null)
             {
-                Category pr = new() { Name = SelectedItem.Name };
+                Category pr = new() { Name = CategoryName };
                 categoryService.Add(pr);
                 Categories.Add(pr);
                 MessageBox.Show($"Se ha creado la categoría: {SelectedItem.Name}");
@@ -57,7 +58,7 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
     [RelayCommand]
     private void Delete()
     {
-        if (SelectedItem != null)
+        if (SelectedItem != null && SelectedItem.Id != 0)
         {
             if (SelectedItem.Name == "Sin categoría")
             {
@@ -87,6 +88,7 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
                 }
                 categoryService.Delete(SelectedItem);
                 Categories = new(categoryService.GetAll());
+                Add();
                 MessageBox.Show("La categoría ha sido borrada.");
             }
         }

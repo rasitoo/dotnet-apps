@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using LiveCharts.Wpf;
-using LiveCharts;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using P06_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 using System.Collections.ObjectModel;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
 
 namespace P06_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
@@ -13,8 +13,8 @@ public partial class HomeViewModel : ObservableObject
     private ObservableCollection<Category> categories;
     [ObservableProperty]
     private ObservableCollection<Product> products;
-    public SeriesCollection? AveragePriceByCategorySeries { get; }
-    public SeriesCollection? ProductsByCategorySeries { get; }
+    public ObservableCollection<ISeries>? AveragePriceByCategorySeries { get; }
+    public ObservableCollection<ISeries>? ProductsByCategorySeries { get; }
     public int TotalProducts => Products.Count;
     public int TotalCategories => Categories.Count;
     public int ProductsWithoutCategory => Products.Count(p => p.Category?.Name == "Sin categoría");
@@ -26,31 +26,31 @@ public partial class HomeViewModel : ObservableObject
         ProductsByCategorySeries = CreateProductsByCategory();
     }
 
-    private SeriesCollection? CreateProductsByCategory()
+    private ObservableCollection<ISeries>? CreateProductsByCategory()
     {
-        var series = new SeriesCollection();
+        var series = new ObservableCollection<ISeries>();
         foreach (var category in Categories)
         {
             var products = Products.Where(p => p.Category?.Name == category.Name);
-            series.Add(new PieSeries
+            series.Add(new PieSeries<int>
             {
-                Title = category.Name,
-                Values = new ChartValues<int> { products.Count() }
+                Name = category.Name,
+                Values = new [] { products.Count() }
             });
         }
         return series;
     }
 
-    private SeriesCollection? CreateAveragePriceByCategory()
+    private ObservableCollection<ISeries>? CreateAveragePriceByCategory()
     {
-        var series = new SeriesCollection();
+        var series = new ObservableCollection<ISeries>();
         foreach (var category in Categories)
         {
             var averagePrice = Products.Where(p => p.Category?.Name == category.Name).Average(p => p.Price) ?? 0;
-            series.Add(new PieSeries
+            series.Add(new PieSeries<double>
             {
-                Title = category.Name,
-                Values = new ChartValues<double> { averagePrice }
+                Name = category.Name,
+                Values = new[] { averagePrice }
             });
         }
         return series;
