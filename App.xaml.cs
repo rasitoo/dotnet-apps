@@ -48,7 +48,16 @@ public partial class App : Application
         services.AddScoped<IRepository<Category>, CategoryRepository>();
         services.AddScoped<IRepositoryService<Product>, ProductService>();
         services.AddScoped<IRepositoryService<Category>, CategoryService>();
-        services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost,1433;User Id=sa;Password=Interfaces-2425;TrustServerCertificate=true;"));
+        //Retry onfailure de https://stackoverflow.com/questions/62893900/why-is-not-working-ef-core-retry-on-failure
+        services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer("Server=localhost,1433;User Id=sa;Password=WPF-MVVM-IoC-Rodrigo;TrustServerCertificate=true;",
+            sqlServerOptionsAction: sqlOptions =>
+            {
+                sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 10,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+            }));
     }
     // Solo para cargar datos dummy, quitar en aplicación en producción. Generado con Copilot
     private static void GenerarDummies(ServiceProvider serviceProvider)
