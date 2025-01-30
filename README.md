@@ -4,6 +4,6 @@ Es necesario lanzar una base de datos en SQLserver para utilizar la aplicación
 ### Paquete de NuGet
         Microsoft.EntityFrameworkCore.SqlServer
 ### Contenedor SQLserver
-        docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=PracticaWPFMVVMIoCRodrigo" -p 1433:1433 --name PracticaWPFMVVMIoCRodrigo -d mcr.microsoft.com/mssql/server:2022-latest
+        docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=WPF-MVVM-IoC-Rodrigo" -p 1433:1433 --name MVVMIoCRodrigo -d mcr.microsoft.com/mssql/server:2022-latest
 ### Cadena de Conexión
         services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost,1433;User Id=sa;Password=PracticaWPFMVVMIoCRodrigo;TrustServerCertificate=true;"));
