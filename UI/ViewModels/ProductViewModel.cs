@@ -13,35 +13,44 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     [ObservableProperty]
     private ObservableCollection<Product> _products = new(productService.GetAll());
     [ObservableProperty]
-    private Product? _selectedItem = new();
+    private Product? _selectedProduct = new() { ImageUri= "https://picsum.photos/250/250" };
     [ObservableProperty]
-    private string? _categoryName;
+    private string? _categoryName;    
+    [ObservableProperty]
+    private string? _name;    
+    [ObservableProperty]
+    private string? _desc;    
+    [ObservableProperty]
+    private double? _price;
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
-        if (e.PropertyName == nameof(SelectedItem))
+        if (e.PropertyName == nameof(SelectedProduct))
         {
-            CategoryName = SelectedItem?.Category?.Name;
+            CategoryName = SelectedProduct?.Category?.Name;
+            Name = SelectedProduct?.Name;
+            Desc = SelectedProduct?.Description;
+            Price = SelectedProduct?.Price;
         }
     }
     [RelayCommand]
     private void Save()
     {
-        SelectedItem ??= new() { Category = new() { Name = "Otros" } };
-        SelectedItem.Category ??= CategoryExistsOrCreate("Otros");
+        SelectedProduct ??= new() { Category = new() { Name = "Otros" } };
+        SelectedProduct.Category ??= CategoryExistsOrCreate("Otros");
 
-        if (SelectedItem.Id != 0)
+        if (SelectedProduct.Id != 0)
         {
-            SelectedItem.Category = CategoryExistsOrCreate(CategoryName ?? "Otros");
-            productService.Update(SelectedItem);
-            MessageBox.Show($"Se ha editado el producto: {SelectedItem.Name}");
+            SelectedProduct.Category = CategoryExistsOrCreate(CategoryName ?? "Otros");
+            productService.Update(SelectedProduct);
+            MessageBox.Show($"Se ha editado el producto: {SelectedProduct.Name}");
         }
         else
         {
-            Product pr = new() { Name = SelectedItem.Name, Description = SelectedItem.Description, Price = SelectedItem.Price, Category = CategoryExistsOrCreate(CategoryName ?? "Otros") };
+            Product pr = new() { Name = SelectedProduct.Name, Description = SelectedProduct.Description, Price = SelectedProduct.Price, Category = CategoryExistsOrCreate(CategoryName ?? "Otros") };
             productService.Add(pr);
             Products.Add(pr);
-            MessageBox.Show($"Se ha creado el producto: {SelectedItem.Name}");
+            MessageBox.Show($"Se ha creado el producto: {SelectedProduct.Name}");
         }
     }
     public Category? CategoryExistsOrCreate(string nombre)
@@ -68,13 +77,13 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     [RelayCommand]
     private void Delete()
     {
-        if (SelectedItem != null)
+        if (SelectedProduct != null)
         {
-            var result = MessageBox.Show($"¿Está seguro de que desea borrar el producto: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show($"¿Está seguro de que desea borrar el producto: {SelectedProduct.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                productService.Delete(SelectedItem);
-                Products.Remove(SelectedItem);
+                productService.Delete(SelectedProduct);
+                Products.Remove(SelectedProduct);
                 MessageBox.Show("El producto ha sido borrado.");
             }
         }
@@ -86,6 +95,6 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     [RelayCommand]
     private void Add()
     {
-        SelectedItem = new() { Category = new() { Name = "Otros" } };
+        SelectedProduct = new() { Category = new() { Name = "Otros" } };
     }
 }

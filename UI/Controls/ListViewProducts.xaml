@@ -12,7 +12,7 @@
 
         <ListView x:Name="ListProductos"
                   ItemsSource="{Binding ItemsSource, ElementName=lista}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center">
             <ListView.ItemTemplate>

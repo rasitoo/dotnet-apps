@@ -32,6 +32,24 @@ public partial class App : Application
             Current.Shutdown();
         }
     }
+    private static void ConfigureServices(IServiceCollection services)
+    {
+        services.AddTransient<MainWindow>();
+        services.AddTransient<MainViewModel>();
+        services.AddTransient<CategoryView>();
+        services.AddTransient<CategoryViewModel>();
+        services.AddTransient<ProductView>();
+        services.AddTransient<ProductViewModel>();
+        services.AddTransient<SettingsView>();
+        services.AddTransient<SettingsViewModel>();
+        services.AddTransient<HomeView>();
+        services.AddTransient<HomeViewModel>();
+        services.AddScoped<IRepository<Product>, ProductRepository>();
+        services.AddScoped<IRepository<Category>, CategoryRepository>();
+        services.AddScoped<IRepositoryService<Product>, ProductService>();
+        services.AddScoped<IRepositoryService<Category>, CategoryService>();
+        services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost,1433;User Id=sa;Password=Interfaces-2425;TrustServerCertificate=true;"));
+    }
     // Solo para cargar datos dummy, quitar en aplicación en producción. Generado con Copilot
     private static void GenerarDummies(ServiceProvider serviceProvider)
     {
@@ -86,22 +104,4 @@ public partial class App : Application
 
     }
     //
-    private static void ConfigureServices(IServiceCollection services)
-    {
-        services.AddTransient<MainWindow>();
-        services.AddTransient<MainViewModel>();
-        services.AddTransient<CategoryView>();
-        services.AddTransient<CategoryViewModel>();
-        services.AddTransient<ProductView>();
-        services.AddTransient<ProductViewModel>();
-        services.AddTransient<SettingsView>();
-        services.AddTransient<SettingsViewModel>();
-        services.AddTransient<HomeView>();
-        services.AddTransient<HomeViewModel>();
-        services.AddScoped<IRepository<Product>, ProductRepository>();
-        services.AddScoped<IRepository<Category>, CategoryRepository>();
-        services.AddScoped<IRepositoryService<Product>, ProductService>();
-        services.AddScoped<IRepositoryService<Category>, CategoryService>();
-        services.AddDbContext<AppDbContext>(options => options.UseSqlServer("Server=localhost,1433;User Id=sa;Password=Interfaces-2425;TrustServerCertificate=true;"));
-    }
 }

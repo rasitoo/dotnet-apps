@@ -15,7 +15,11 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
     [ObservableProperty]
     private ObservableCollection<Product>? _productsByCategory;
     [ObservableProperty]
-    private Category? _selectedItem;
+    private Category? _selectedItem = new();
+    [ObservableProperty]
+    private Product? _selectedProduct;
+    [ObservableProperty]
+    private string? _categoryName;
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
@@ -23,6 +27,7 @@ public partial class CategoryViewModel(IRepositoryService<Category> categoryServ
         {
             Categories = new(categoryService.GetAll());
             ProductsByCategory = new(productService.GetAll().Where(p => p.CategoryId == SelectedItem?.Id));
+            CategoryName = SelectedItem?.Name;
         }
     }
     [RelayCommand]

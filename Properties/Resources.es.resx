@@ -120,8 +120,14 @@
   <data name="Add" xml:space="preserve">
     <value>Añadir</value>
   </data>
+  <data name="AvgPrcByCt" xml:space="preserve">
+    <value>Media de precio por categoría</value>
+  </data>
   <data name="Category" xml:space="preserve">
     <value>Categoría</value>
+  </data>
+  <data name="DataGraphics" xml:space="preserve">
+    <value>Gráficas de datos</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Borrar</value>
@@ -134,6 +140,9 @@
   </data>
   <data name="ImageLink" xml:space="preserve">
     <value>Link de la imagen</value>
+  </data>
+  <data name="InfPrCt" xml:space="preserve">
+    <value>Información sobre productos y categorías</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
@@ -153,6 +162,12 @@
   <data name="NavSettings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
+  <data name="PrdsByCt" xml:space="preserve">
+    <value>Productos por categoría</value>
+  </data>
+  <data name="PrdsWthtCts" xml:space="preserve">
+    <value>Productos sin categoría:  {0}</value>
+  </data>
   <data name="Price" xml:space="preserve">
     <value>Precio</value>
   </data>
@@ -164,6 +179,12 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>Catálogo de productos</value>
+  </data>
+  <data name="TtlCts" xml:space="preserve">
+    <value>Categorías totales:  {0}</value>
+  </data>
+  <data name="TtlPrds" xml:space="preserve">
+    <value>Productos totales:  {0}</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Actualizar</value>

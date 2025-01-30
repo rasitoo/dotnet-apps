@@ -17,11 +17,11 @@ public partial class ListViewProducts : UserControl
     }
     public static readonly DependencyProperty ItemsSourceProperty =
         DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListViewProducts), new PropertyMetadata(null));
-    public Object SelectedItem
+    public Object SelectedProduct
     {
-        get { return (Object)GetValue(SelectedItemProperty); }
-        set { SetValue(SelectedItemProperty, value); }
+        get { return (Object)GetValue(SelectedProductProperty); }
+        set { SetValue(SelectedProductProperty, value); }
     }
-    public static readonly DependencyProperty SelectedItemProperty =
-        DependencyProperty.Register("SelectedItem", typeof(Object), typeof(ListViewProducts), new PropertyMetadata(null));
+    public static readonly DependencyProperty SelectedProductProperty =
+        DependencyProperty.Register("SelectedProduct", typeof(Object), typeof(ListViewProducts), new PropertyMetadata(null));
 }
