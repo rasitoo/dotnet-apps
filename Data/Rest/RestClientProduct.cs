@@ -37,7 +37,7 @@ internal class RestClientProduct(ApiClientService apiClientService) : IRestClien
             {
                 JsonDocument doc = await apiClientService.GetJsonAsync(url);
                 JsonElement info = doc.RootElement.GetProperty("info");
-                totalPages = info.GetProperty("pages").GetInt32();
+                //totalPages = info.GetProperty("pages").GetInt32();
 
                 foreach (JsonElement jsonProduct in doc.RootElement.GetProperty("results").EnumerateArray())
                 {

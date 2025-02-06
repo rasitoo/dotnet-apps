@@ -4,24 +4,55 @@ using P07_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 using System.Collections.ObjectModel;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
+using System.Windows;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
 public partial class HomeViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ObservableCollection<Category> categories;
+    private ObservableCollection<Category> _categories;
     [ObservableProperty]
-    private ObservableCollection<Product> products;
+    private ObservableCollection<Product> _products;
     public ObservableCollection<ISeries>? AveragePriceByCategorySeries { get; }
     public ObservableCollection<ISeries>? ProductsByCategorySeries { get; }
-    public int TotalProducts => Products.Count;
+    //public int? TotalProducts => Products.Count;
     public int TotalCategories => Categories.Count;
-    public int ProductsWithoutCategory => Products.Count(p => p.Category?.Name == "Sin categoría");
+    //public int ProductsWithoutCategory => Products.Count(p => p.Category?.Name == "Sin categoría");
+    private IRepositoryService<Category> _categoryService;
+    private IRepositoryService<Product> _productService;
+    public async void getProducts()
+    {
+        Products = new(await _productService.GetAll());
+
+        if (Products.Count > 0)
+        {
+            MessageBox.Show(Products[0].Name);
+        }
+        else
+        {
+            MessageBox.Show("No se encontraron Productos.");
+        }
+    }
+    public async void getCategories()
+    {
+        Categories = new(await _categoryService.GetAll());
+
+        if (Categories.Count > 0)
+        {
+            MessageBox.Show(Categories[0].Name);
+        }
+        else
+        {
+            MessageBox.Show("No se encontraron Categorias.");
+        }
+    }
     public HomeViewModel(IRepositoryService<Product> productService, IRepositoryService<Category> categoryService)
     {
-        categories = new(categoryService.GetAll());
-        products = new(productService.GetAll());
+        _categoryService = categoryService;
+        _productService = productService;
+        getProducts();
+        getCategories();
         AveragePriceByCategorySeries = CreateAveragePriceByCategory();
         ProductsByCategorySeries = CreateProductsByCategory();
     }

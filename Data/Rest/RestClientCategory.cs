@@ -18,9 +18,9 @@ internal class RestClientCategory : IRestClient<Category>
     {
         throw new NotImplementedException();
     }
-    Task<List<Category>> IRestClient<Category>.GetAll()
+    public async Task<List<Category>> GetAll()
     {
-        throw new NotImplementedException();
+        return new();
     }
     public void Update(Category item)
     {

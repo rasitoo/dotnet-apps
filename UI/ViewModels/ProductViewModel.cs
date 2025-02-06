@@ -5,13 +5,17 @@ using P07_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
-public partial class ProductViewModel(IRepositoryService<Product> productService, IRepositoryService<Category> categoryService) : ObservableObject
+public partial class ProductViewModel : ObservableObject
 {
+
     [ObservableProperty]
-    private ObservableCollection<Product> _products = new(productService.GetAll());
+    private List<Category> _categories = [];
+    [ObservableProperty]
+    private ObservableCollection<Product> _products = [];
     [ObservableProperty]
     private Product? _selectedProduct = new() { Category = new() { Name = "Otros" } };
     [ObservableProperty]
@@ -22,6 +26,40 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
     private string? _desc;    
     [ObservableProperty]
     private double? _price;
+    private IRepositoryService<Category> _categoryService;
+    private IRepositoryService<Product> _productService;
+    public ProductViewModel(IRepositoryService<Category> categoryService, IRepositoryService<Product> productService)
+    {
+        this._categoryService = categoryService;
+        this._productService = productService;
+        getProducts();
+    }
+    public async void getProducts()
+    {
+        Products = new(await _productService.GetAll());
+
+        if (Products.Count > 0)
+        {
+            MessageBox.Show(Products[0].Name);
+        }
+        else
+        {
+            MessageBox.Show("No se encontraron Categorias.");
+        }
+    }
+    public async void getCategories()
+    {
+        Categories =  new(await _categoryService.GetAll());
+
+        if (Categories.Count > 0)
+        {
+            MessageBox.Show(Categories[0].Name);
+        }
+        else
+        {
+            MessageBox.Show("No se encontraron Categorias.");
+        }
+    }
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         //No me gusta usar este evento pero si no, se verían cambios de productos en las listas aunque
@@ -48,25 +86,24 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
             SelectedProduct.Name = Name;
             SelectedProduct.Description = Desc;
             SelectedProduct.Price = Price;
-            productService.Update(SelectedProduct);
+            _productService.Update(SelectedProduct);
             MessageBox.Show($"Se ha editado el producto: {Name}");
         }
         else
         {
             Product pr = new() { Name = Name, Description = Desc, Price = Price, Category = CategoryExistsOrCreate(CategoryName ?? "Otros") };
-            productService.Add(pr);
+            _productService.Add(pr);
             Products.Add(pr);
             MessageBox.Show($"Se ha creado el producto: {Name}");
         }
     }
     public Category? CategoryExistsOrCreate(string nombre)
     {
-        var categories = categoryService.GetAll();
-        if (categories == null)
+        if (Categories == null)
         {
             return null;
         }
-        var category = categories.Find(c => c.Name?.Equals(nombre) == true);
+        var category = Categories.Find(c => c.Name?.Equals(nombre) == true);
         if (category != null)
         {
             return category;
@@ -75,7 +112,7 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
         if (result == MessageBoxResult.Yes)
         {
             Category newCategory = new() { Name = nombre };
-            categoryService.Add(newCategory);
+            _categoryService.Add(newCategory);
             return newCategory;
         }
         return null;
@@ -88,7 +125,7 @@ public partial class ProductViewModel(IRepositoryService<Product> productService
             var result = MessageBox.Show($"¿Está seguro de que desea borrar el producto: {Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                productService.Delete(SelectedProduct);
+                _productService.Delete(SelectedProduct);
                 Products.Remove(SelectedProduct);
                 MessageBox.Show("El producto ha sido borrado.");
                 Add();

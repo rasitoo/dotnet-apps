@@ -28,7 +28,7 @@ public partial class CategoryViewModel : ObservableObject
     {
         this._categoryService = categoryService;
         this._productService = productService;
-        getCategories();
+        //getCategories();
         getProductsByCategory();
     }
     public async void getCategories()
@@ -78,7 +78,7 @@ public partial class CategoryViewModel : ObservableObject
         if (SelectedItem != null && SelectedItem.Id != 0)
         {
             SelectedItem.Name = CategoryName;
-            categoryService.Update(SelectedItem);
+            _categoryService.Update(SelectedItem);
             MessageBox.Show($"Se ha editado la categoría: {SelectedItem.Name}");
         }
         else
@@ -86,7 +86,7 @@ public partial class CategoryViewModel : ObservableObject
             if (SelectedItem != null)
             {
                 Category pr = new() { Name = CategoryName };
-                categoryService.Add(pr);
+                _categoryService.Add(pr);
                 Categories.Add(pr);
                 MessageBox.Show($"Se ha creado la categoría: {SelectedItem.Name}");
             }
@@ -106,7 +106,7 @@ public partial class CategoryViewModel : ObservableObject
             if (result == MessageBoxResult.Yes)
             {
                 Category ct;
-                var products = productService.GetAll().Where(p => p.CategoryId == SelectedItem.Id).ToList();
+                //var products = _productService.GetAll().Where(p => p.CategoryId == SelectedItem.Id).ToList();
                 var category = Categories.ToList().Find(c => c.Name?.Equals("Sin categoría") == true);
                 if (category != null)
                 {
@@ -115,16 +115,16 @@ public partial class CategoryViewModel : ObservableObject
                 else
                 {
                     ct = new() { Name = "Sin categoría" };
-                    categoryService.Add(ct);
+                    _categoryService.Add(ct);
                 }
-                foreach (var product in products)
-                {
-                    product.Category = ct;
-                    product.CategoryId = null;
-                    productService.Update(product);
-                }
-                categoryService.Delete(SelectedItem);
-                Categories = new(categoryService.GetAll());
+                //foreach (var product in products)
+                //{
+                //    product.Category = ct;
+                //    product.CategoryId = null;
+                //    productService.Update(product);
+                //}
+                _categoryService.Delete(SelectedItem);
+                //Categories = new(_categoryService.GetAll());
                 Add();
                 MessageBox.Show("La categoría ha sido borrada.");
             }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
+using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.Views;
@@ -40,9 +42,10 @@ public partial class App : Application
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<HomeView>();
         services.AddTransient<HomeViewModel>();
-        //services.AddScoped<IRepository<Product>, ProductRepository>();
-        //services.AddScoped<IRepository<Category>, CategoryRepository>();
+        services.AddScoped<IRestClient<Product>, RestClientProduct>();
+        services.AddScoped<IRestClient<Category>, RestClientCategory>();
         services.AddScoped<IRepositoryService<Product>, ProductService>();
         services.AddScoped<IRepositoryService<Category>, CategoryService>();
+        services.AddScoped<ApiClientService>();
     }
 }
