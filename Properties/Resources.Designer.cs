@@ -70,7 +70,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Average price by category.
+        ///   Busca una cadena traducida similar a Average price by Location.
         /// </summary>
         public static string AvgPrcByCt {
             get {
@@ -79,11 +79,11 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Category.
+        ///   Busca una cadena traducida similar a Location.
         /// </summary>
-        public static string Category {
+        public static string Location {
             get {
-                return ResourceManager.GetString("Category", resourceCulture);
+                return ResourceManager.GetString("Location", resourceCulture);
             }
         }
         
@@ -133,7 +133,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Info about products and categories.
+        ///   Busca una cadena traducida similar a Info about characters and categories.
         /// </summary>
         public static string InfPrCt {
             get {
@@ -178,11 +178,11 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Products.
+        ///   Busca una cadena traducida similar a Characters.
         /// </summary>
-        public static string NavProducts {
+        public static string NavCharacters {
             get {
-                return ResourceManager.GetString("NavProducts", resourceCulture);
+                return ResourceManager.GetString("NavCharacters", resourceCulture);
             }
         }
         
@@ -196,7 +196,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Products by category.
+        ///   Busca una cadena traducida similar a Characters by location.
         /// </summary>
         public static string PrdsByCt {
             get {
@@ -205,7 +205,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Products without category.
+        ///   Busca una cadena traducida similar a Characters without location.
         /// </summary>
         public static string PrdsWthtCts {
             get {
@@ -223,11 +223,11 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Product.
+        ///   Busca una cadena traducida similar a Character.
         /// </summary>
-        public static string Product {
+        public static string Character {
             get {
-                return ResourceManager.GetString("Product", resourceCulture);
+                return ResourceManager.GetString("Character", resourceCulture);
             }
         }
         
@@ -241,7 +241,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Product catalog.
+        ///   Busca una cadena traducida similar a Character catalog.
         /// </summary>
         public static string Title {
             get {
@@ -259,7 +259,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Total Products.
+        ///   Busca una cadena traducida similar a Total Characters.
         /// </summary>
         public static string TtlPrds {
             get {

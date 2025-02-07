@@ -7,22 +7,22 @@ using System.Windows;
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
 
-public partial class MainViewModel(HomeView homeView, ProductView productView, CategoryView categoryView, SettingsView settingsView, IServiceProvider serviceProvider) : ObservableObject
+public partial class MainViewModel(HomeView homeView, CharacterView characterView, LocationView locationView, SettingsView settingsView, IServiceProvider serviceProvider) : ObservableObject
 {
     [ObservableProperty]
     private object? _activeView = homeView;
     [RelayCommand]
     private void ActivateHomeView()
     {
-        //Un poco trampa y bastante feo pero es la forma que se me ha ocurrido para que al borrar un producto o categoría se vea reflejado en el homeview
+        //Un poco trampa y bastante feo pero es la forma que se me ha ocurrido para que al borrar un charactero o categoría se vea reflejado en el homeview
         var homeView = serviceProvider.GetRequiredService<HomeView>();
         homeView.DataContext = serviceProvider.GetRequiredService<HomeViewModel>();
         ActiveView = homeView;
     }
     [RelayCommand]
-    private void ActivateProductView() => ActiveView = productView;
+    private void ActivateCharacterView() => ActiveView = characterView;
     [RelayCommand]
-    private void ActivateCategoryView() => ActiveView = categoryView;
+    private void ActivateLocationView() => ActiveView = locationView;
     [RelayCommand]
     private void ActivateSettingsView() => ActiveView = settingsView;
     [RelayCommand]

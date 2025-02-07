@@ -4,31 +4,31 @@ using System.Text.Json;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
-internal class RestClientProduct(ApiClientService apiClientService) : IRestClient<Product>
+internal class RestClientCharacter(ApiClientService apiClientService) : IRestClient<Character>
 {
 
     //Donde se hace el await???
 
-    public void Add(Product item)
+    public void Add(Character item)
     {
         throw new NotImplementedException();
     }
 
-    public void Delete(Product item)
+    public void Delete(Character item)
     {
         throw new NotImplementedException();
     }
 
-    public Product? Get(int id)
+    public Character? Get(int id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<List<Product>> GetAll()
+    public async Task<List<Character>> GetAll()
     {
         int currentPage = 1;
         int totalPages = 1;
-        List<Product> productos = new();
+        List<Character> characters = new();
 
         while (currentPage <= totalPages)
         {
@@ -39,17 +39,17 @@ internal class RestClientProduct(ApiClientService apiClientService) : IRestClien
                 JsonElement info = doc.RootElement.GetProperty("info");
                 //totalPages = info.GetProperty("pages").GetInt32();
 
-                foreach (JsonElement jsonProduct in doc.RootElement.GetProperty("results").EnumerateArray())
+                foreach (JsonElement jsonCharacter in doc.RootElement.GetProperty("results").EnumerateArray())
                 {
-                    Product product = new()
+                    Character character = new()
                     {
-                        Name = jsonProduct.GetProperty("name").GetString(),
-                        //Precio = jsonProduct.GetProperty("status").GetDouble(),
-                        Category = new() { Name = jsonProduct.GetProperty("species").GetString() },
-                        Description = jsonProduct.GetProperty("type").GetString(),
-                        ImageUri = jsonProduct.GetProperty("image").GetString()
+                        Name = jsonCharacter.GetProperty("name").GetString(),
+                        //Precio = jsonCharacter.GetProperty("status").GetDouble(),
+                        Location = new() { Name = jsonCharacter.GetProperty("species").GetString() },
+                        Description = jsonCharacter.GetProperty("type").GetString(),
+                        ImageUri = jsonCharacter.GetProperty("image").GetString()
                     };
-                    productos.Add(product);
+                    characters.Add(character);
                 }
             }
             catch (Exception ex)
@@ -60,10 +60,10 @@ internal class RestClientProduct(ApiClientService apiClientService) : IRestClien
             currentPage++;
         }
 
-        return productos;
+        return characters;
     }
 
-    public void Update(Product item)
+    public void Update(Character item)
     {
         throw new NotImplementedException();
     }

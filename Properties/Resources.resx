@@ -142,7 +142,7 @@
     <value>Image link</value>
   </data>
   <data name="InfPrCt" xml:space="preserve">
-    <value>Info about products and categories</value>
+    <value>Info about characters and categories</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -156,35 +156,35 @@
   <data name="NavHome" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="NavProducts" xml:space="preserve">
-    <value>Products</value>
+  <data name="NavCharacters" xml:space="preserve">
+    <value>Characters</value>
   </data>
   <data name="NavSettings" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="PrdsByCt" xml:space="preserve">
-    <value>Products by category</value>
+    <value>Characters by category</value>
   </data>
   <data name="PrdsWthtCts" xml:space="preserve">
-    <value>Products without category</value>
+    <value>Characters without category</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>Price</value>
   </data>
-  <data name="Product" xml:space="preserve">
-    <value>Product</value>
+  <data name="Character" xml:space="preserve">
+    <value>Character</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Product catalog</value>
+    <value>Character catalog</value>
   </data>
   <data name="TtlCts" xml:space="preserve">
     <value>Total categories</value>
   </data>
   <data name="TtlPrds" xml:space="preserve">
-    <value>Total Products</value>
+    <value>Total Characters</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Update</value>

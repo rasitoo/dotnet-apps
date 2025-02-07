@@ -11,32 +11,32 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 public partial class HomeViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ObservableCollection<Category> _categories;
+    private ObservableCollection<Location> _categories;
     [ObservableProperty]
-    private ObservableCollection<Product> _products;
-    public ObservableCollection<ISeries>? AveragePriceByCategorySeries { get; }
-    public ObservableCollection<ISeries>? ProductsByCategorySeries { get; }
-    //public int? TotalProducts => Products.Count;
+    private ObservableCollection<Character> _characters;
+    public ObservableCollection<ISeries>? AveragePriceByLocationSeries { get; }
+    public ObservableCollection<ISeries>? CharactersByLocationSeries { get; }
+    //public int? TotalCharacters => Characters.Count;
     public int TotalCategories => Categories.Count;
-    //public int ProductsWithoutCategory => Products.Count(p => p.Category?.Name == "Sin categoría");
-    private IRepositoryService<Category> _categoryService;
-    private IRepositoryService<Product> _productService;
-    public async void getProducts()
+    //public int CharactersWithoutLocation => Characters.Count(p => p.Location?.Name == "Sin categoría");
+    private IRepositoryService<Location> _locationService;
+    private IRepositoryService<Character> _characterService;
+    public async void getCharacters()
     {
-        Products = new(await _productService.GetAll());
+        Characters = new(await _characterService.GetAll());
 
-        if (Products.Count > 0)
+        if (Characters.Count > 0)
         {
-            MessageBox.Show(Products[0].Name);
+            MessageBox.Show(Characters[0].Name);
         }
         else
         {
-            MessageBox.Show("No se encontraron Productos.");
+            MessageBox.Show("No se encontraron Characteros.");
         }
     }
     public async void getCategories()
     {
-        Categories = new(await _categoryService.GetAll());
+        Categories = new(await _locationService.GetAll());
 
         if (Categories.Count > 0)
         {
@@ -47,40 +47,40 @@ public partial class HomeViewModel : ObservableObject
             MessageBox.Show("No se encontraron Categorias.");
         }
     }
-    public HomeViewModel(IRepositoryService<Product> productService, IRepositoryService<Category> categoryService)
+    public HomeViewModel(IRepositoryService<Character> characterService, IRepositoryService<Location> locationService)
     {
-        _categoryService = categoryService;
-        _productService = productService;
-        getProducts();
+        _locationService = locationService;
+        _characterService = characterService;
+        getCharacters();
         getCategories();
-        AveragePriceByCategorySeries = CreateAveragePriceByCategory();
-        ProductsByCategorySeries = CreateProductsByCategory();
+        AveragePriceByLocationSeries = CreateAveragePriceByLocation();
+        CharactersByLocationSeries = CreateCharactersByLocation();
     }
 
-    private ObservableCollection<ISeries>? CreateProductsByCategory()
+    private ObservableCollection<ISeries>? CreateCharactersByLocation()
     {
         var series = new ObservableCollection<ISeries>();
-        foreach (var category in Categories)
+        foreach (var location in Categories)
         {
-            var products = Products.Where(p => p.Category?.Name == category.Name);
+            var characters = Characters.Where(p => p.Location?.Name == location.Name);
             series.Add(new PieSeries<int>
             {
-                Name = category.Name,
-                Values = new [] { products.Count() }
+                Name = location.Name,
+                Values = new [] { characters.Count() }
             });
         }
         return series;
     }
 
-    private ObservableCollection<ISeries>? CreateAveragePriceByCategory()
+    private ObservableCollection<ISeries>? CreateAveragePriceByLocation()
     {
         var series = new ObservableCollection<ISeries>();
-        foreach (var category in Categories)
+        foreach (var location in Categories)
         {
-            var averagePrice = Products.Where(p => p.Category?.Name == category.Name).Average(p => p.Price) ?? 0;
+            var averagePrice = Characters.Where(p => p.Location?.Name == location.Name).Average(p => p.Price) ?? 0;
             series.Add(new PieSeries<double>
             {
-                Name = category.Name,
+                Name = location.Name,
                 Values = new[] { averagePrice }
             });
         }

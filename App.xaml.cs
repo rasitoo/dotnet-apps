@@ -34,18 +34,18 @@ public partial class App : Application
     {
         services.AddTransient<MainWindow>();
         services.AddTransient<MainViewModel>();
-        services.AddTransient<CategoryView>();
-        services.AddTransient<CategoryViewModel>();
-        services.AddTransient<ProductView>();
-        services.AddTransient<ProductViewModel>();
+        services.AddTransient<LocationView>();
+        services.AddTransient<LocationViewModel>();
+        services.AddTransient<CharacterView>();
+        services.AddTransient<CharacterViewModel>();
         services.AddTransient<SettingsView>();
         services.AddTransient<SettingsViewModel>();
         services.AddTransient<HomeView>();
         services.AddTransient<HomeViewModel>();
-        services.AddScoped<IRestClient<Product>, RestClientProduct>();
-        services.AddScoped<IRestClient<Category>, RestClientCategory>();
-        services.AddScoped<IRepositoryService<Product>, ProductService>();
-        services.AddScoped<IRepositoryService<Category>, CategoryService>();
+        services.AddScoped<IRestClient<Character>, RestClientCharacter>();
+        services.AddScoped<IRestClient<Location>, RestClientLocation>();
+        services.AddScoped<IRepositoryService<Character>, CharacterService>();
+        services.AddScoped<IRepositoryService<Location>, LocationService>();
         services.AddScoped<ApiClientService>();
     }
 }

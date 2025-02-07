@@ -22,8 +22,8 @@
 
             <StackPanel>
                 <c:ButtonNav Text="{x:Static p:Resources.NavHome}" Icon="Home" IsChecked="True" Command="{Binding ActivateHomeViewCommand}" GroupName="SideMenu" />
-                <c:ButtonNav Text="{x:Static p:Resources.NavProducts}" Icon="Library" Command="{Binding ActivateProductViewCommand}" GroupName="SideMenu" />
-                <c:ButtonNav Text="{x:Static p:Resources.NavCategories}" Icon="Library" Command="{Binding ActivateCategoryViewCommand}" GroupName="SideMenu" />
+                <c:ButtonNav Text="{x:Static p:Resources.NavCharacters}" Icon="Library" Command="{Binding ActivateCharacterViewCommand}" GroupName="SideMenu" />
+                <c:ButtonNav Text="{x:Static p:Resources.NavCategories}" Icon="Library" Command="{Binding ActivateLocationViewCommand}" GroupName="SideMenu" />
                 <c:ButtonNav Text="{x:Static p:Resources.NavSettings}" Icon="Settings" Command="{Binding ActivateSettingsViewCommand}" GroupName="SideMenu" />
             </StackPanel>
             <StackPanel Grid.Row="1">

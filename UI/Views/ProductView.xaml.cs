@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.Views;
 
-public partial class ProductView : UserControl
+public partial class CharacterView : UserControl
 {
-    public ProductView(ProductViewModel viewModel)
+    public CharacterView(CharacterViewModel viewModel)
     {
         InitializeComponent();
         this.DataContext = viewModel;
