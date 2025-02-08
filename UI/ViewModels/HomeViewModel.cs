@@ -17,7 +17,7 @@ public partial class HomeViewModel : ObservableObject
     public ObservableCollection<ISeries>? AveragePriceByLocationSeries { get; }
     public ObservableCollection<ISeries>? CharactersByLocationSeries { get; }
     //public int? TotalCharacters => Characters.Count;
-    public int TotalCategories => Categories.Count;
+    //public int TotalCategories => Categories.Count;
     //public int CharactersWithoutLocation => Characters.Count(p => p.Location?.Name == "Sin categoría");
     private IRepositoryService<Location> _locationService;
     private IRepositoryService<Character> _characterService;
@@ -60,30 +60,30 @@ public partial class HomeViewModel : ObservableObject
     private ObservableCollection<ISeries>? CreateCharactersByLocation()
     {
         var series = new ObservableCollection<ISeries>();
-        foreach (var location in Categories)
-        {
-            var characters = Characters.Where(p => p.Location?.Name == location.Name);
-            series.Add(new PieSeries<int>
-            {
-                Name = location.Name,
-                Values = new [] { characters.Count() }
-            });
-        }
+        //foreach (var location in Categories)
+        //{
+        //    var characters = Characters.Where(p => p.Location?.Name == location.Name);
+        //    series.Add(new PieSeries<int>
+        //    {
+        //        Name = location.Name,
+        //        Values = new [] { characters.Count() }
+        //    });
+        //}
         return series;
     }
 
     private ObservableCollection<ISeries>? CreateAveragePriceByLocation()
     {
         var series = new ObservableCollection<ISeries>();
-        foreach (var location in Categories)
-        {
-            var averagePrice = Characters.Where(p => p.Location?.Name == location.Name).Average(p => p.Price) ?? 0;
-            series.Add(new PieSeries<double>
-            {
-                Name = location.Name,
-                Values = new[] { averagePrice }
-            });
-        }
+        //foreach (var location in Categories)
+        //{
+        //    var averagePrice = Characters.Where(p => p.Location?.Name == location.Name).Average(p => p.Price) ?? 0;
+        //    series.Add(new PieSeries<double>
+        //    {
+        //        Name = location.Name,
+        //        Values = new[] { averagePrice }
+        //    });
+        //}
         return series;
     }
 }

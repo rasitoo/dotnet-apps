@@ -38,7 +38,7 @@ public partial class LocationViewModel : ObservableObject
     }
     public async void LoadCategories()
     {
-        Categories = new (await _locationService.GetAll());
+        Categories = new(await _locationService.GetAll());
 
         if (Categories.Count > 0)
         {
@@ -62,55 +62,37 @@ public partial class LocationViewModel : ObservableObject
     //}
     public async void LoadCharactersBySelectedLocation()
     {
-        //if (SelectedItem != null)
-        //{
-        //    CharactersByLocation = new ObservableCollection<Character>();
-        //    foreach (var character in _characterService.GetAll())
-        //    {
-        //        if (character.LocationId == SelectedItem.Id)
-        //        {
-        //            CharactersByLocation.Add(character);
-        //        }
-        //    }
-        //}
-    }
-    [RelayCommand]
-    private async void LoadNextPage()
-    {
-        if (_currentPage < _totalPages)
+        if (SelectedItem != null)
         {
-            _currentPage++;
-            await LoadCharactersByLocationAsync(SelectedItem?.Id);
+            CharactersByLocation = new ObservableCollection<Character>((await _locationService.Get(SelectedItem.Id)).Characters);
         }
     }
+    //[RelayCommand]
+    //private async void LoadNextPage()
+    //{
+    //    if (_currentPage < _totalPages)
+    //    {
+    //        _currentPage++;
+    //        await LoadCharactersByLocationAsync(SelectedItem?.Id);
+    //    }
+    //}
 
-    [RelayCommand]
-    private async void LoadPreviousPage()
-    {
-        if (_currentPage > 1)
-        {
-            _currentPage--;
-            await LoadCharactersByLocationAsync(SelectedItem?.Id);
-        }
-    }
-    private async Task LoadCharactersByLocationAsync(int? locationId)
-    {
-        CharactersByLocation = new ObservableCollection<Character>();
-        //await foreach (var character in _characterService.GetAll())
-        //{
-        //    if (character.LocationId == locationId)
-        //    {
-        //        CharactersByLocation.Add(character);
-        //    }
-        //}
-    }
+    //[RelayCommand]
+    //private async void LoadPreviousPage()
+    //{
+    //    if (_currentPage > 1)
+    //    {
+    //        _currentPage--;
+    //        await LoadCharactersByLocationAsync(SelectedItem?.Id);
+    //    }
+    //}
+
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
         if (e.PropertyName == nameof(SelectedItem))
         {
-            LoadCategories();
             LoadCharactersBySelectedLocation();
             LocationName = SelectedItem?.Name;
         }

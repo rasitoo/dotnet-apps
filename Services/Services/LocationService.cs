@@ -3,26 +3,26 @@ using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 
-internal class LocationService(IRestClient<Location> LocationRepository) : IRepositoryService<Location>
+internal class LocationService(IRestClient<Location> LocationClient) : IRepositoryService<Location>
 {
     public void Add(Location objeto)
     {
-        LocationRepository.Add(objeto);
+        LocationClient.Add(objeto);
     }
     public void Delete(Location item)
     {
-        LocationRepository.Delete(item);
+        LocationClient.Delete(item);
     }
-    public Location? Get(int id)
+    public Task<Location?> Get(int id)
     {
-        return LocationRepository.Get(id);
+        return LocationClient.Get(id);
     }
     public Task<List<Location>> GetAll()
     {
-        return LocationRepository.GetAll();
+        return LocationClient.GetAll();
     }
     public void Update(Location objeto)
     {
-        LocationRepository.Update(objeto);
+        LocationClient.Update(objeto);
     }
 }

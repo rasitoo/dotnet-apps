@@ -2,7 +2,7 @@
 
 public interface IRepositoryService<T>
 {
-    T? Get(int id);
+    Task<T?> Get(int id);
     Task<List<T>> GetAll();
     void Add(T item);
     void Delete(T item);

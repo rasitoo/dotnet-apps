@@ -13,7 +13,7 @@ internal class CharacterService(IRestClient<Character> CharacterRepository) : IR
     {
         CharacterRepository.Delete(item);
     }
-    public Character? Get(int id)
+    public Task<Character?> Get(int id)
     {
         return CharacterRepository.Get(id);
     }

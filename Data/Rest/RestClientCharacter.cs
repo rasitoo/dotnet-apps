@@ -19,7 +19,7 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
         throw new NotImplementedException();
     }
 
-    public Character? Get(int id)
+    public Task<Character?> Get(int id)
     {
         throw new NotImplementedException();
     }
@@ -45,7 +45,7 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
                     {
                         Name = jsonCharacter.GetProperty("name").GetString(),
                         //Precio = jsonCharacter.GetProperty("status").GetDouble(),
-                        Location = new() { Name = jsonCharacter.GetProperty("species").GetString() },
+                        //Location = new() { Name = jsonCharacter.GetProperty("species").GetString() },
                         Description = jsonCharacter.GetProperty("type").GetString(),
                         ImageUri = jsonCharacter.GetProperty("image").GetString()
                     };
