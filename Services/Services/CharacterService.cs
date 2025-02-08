@@ -3,26 +3,37 @@ using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 
-internal class CharacterService(IRestClient<Character> CharacterRepository) : IRepositoryService<Character>
+internal class CharacterService(IRestClient<Character> CharacterClient) : IService<Character>
 {
+    public int Total
+    {
+        get => CharacterClient.Total;
+        set => CharacterClient.Total = value;
+    }    
+    public int TotalPages
+    {
+        get => CharacterClient.Total;
+        set => CharacterClient.Total = value;
+    }
+
     public void Add(Character objeto)
     {
-        CharacterRepository.Add(objeto);
+        CharacterClient.Add(objeto);
     }
     public void Delete(Character item)
     {
-        CharacterRepository.Delete(item);
+        CharacterClient.Delete(item);
     }
     public Task<Character?> Get(int id)
     {
-        return CharacterRepository.Get(id);
+        return CharacterClient.Get(id);
     }
-    public Task<List<Character>> GetAll()
+    public Task<List<Character>> GetAll(int page)
     {
-        return CharacterRepository.GetAll();
+        return CharacterClient.GetAll(page);
     }
     public void Update(Character objeto)
     {
-        CharacterRepository.Update(objeto);
+        CharacterClient.Update(objeto);
     }
 }

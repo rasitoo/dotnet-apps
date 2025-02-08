@@ -44,8 +44,8 @@ public partial class App : Application
         services.AddTransient<HomeViewModel>();
         services.AddScoped<IRestClient<Character>, RestClientCharacter>();
         services.AddScoped<IRestClient<Location>, RestClientLocation>();
-        services.AddScoped<IRepositoryService<Character>, CharacterService>();
-        services.AddScoped<IRepositoryService<Location>, LocationService>();
+        services.AddScoped<IService<Character>, CharacterService>();
+        services.AddScoped<IService<Location>, LocationService>();
         services.AddScoped<ApiClientService>();
     }
 }

@@ -24,4 +24,20 @@ public partial class ListViewCharacters : UserControl
     }
     public static readonly DependencyProperty SelectedCharacterProperty =
         DependencyProperty.Register("SelectedCharacter", typeof(Object), typeof(ListViewCharacters), new PropertyMetadata(null));
+    public double ScrollPercentage
+    {
+        get { return (double)GetValue(ScrollPercentageProperty); }
+        set { SetValue(ScrollPercentageProperty, value); }
+    }
+
+    public static readonly DependencyProperty ScrollPercentageProperty =
+        DependencyProperty.Register("ScrollPercentage", typeof(double), typeof(ListViewCharacters), new PropertyMetadata(0.0));
+
+    private void ListCharacters_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+        if (e.ExtentHeight > 0)
+        {
+            ScrollPercentage = e.VerticalOffset / e.ExtentHeight;
+        }
+    }
 }

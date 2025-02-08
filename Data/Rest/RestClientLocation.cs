@@ -6,6 +6,9 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
 internal class RestClientLocation(ApiClientService apiClientService) : IRestClient<Location>
 {
+    public int Total { get; set; }
+    public int TotalPages { get; set; }
+
     public void Add(Location item)
     {
         throw new NotImplementedException();
@@ -64,15 +67,14 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
         }
         return location;
     }
-    public async Task<List<Location>> GetAll()
+    public async Task<List<Location>> GetAll(int page)
     {
-        int currentPage = 1;
         int totalPages = 1;
         List<Location> locations = new();
 
-        while (currentPage <= totalPages)
+        while (page <= totalPages)
         {
-            string url = $"https://rickandmortyapi.com/api/location?page={currentPage}";
+            string url = $"https://rickandmortyapi.com/api/location?page={page}";
             try
             {
                 JsonDocument doc = await apiClientService.GetJsonAsync(url);
@@ -85,6 +87,7 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
                     {
                         Id = jsonLocation.GetProperty("id").GetInt32(),
                         Name = jsonLocation.GetProperty("name").GetString(),
+                        ResidentsNum = jsonLocation.GetProperty("residents").EnumerateArray().Count(),
                         Characters = new List<Character>()
                     };
                     locations.Add(location);
@@ -94,8 +97,7 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-
-            currentPage++;
+            page++;
         }
 
         return locations;

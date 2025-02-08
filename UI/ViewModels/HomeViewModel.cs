@@ -19,11 +19,11 @@ public partial class HomeViewModel : ObservableObject
     //public int? TotalCharacters => Characters.Count;
     //public int TotalCategories => Categories.Count;
     //public int CharactersWithoutLocation => Characters.Count(p => p.Location?.Name == "Sin categoría");
-    private IRepositoryService<Location> _locationService;
-    private IRepositoryService<Character> _characterService;
+    private IService<Location> _locationService;
+    private IService<Character> _characterService;
     public async void getCharacters()
     {
-        Characters = new(await _characterService.GetAll());
+        Characters = new(await _characterService.GetAll(1));
 
         if (Characters.Count > 0)
         {
@@ -36,7 +36,7 @@ public partial class HomeViewModel : ObservableObject
     }
     public async void getCategories()
     {
-        Categories = new(await _locationService.GetAll());
+        Categories = new(await _locationService.GetAll(1));
 
         if (Categories.Count > 0)
         {
@@ -47,7 +47,7 @@ public partial class HomeViewModel : ObservableObject
             MessageBox.Show("No se encontraron Categorias.");
         }
     }
-    public HomeViewModel(IRepositoryService<Character> characterService, IRepositoryService<Location> locationService)
+    public HomeViewModel(IService<Character> characterService, IService<Location> locationService)
     {
         _locationService = locationService;
         _characterService = characterService;

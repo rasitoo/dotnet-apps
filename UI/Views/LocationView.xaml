@@ -36,11 +36,11 @@
         <c:ListViewCategories ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}" Grid.Row="1" VerticalAlignment="Top"/>
         <ScrollViewer Grid.Column="1" Grid.Row="1">
             <StackPanel Grid.Row="1" Grid.Column="1">
-                <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="5">
+                <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="5" MaxHeight="700">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="2*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -52,9 +52,7 @@
                         <TextBox  Text="{Binding LocationName, Mode=TwoWay}" FontWeight="Bold"  Grid.Row="0" Grid.Column="1" Margin="10"/>
 
                         <TextBlock HorizontalAlignment="Left"  Text="{x:Static p:Resources.NavCharacters}" Grid.Row="1" Margin="10"/>
-                        <c:ListViewCharacters ItemsSource="{Binding CharactersByLocation}" SelectedCharacter="{Binding SelectedCharacter}" Grid.Row="1" Grid.Column="1"/>
-
-
+                        <c:ListViewCharacters ItemsSource="{Binding CharactersByLocation}" SelectedCharacter="{Binding SelectedCharacter}" Grid.Column="1" Grid.Row="1"/>
 
                     </Grid>
                 </Border>

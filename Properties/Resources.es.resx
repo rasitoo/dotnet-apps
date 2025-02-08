@@ -124,7 +124,7 @@
     <value>Media de precio por categoría</value>
   </data>
   <data name="Category" xml:space="preserve">
-    <value>Categoría</value>
+    <value>Localización</value>
   </data>
   <data name="DataGraphics" xml:space="preserve">
     <value>Gráficas de datos</value>
@@ -142,13 +142,13 @@
     <value>Link de la imagen</value>
   </data>
   <data name="InfPrCt" xml:space="preserve">
-    <value>Información sobre characters y categorías</value>
+    <value>Información sobre personajes y localizaciones</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
   <data name="NavCategories" xml:space="preserve">
-    <value>Categorias</value>
+    <value>Localización</value>
   </data>
   <data name="NavExit" xml:space="preserve">
     <value>Salir</value>
@@ -157,16 +157,16 @@
     <value>Inicio</value>
   </data>
   <data name="NavCharacters" xml:space="preserve">
-    <value>Characteros</value>
+    <value>Personajes</value>
   </data>
   <data name="NavSettings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
   <data name="PrdsByCt" xml:space="preserve">
-    <value>Characteros por categoría</value>
+    <value>Personajes por localización</value>
   </data>
   <data name="PrdsWthtCts" xml:space="preserve">
-    <value>Characteros sin categoría:  {0}</value>
+    <value>Personajes sin localización:  {0}</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>Precio</value>
@@ -178,13 +178,13 @@
     <value>Guardar</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Catálogo de characters</value>
+    <value>Lista de personajes</value>
   </data>
   <data name="TtlCts" xml:space="preserve">
-    <value>Categorías totales:  {0}</value>
+    <value>Localizaciones totales:  {0}</value>
   </data>
   <data name="TtlPrds" xml:space="preserve">
-    <value>Characteros totales:  {0}</value>
+    <value>Personajes totales:  {0}</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Actualizar</value>

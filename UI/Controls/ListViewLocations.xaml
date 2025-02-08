@@ -22,6 +22,7 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel>
                                 <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding ResidentsNum}" FontWeight="Bold" />
                             </StackPanel>
                         </StackPanel>
                     </Border>

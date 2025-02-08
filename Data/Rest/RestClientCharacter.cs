@@ -8,7 +8,8 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
 {
 
     //Donde se hace el await???
-
+    public int Total {get;set;}
+    public int TotalPages {get;set;}
     public void Add(Character item)
     {
         throw new NotImplementedException();
@@ -24,20 +25,22 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
         throw new NotImplementedException();
     }
 
-    public async Task<List<Character>> GetAll()
+    public async Task<List<Character>> GetAll(int page)
     {
-        int currentPage = 1;
-        int totalPages = 1;
+        int totalPages = page+2;
         List<Character> characters = new();
 
-        while (currentPage <= totalPages)
+        while (page <= totalPages)
         {
-            string url = $"https://rickandmortyapi.com/api/character?page={currentPage}";
+            string url = $"https://rickandmortyapi.com/api/character?page={page}";
             try
             {
                 JsonDocument doc = await apiClientService.GetJsonAsync(url);
                 JsonElement info = doc.RootElement.GetProperty("info");
-                //totalPages = info.GetProperty("pages").GetInt32();
+                Total = info.GetProperty("count").GetInt32();
+                TotalPages = info.GetProperty("pages").GetInt32();
+                
+
 
                 foreach (JsonElement jsonCharacter in doc.RootElement.GetProperty("results").EnumerateArray())
                 {
@@ -56,8 +59,7 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-
-            currentPage++;
+            page++;
         }
 
         return characters;

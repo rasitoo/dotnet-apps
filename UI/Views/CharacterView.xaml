@@ -35,7 +35,7 @@
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" />
         </Border>
-        <c:ListViewCharacters ItemsSource="{Binding Characters}" SelectedCharacter="{Binding SelectedCharacter}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"/>
+        <c:ListViewCharacters ItemsSource="{Binding Characters}" SelectedCharacter="{Binding SelectedCharacter}" ScrollPercentage="{Binding ScrollPercentage, Mode=TwoWay}" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"/>
         <ScrollViewer Grid.Column="1" Grid.Row="1">
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Image Source="{Binding SelectedCharacter.ImageUri}" Height="200" Margin="0,0,10,0" />

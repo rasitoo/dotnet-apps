@@ -5,12 +5,17 @@ using P07_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
+using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
-
 public partial class CharacterViewModel : ObservableObject
 {
+    private const int PageSize = 10;
+
+    private IService<Location> _locationService;
+    private IService<Character> _characterService;
 
     [ObservableProperty]
     private List<Location> _categories = [];
@@ -19,37 +24,54 @@ public partial class CharacterViewModel : ObservableObject
     [ObservableProperty]
     private Character? _selectedCharacter = new() { Location = new() { Name = "Otros" } };
     [ObservableProperty]
-    private string? _locationName;    
+    private string? _locationName;
     [ObservableProperty]
-    private string? _name;    
+    private string? _name;
     [ObservableProperty]
-    private string? _desc;    
+    private string? _desc;
     [ObservableProperty]
     private double? _price;
-    private IRepositoryService<Location> _locationService;
-    private IRepositoryService<Character> _characterService;
-    public CharacterViewModel(IRepositoryService<Location> locationService, IRepositoryService<Character> characterService)
+    [ObservableProperty]
+    private int _currentPage = 1;
+    [ObservableProperty]
+    private int _totalPages;
+    [ObservableProperty]
+    private double _scrollPercentage = 0.0;
+
+    public CharacterViewModel(IService<Location> locationService, IService<Character> characterService)
     {
         this._locationService = locationService;
         this._characterService = characterService;
         getCharacters();
     }
+
+    private void LoadNextPage()
+    {
+        if (CurrentPage < TotalPages)
+        {
+            CurrentPage++;
+            addCharacters();
+        }
+    }    
     public async void getCharacters()
     {
-        Characters = new(await _characterService.GetAll());
-
-        if (Characters.Count > 0)
-        {
-            MessageBox.Show(Characters[0].Name);
-        }
-        else
-        {
-            MessageBox.Show("No se encontraron Categorias.");
-        }
+        var paginatedCharacters =  await _characterService.GetAll(CurrentPage);
+        Characters = new ObservableCollection<Character>(paginatedCharacters);
+        TotalPages = _characterService.TotalPages;
     }
+    public async void addCharacters()
+    {
+        var paginatedCharacters = await _characterService.GetAll(CurrentPage);
+        foreach (var character in paginatedCharacters)
+        {
+            Characters.Add(character);
+        }
+        TotalPages = _characterService.TotalPages;
+    }
+
     public async void getCategories()
     {
-        Categories =  new(await _locationService.GetAll());
+        Categories = new(await _locationService.GetAll(CurrentPage));
 
         if (Categories.Count > 0)
         {
@@ -60,11 +82,9 @@ public partial class CharacterViewModel : ObservableObject
             MessageBox.Show("No se encontraron Categorias.");
         }
     }
+
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
-        //No me gusta usar este evento pero si no, se verían cambios de characters en las listas aunque
-        //no se guardaran en la base de datos, además cambiaría el nombre de categoría a todos los prductos
-        //en vez de cambiar la categoría del charactero concreto
         base.OnPropertyChanged(e);
         if (e.PropertyName == nameof(SelectedCharacter))
         {
@@ -73,7 +93,20 @@ public partial class CharacterViewModel : ObservableObject
             Desc = SelectedCharacter?.Description;
             Price = SelectedCharacter?.Price;
         }
+        else if (e.PropertyName == nameof(ScrollPercentage))
+        {
+        //    if(ScrollPercentage <= 0.1)
+        //    {
+        //        LoadPreviousPage();
+        //    }
+        //    else 
+            if (ScrollPercentage >= 0.8)
+            {
+                LoadNextPage();
+            }
+        }
     }
+
     [RelayCommand]
     private void Save()
     {
@@ -97,6 +130,7 @@ public partial class CharacterViewModel : ObservableObject
             MessageBox.Show($"Se ha creado el charactero: {Name}");
         }
     }
+
     public Location? LocationExistsOrCreate(string nombre)
     {
         if (Categories == null)
@@ -117,6 +151,7 @@ public partial class CharacterViewModel : ObservableObject
         }
         return null;
     }
+
     [RelayCommand]
     private void Delete()
     {
@@ -136,6 +171,7 @@ public partial class CharacterViewModel : ObservableObject
             MessageBox.Show("No hay charactero seleccionado para borrar.");
         }
     }
+
     [RelayCommand]
     private void Add()
     {
