@@ -70,7 +70,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Average price by Location.
+        ///   Busca una cadena traducida similar a AvgPrcByCt.
         /// </summary>
         public static string AvgPrcByCt {
             get {
@@ -79,16 +79,16 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Location.
+        ///   Busca una cadena traducida similar a Character.
         /// </summary>
-        public static string Location {
+        public static string Character {
             get {
-                return ResourceManager.GetString("Location", resourceCulture);
+                return ResourceManager.GetString("Character", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Data graphics.
+        ///   Busca una cadena traducida similar a DataGraphics.
         /// </summary>
         public static string DataGraphics {
             get {
@@ -106,15 +106,6 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Description.
-        /// </summary>
-        public static string Description {
-            get {
-                return ResourceManager.GetString("Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Home.
         /// </summary>
         public static string Home {
@@ -124,7 +115,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Image link.
+        ///   Busca una cadena traducida similar a ImageLink.
         /// </summary>
         public static string ImageLink {
             get {
@@ -133,7 +124,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Info about characters and categories.
+        ///   Busca una cadena traducida similar a InfPrCt.
         /// </summary>
         public static string InfPrCt {
             get {
@@ -142,43 +133,16 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Language.
+        ///   Busca una cadena traducida similar a Location.
         /// </summary>
-        public static string Language {
+        public static string Location {
             get {
-                return ResourceManager.GetString("Language", resourceCulture);
+                return ResourceManager.GetString("Location", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Categories.
-        /// </summary>
-        public static string NavCategories {
-            get {
-                return ResourceManager.GetString("NavCategories", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Exit.
-        /// </summary>
-        public static string NavExit {
-            get {
-                return ResourceManager.GetString("NavExit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Home.
-        /// </summary>
-        public static string NavHome {
-            get {
-                return ResourceManager.GetString("NavHome", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Characters.
+        ///   Busca una cadena traducida similar a NavCharacters.
         /// </summary>
         public static string NavCharacters {
             get {
@@ -187,7 +151,34 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Settings.
+        ///   Busca una cadena traducida similar a NavExit.
+        /// </summary>
+        public static string NavExit {
+            get {
+                return ResourceManager.GetString("NavExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a NavHome.
+        /// </summary>
+        public static string NavHome {
+            get {
+                return ResourceManager.GetString("NavHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a NavLocations.
+        /// </summary>
+        public static string NavLocations {
+            get {
+                return ResourceManager.GetString("NavLocations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a NavSettings.
         /// </summary>
         public static string NavSettings {
             get {
@@ -196,7 +187,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Characters by location.
+        ///   Busca una cadena traducida similar a PrdsByCt.
         /// </summary>
         public static string PrdsByCt {
             get {
@@ -205,7 +196,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Characters without location.
+        ///   Busca una cadena traducida similar a PrdsWthtCts.
         /// </summary>
         public static string PrdsWthtCts {
             get {
@@ -214,20 +205,11 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Price.
+        ///   Busca una cadena traducida similar a Residents.
         /// </summary>
-        public static string Price {
+        public static string Residents {
             get {
-                return ResourceManager.GetString("Price", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Character.
-        /// </summary>
-        public static string Character {
-            get {
-                return ResourceManager.GetString("Character", resourceCulture);
+                return ResourceManager.GetString("Residents", resourceCulture);
             }
         }
         
@@ -241,38 +223,38 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Character catalog.
+        ///   Busca una cadena traducida similar a Status.
         /// </summary>
-        public static string Title {
+        public static string Status {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Total categories.
+        ///   Busca una cadena traducida similar a TtlPrds.
         /// </summary>
-        public static string TtlCts {
+        public static string TtlChtrs {
             get {
-                return ResourceManager.GetString("TtlCts", resourceCulture);
+                return ResourceManager.GetString("TtlChtrs", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Total Characters.
+        ///   Busca una cadena traducida similar a TtlCts.
         /// </summary>
-        public static string TtlPrds {
+        public static string TtlLcts {
             get {
-                return ResourceManager.GetString("TtlPrds", resourceCulture);
+                return ResourceManager.GetString("TtlLcts", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Update.
+        ///   Busca una cadena traducida similar a Type.
         /// </summary>
-        public static string Update {
+        public static string Type {
             get {
-                return ResourceManager.GetString("Update", resourceCulture);
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
     }

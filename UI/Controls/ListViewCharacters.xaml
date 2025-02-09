@@ -15,7 +15,8 @@
                   SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}"
                   HorizontalAlignment="Center"
                   VerticalAlignment="Center"
-                  ScrollViewer.ScrollChanged="ListCharacters_ScrollChanged">
+                  ScrollViewer.ScrollChanged="ListCharacters_ScrollChanged"
+                  VirtualizingPanel.IsVirtualizing="True">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Padding="5" Width="300">
@@ -23,8 +24,8 @@
                         <Image Source="{Binding ImageUri}" Width="50" Height="50" Margin="0,0,10,0" />
                         <StackPanel>
                             <TextBlock Text="{Binding Name}" FontWeight="Bold" />
-                            <TextBlock Text="{Binding Description}" />
-                            <TextBlock Text="{Binding Price}" />
+                            <TextBlock Text="{Binding Type}" />
+                            <TextBlock Text="{Binding Status}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>

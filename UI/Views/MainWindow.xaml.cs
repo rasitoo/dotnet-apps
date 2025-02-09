@@ -1,9 +1,12 @@
-﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo;
+﻿using P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
+
+namespace P07_01_DI_Contactos_TAPIADOR_rodrigo;
 
 public partial class MainWindow
 {
-    public MainWindow()
+    public MainWindow(MainViewModel viewModel)
     {
+        DataContext = viewModel;
         LoadSettings();
         InitializeComponent();
     }

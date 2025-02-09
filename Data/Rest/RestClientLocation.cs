@@ -29,6 +29,8 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
         {
             JsonDocument doc = await apiClientService.GetJsonAsync(url);
             JsonElement root = doc.RootElement;
+            JsonElement info = root.GetProperty("info");
+            Total = info.GetProperty("count").GetInt32();
 
             location = new Location
             {
@@ -45,11 +47,12 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
                     JsonDocument residentDoc = await apiClientService.GetJsonAsync(residentUri);
                     JsonElement residentElement = residentDoc.RootElement;
 
+
                     Character character = new()
                     {
                         Id = residentElement.GetProperty("id").GetInt32(),
                         Name = residentElement.GetProperty("name").GetString(),
-                        Description = residentElement.GetProperty("status").GetString(),
+                        Type = residentElement.GetProperty("status").GetString(),
                         ImageUri = residentElement.GetProperty("image").GetString(),
                     };
 

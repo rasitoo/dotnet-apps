@@ -22,7 +22,7 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel>
                                 <TextBlock Text="{Binding Name}" FontWeight="Bold" />
-                                <TextBlock Text="{Binding ResidentsNum}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding ResidentsNum, StringFormat='{x:Static p:Resources.Residents}'}" />
                             </StackPanel>
                         </StackPanel>
                     </Border>

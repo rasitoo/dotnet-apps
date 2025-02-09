@@ -5,15 +5,10 @@ using P07_01_DI_Contactos_TAPIADOR_rodrigo.Services.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 public partial class CharacterViewModel : ObservableObject
 {
-    private const int PageSize = 10;
-
     private IService<Location> _locationService;
     private IService<Character> _characterService;
 
@@ -28,9 +23,9 @@ public partial class CharacterViewModel : ObservableObject
     [ObservableProperty]
     private string? _name;
     [ObservableProperty]
-    private string? _desc;
+    private string? _type;
     [ObservableProperty]
-    private double? _price;
+    private string? _status;
     [ObservableProperty]
     private int _currentPage = 1;
     [ObservableProperty]
@@ -72,35 +67,22 @@ public partial class CharacterViewModel : ObservableObject
     public async void getCategories()
     {
         Categories = new(await _locationService.GetAll(CurrentPage));
-
-        if (Categories.Count > 0)
-        {
-            MessageBox.Show(Categories[0].Name);
-        }
-        else
-        {
-            MessageBox.Show("No se encontraron Categorias.");
-        }
     }
 
-    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+    protected async override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
         base.OnPropertyChanged(e);
         if (e.PropertyName == nameof(SelectedCharacter))
         {
-            LocationName = SelectedCharacter?.Location?.Name;
+            LocationName = "";
             Name = SelectedCharacter?.Name;
-            Desc = SelectedCharacter?.Description;
-            Price = SelectedCharacter?.Price;
+            Type = SelectedCharacter?.Type;
+            Status = SelectedCharacter?.Status;
+            LocationName = (SelectedCharacter?.LocationId != null) ? (await _locationService.Get(SelectedCharacter.LocationId.Value))?.Name : null;
         }
         else if (e.PropertyName == nameof(ScrollPercentage))
         {
-        //    if(ScrollPercentage <= 0.1)
-        //    {
-        //        LoadPreviousPage();
-        //    }
-        //    else 
-            if (ScrollPercentage >= 0.8)
+            if (ScrollPercentage >= 0.7)
             {
                 LoadNextPage();
             }
@@ -110,25 +92,25 @@ public partial class CharacterViewModel : ObservableObject
     [RelayCommand]
     private void Save()
     {
-        SelectedCharacter ??= new() { Location = new() { Name = "Otros" } };
-        SelectedCharacter.Location ??= LocationExistsOrCreate("Otros");
+        //SelectedCharacter ??= new() { Location = new() { Name = "Otros" } };
+        //SelectedCharacter.Location ??= LocationExistsOrCreate("Otros");
 
-        if (SelectedCharacter.Id != 0)
-        {
-            SelectedCharacter.Location = LocationExistsOrCreate(LocationName ?? "Otros");
-            SelectedCharacter.Name = Name;
-            SelectedCharacter.Description = Desc;
-            SelectedCharacter.Price = Price;
-            _characterService.Update(SelectedCharacter);
-            MessageBox.Show($"Se ha editado el charactero: {Name}");
-        }
-        else
-        {
-            Character pr = new() { Name = Name, Description = Desc, Price = Price, Location = LocationExistsOrCreate(LocationName ?? "Otros") };
-            _characterService.Add(pr);
-            Characters.Add(pr);
-            MessageBox.Show($"Se ha creado el charactero: {Name}");
-        }
+        //if (SelectedCharacter.Id != 0)
+        //{
+        //    SelectedCharacter.Location = LocationExistsOrCreate(LocationName ?? "Otros");
+        //    SelectedCharacter.Name = Name;
+        //    SelectedCharacter.Type = Desc;
+        //    SelectedCharacter.Status = Status;
+        //    _characterService.Update(SelectedCharacter);
+        //    MessageBox.Show($"Se ha editado el charactero: {Name}");
+        //}
+        //else
+        //{
+        //    Character pr = new() { Name = Name, Type = Desc, Status = Status, Location = LocationExistsOrCreate(LocationName ?? "Otros") };
+        //    _characterService.Add(pr);
+        //    Characters.Add(pr);
+        //    MessageBox.Show($"Se ha creado el charactero: {Name}");
+        //}
     }
 
     public Location? LocationExistsOrCreate(string nombre)

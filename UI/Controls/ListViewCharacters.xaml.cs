@@ -37,7 +37,7 @@ public partial class ListViewCharacters : UserControl
     {
         if (e.ExtentHeight > 0)
         {
-            ScrollPercentage = e.VerticalOffset / e.ExtentHeight;
+            ScrollPercentage = e.VerticalOffset / (e.ExtentHeight - e.ViewportHeight);
         }
     }
 }

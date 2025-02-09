@@ -27,7 +27,7 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
 
     public async Task<List<Character>> GetAll(int page)
     {
-        int totalPages = page+2;
+        int totalPages = page;
         List<Character> characters = new();
 
         while (page <= totalPages)
@@ -44,12 +44,14 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
 
                 foreach (JsonElement jsonCharacter in doc.RootElement.GetProperty("results").EnumerateArray())
                 {
+                    var location = jsonCharacter.GetProperty("location").GetProperty("url").GetString().Split("/");
                     Character character = new()
                     {
+                        Id = jsonCharacter.GetProperty("id").GetInt32(),
                         Name = jsonCharacter.GetProperty("name").GetString(),
-                        //Precio = jsonCharacter.GetProperty("status").GetDouble(),
-                        //Location = new() { Name = jsonCharacter.GetProperty("species").GetString() },
-                        Description = jsonCharacter.GetProperty("type").GetString(),
+                        Status = jsonCharacter.GetProperty("status").GetString(),
+                        LocationId = int.Parse(location[^1]),
+                        Type = jsonCharacter.GetProperty("type").GetString(),
                         ImageUri = jsonCharacter.GetProperty("image").GetString()
                     };
                     characters.Add(character);
