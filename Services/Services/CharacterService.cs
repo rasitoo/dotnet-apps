@@ -9,7 +9,7 @@ internal class CharacterService(IRestClient<Character> CharacterClient) : IServi
     {
         get => CharacterClient.Total;
         set => CharacterClient.Total = value;
-    }    
+    }
     public int TotalPages
     {
         get => CharacterClient.Total;
@@ -24,9 +24,9 @@ internal class CharacterService(IRestClient<Character> CharacterClient) : IServi
     {
         CharacterClient.Delete(item);
     }
-    public Task<Character?> Get(int id)
+    public Task<Character?> Get(int id, int subItemsPage = 0, double subItemsPerPage = 0)
     {
-        return CharacterClient.Get(id);
+        return CharacterClient.Get(id, subItemsPage, subItemsPerPage);
     }
     public Task<List<Character>> GetAll(int page)
     {

@@ -8,9 +8,10 @@ using System.Windows;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.ViewModels;
 
-//behavioours, endpoint para graficas
 public partial class LocationViewModel : ObservableObject
 {
+    private const double PageSize = 10;
+
     [ObservableProperty]
     private ObservableCollection<Location> _categories = [];
     [ObservableProperty]
@@ -21,10 +22,12 @@ public partial class LocationViewModel : ObservableObject
     private Character? _selectedCharacter;
     [ObservableProperty]
     private string? _locationName;
-    //[ObservableProperty]
-    //private int _currentPage = 1;
-    //[ObservableProperty]
-    //private int _totalPages = 1;
+    [ObservableProperty]
+    private int _currentPage = 1;
+    [ObservableProperty]
+    private int _totalPages;
+    [ObservableProperty]
+    private double _scrollPercentage = 0.0;
 
     private IService<Location> _locationService;
     private IService<Character> _characterService;
@@ -37,35 +40,20 @@ public partial class LocationViewModel : ObservableObject
     }
     public async void LoadLocations()
     {
-        Categories = new(await _locationService.GetAll(1));
+        Categories = new(await _locationService.GetAll());
     }
     public async void LoadCharactersBySelectedLocation()
     {
+        CharactersByLocation = [];
+        CurrentPage = 0;
         if (SelectedItem != null)
         {
-            CharactersByLocation = new ObservableCollection<Character>((await _locationService.Get(SelectedItem.Id)).Characters);
+            var characters = (await _locationService.Get(SelectedItem.Id, CurrentPage, PageSize)).Characters;
+            CharactersByLocation = new(characters);
+            TotalPages = (int)Math.Ceiling(SelectedItem.ResidentsNum / PageSize);
+            CurrentPage++;
         }
     }
-    //[RelayCommand]
-    //private async void LoadNextPage()
-    //{
-    //    if (_currentPage < _totalPages)
-    //    {
-    //        _currentPage++;
-    //        await LoadCharactersByLocationAsync(SelectedItem?.Id);
-    //    }
-    //}
-
-    //[RelayCommand]
-    //private async void LoadPreviousPage()
-    //{
-    //    if (_currentPage > 1)
-    //    {
-    //        _currentPage--;
-    //        await LoadCharactersByLocationAsync(SelectedItem?.Id);
-    //    }
-    //}
-
 
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
@@ -75,8 +63,36 @@ public partial class LocationViewModel : ObservableObject
             LoadCharactersBySelectedLocation();
             LocationName = SelectedItem?.Name;
         }
+        else if (e.PropertyName == nameof(ScrollPercentage))
+        {
+            if (ScrollPercentage >= 0.8)
+            {
+                LoadNextPageOfCharacters();
+            }
+        }
+    }
+    public async void LoadNextPageOfCharacters()
+    {
+        if (SelectedItem != null && CurrentPage < TotalPages)
+        {
+            CurrentPage++;
+            var nextPageCharacters = (await _locationService.Get(SelectedItem.Id, CurrentPage, PageSize)).Characters;
+            foreach (var character in nextPageCharacters)
+            {
+                CharactersByLocation.Add(character);
+            }
+        }
     }
 
+    public async void addCharacters()
+    {
+        var paginatedCharacters = await _characterService.GetAll(CurrentPage);
+        foreach (var character in paginatedCharacters)
+        {
+            CharactersByLocation.Add(character);
+        }
+        TotalPages = _characterService.TotalPages;
+    }
     [RelayCommand]
     private void Save()
     {

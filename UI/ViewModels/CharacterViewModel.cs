@@ -82,7 +82,7 @@ public partial class CharacterViewModel : ObservableObject
         }
         else if (e.PropertyName == nameof(ScrollPercentage))
         {
-            if (ScrollPercentage >= 0.7)
+            if (ScrollPercentage >= 0.8)
             {
                 LoadNextPage();
             }
@@ -139,18 +139,18 @@ public partial class CharacterViewModel : ObservableObject
     {
         if (SelectedCharacter != null && SelectedCharacter.Id != 0)
         {
-            var result = MessageBox.Show($"¿Está seguro de que desea borrar el charactero: {Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show($"¿Está seguro de que desea borrar el personaje: {Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 _characterService.Delete(SelectedCharacter);
                 Characters.Remove(SelectedCharacter);
-                MessageBox.Show("El charactero ha sido borrado.");
+                MessageBox.Show("El personaje ha sido borrado.");
                 Add();
             }
         }
         else
         {
-            MessageBox.Show("No hay charactero seleccionado para borrar.");
+            MessageBox.Show("No hay personaje seleccionado para borrar.");
         }
     }
 

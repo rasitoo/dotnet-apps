@@ -20,7 +20,7 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
         throw new NotImplementedException();
     }
 
-    public Task<Character?> Get(int id)
+    public Task<Character?> Get(int id, int subitems = 0, double subItemsPerPage = 0)
     {
         throw new NotImplementedException();
     }

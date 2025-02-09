@@ -23,9 +23,9 @@ internal class LocationService(IRestClient<Location> LocationClient) : IService<
     {
         LocationClient.Delete(item);
     }
-    public Task<Location?> Get(int id)
+    public Task<Location?> Get(int id = 1, int subItemsPage = 0, double subItemsPerPage = 0)
     {
-        return LocationClient.Get(id);
+        return LocationClient.Get(id, subItemsPage, subItemsPerPage);
     }
     public Task<List<Location>> GetAll(int page)
     {

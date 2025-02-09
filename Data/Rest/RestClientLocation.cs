@@ -7,7 +7,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 internal class RestClientLocation(ApiClientService apiClientService) : IRestClient<Location>
 {
     public int Total { get; set; }
-    public int TotalPages { get; set; }
+    public int TotalPages { get; set; } = 1;
 
     public void Add(Location item)
     {
@@ -19,7 +19,7 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
         throw new NotImplementedException();
     }
 
-    public async Task<Location?> Get(int id)
+    public async Task<Location?> Get(int id, int subItemPage = 0, double subItemsPerPage = 0)
     {
         var characters = new List<Character>();
         Location? location = null;
@@ -29,8 +29,6 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
         {
             JsonDocument doc = await apiClientService.GetJsonAsync(url);
             JsonElement root = doc.RootElement;
-            JsonElement info = root.GetProperty("info");
-            Total = info.GetProperty("count").GetInt32();
 
             location = new Location
             {
@@ -38,9 +36,12 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
                 Name = root.GetProperty("name").GetString(),
                 Characters = characters
             };
+            int start = (int)(subItemPage * subItemsPerPage);
+            int end = start + (int)subItemsPerPage;
 
-            foreach (JsonElement residentUrl in root.GetProperty("residents").EnumerateArray())
+            for (int i = start; i < end && i < root.GetProperty("residents").GetArrayLength(); i++)
             {
+                JsonElement residentUrl = root.GetProperty("residents")[i];
                 string residentUri = residentUrl.GetString();
                 try
                 {
@@ -70,19 +71,19 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
         }
         return location;
     }
-    public async Task<List<Location>> GetAll(int page)
+    public async Task<List<Location>> GetAll(int page = 1)
     {
-        int totalPages = 1;
         List<Location> locations = new();
 
-        while (page <= totalPages)
+        while (page <= TotalPages)
         {
             string url = $"https://rickandmortyapi.com/api/location?page={page}";
             try
             {
                 JsonDocument doc = await apiClientService.GetJsonAsync(url);
                 JsonElement info = doc.RootElement.GetProperty("info");
-                totalPages = info.GetProperty("pages").GetInt32();
+                TotalPages = info.GetProperty("pages").GetInt32();
+                Total = info.GetProperty("count").GetInt32();
 
                 foreach (JsonElement jsonLocation in doc.RootElement.GetProperty("results").EnumerateArray())
                 {
