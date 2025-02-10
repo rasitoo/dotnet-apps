@@ -6,23 +6,66 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
 internal class RestClientCharacter(ApiClientService apiClientService) : IRestClient<Character>
 {
+    public int Total { get; set; }
+    public int TotalPages { get; set; }
 
-    //Donde se hace el await???
-    public int Total {get;set;}
-    public int TotalPages {get;set;}
-    public void Add(Character item)
+    public async void Add(Character item)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.PostJsonAsync("https://rickandmortyapi.com/api/character", item);
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
     }
 
-    public void Delete(Character item)
+    public async void Delete(Character item)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.DeleteAsync($"https://rickandmortyapi.com/api/character/{item.Id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
     }
 
-    public Task<Character?> Get(int id, int subitems = 0, double subItemsPerPage = 0)
+    public async Task<Character?> Get(int id, int subItemsPage = 0, double subItemsPerPage = 0)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.GetJsonAsync($"https://rickandmortyapi.com/api/character/{id}");
+            if (response != null)
+            {
+                var jsonCharacter = response.RootElement;
+                var location = jsonCharacter.GetProperty("location").GetProperty("url").GetString().Split("/");
+                return new Character
+                {
+                    Id = jsonCharacter.GetProperty("id").GetInt32(),
+                    Name = jsonCharacter.GetProperty("name").GetString(),
+                    Status = jsonCharacter.GetProperty("status").GetString(),
+                    LocationId = int.Parse(location[^1]),
+                    Type = jsonCharacter.GetProperty("type").GetString(),
+                    ImageUri = jsonCharacter.GetProperty("image").GetString()
+                };
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return null;
     }
 
     public async Task<List<Character>> GetAll(int page)
@@ -39,8 +82,6 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
                 JsonElement info = doc.RootElement.GetProperty("info");
                 Total = info.GetProperty("count").GetInt32();
                 TotalPages = info.GetProperty("pages").GetInt32();
-                
-
 
                 foreach (JsonElement jsonCharacter in doc.RootElement.GetProperty("results").EnumerateArray())
                 {
@@ -67,8 +108,19 @@ internal class RestClientCharacter(ApiClientService apiClientService) : IRestCli
         return characters;
     }
 
-    public void Update(Character item)
+    public async void Update(Character item)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.PutJsonAsync($"https://rickandmortyapi.com/api/character/{item.Id}", item);
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
     }
 }

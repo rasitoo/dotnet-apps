@@ -70,15 +70,6 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a AvgPrcByCt.
-        /// </summary>
-        public static string AvgPrcByCt {
-            get {
-                return ResourceManager.GetString("AvgPrcByCt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Character.
         /// </summary>
         public static string Character {

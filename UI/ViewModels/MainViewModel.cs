@@ -14,7 +14,7 @@ public partial class MainViewModel(HomeView homeView, CharacterView characterVie
     [RelayCommand]
     private void ActivateHomeView()
     {
-        //Un poco trampa y bastante feo pero es la forma que se me ha ocurrido para que al borrar un charactero o categoría se vea reflejado en el homeview
+        //Un poco trampa y bastante feo pero es la forma que se me ha ocurrido para que al borrar un character o location se vea reflejado en el homeview
         var homeView = serviceProvider.GetRequiredService<HomeView>();
         homeView.DataContext = serviceProvider.GetRequiredService<HomeViewModel>();
         ActiveView = homeView;

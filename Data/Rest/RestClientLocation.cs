@@ -1,6 +1,7 @@
 ﻿using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Windows;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
@@ -9,14 +10,36 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
     public int Total { get; set; }
     public int TotalPages { get; set; } = 1;
 
-    public void Add(Location item)
+    public async void Add(Location item)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.PostJsonAsync("https://rickandmortyapi.com/api/location", item);
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
     }
 
-    public void Delete(Location item)
+    public async void Delete(Location item)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.DeleteAsync($"https://rickandmortyapi.com/api/location/{item.Id}");
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
     }
 
     public async Task<Location?> Get(int id, int subItemPage = 0, double subItemsPerPage = 0)
@@ -34,11 +57,11 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
             {
                 Id = root.GetProperty("id").GetInt32(),
                 Name = root.GetProperty("name").GetString(),
+                ResidentsNum = root.GetProperty("residents").EnumerateArray().Count(),
                 Characters = characters
             };
             int start = (int)(subItemPage * subItemsPerPage);
             int end = start + (int)subItemsPerPage;
-
             for (int i = start; i < end && i < root.GetProperty("residents").GetArrayLength(); i++)
             {
                 JsonElement residentUrl = root.GetProperty("residents")[i];
@@ -47,7 +70,6 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
                 {
                     JsonDocument residentDoc = await apiClientService.GetJsonAsync(residentUri);
                     JsonElement residentElement = residentDoc.RootElement;
-
 
                     Character character = new()
                     {
@@ -71,6 +93,7 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
         }
         return location;
     }
+
     public async Task<List<Location>> GetAll(int page = 1)
     {
         List<Location> locations = new();
@@ -106,9 +129,21 @@ internal class RestClientLocation(ApiClientService apiClientService) : IRestClie
 
         return locations;
     }
-    public void Update(Location item)
+
+    public async void Update(Location item)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.PutJsonAsync($"https://rickandmortyapi.com/api/location/{item.Id}", item);
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
     }
 
 }

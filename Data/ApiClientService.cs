@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data;
@@ -20,9 +21,28 @@ internal class ApiClientService
 
     public async Task<JsonDocument> GetJsonAsync(string url)
     {
-        HttpResponseMessage response = await _client.GetAsync(url);
+        var response = await _client.GetAsync(url);
         response.EnsureSuccessStatusCode();
-        string content = await response.Content.ReadAsStringAsync();
-        return JsonDocument.Parse(content);
+        var jsonString = await response.Content.ReadAsStringAsync();
+        return JsonDocument.Parse(jsonString);
+    }
+
+    public async Task<HttpResponseMessage> PostJsonAsync(string url, object data)
+    {
+        var jsonString = JsonSerializer.Serialize(data, _serializerOptions);
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+        return await _client.PostAsync(url, content);
+    }
+
+    public async Task<HttpResponseMessage> DeleteAsync(string url)
+    {
+        return await _client.DeleteAsync(url);
+    }
+
+    public async Task<HttpResponseMessage> PutJsonAsync(string url, object data)
+    {
+        var jsonString = JsonSerializer.Serialize(data, _serializerOptions);
+        var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+        return await _client.PutAsync(url, content);
     }
 }

@@ -120,9 +120,6 @@
   <data name="Add" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="AvgPrcByCt" xml:space="preserve">
-    <value>AvgPrcByCt</value>
-  </data>
   <data name="Character" xml:space="preserve">
     <value>Character</value>
   </data>
@@ -137,9 +134,6 @@
   </data>
   <data name="ImageLink" xml:space="preserve">
     <value>ImageLink</value>
-  </data>
-  <data name="InfPrCt" xml:space="preserve">
-    <value>InfPrCt</value>
   </data>
   <data name="Location" xml:space="preserve">
     <value>Location</value>
@@ -162,9 +156,6 @@
   <data name="PrdsByCt" xml:space="preserve">
     <value>PrdsByCt</value>
   </data>
-  <data name="PrdsWthtCts" xml:space="preserve">
-    <value>PrdsWthtCts</value>
-  </data>
   <data name="Residents" xml:space="preserve">
     <value>Residents</value>
   </data>
@@ -182,5 +173,11 @@
   </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="PrdsWthtCts" xml:space="preserve">
+    <value>PrdsWthtCts</value>
+  </data>
+  <data name="InfPrCt" xml:space="preserve">
+    <value>InfPrCt</value>
   </data>
 </root>
