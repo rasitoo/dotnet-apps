@@ -13,7 +13,7 @@ public partial class CharacterViewModel : ObservableObject
     private IService<Character> _characterService;
 
     [ObservableProperty]
-    private List<Location> _categories = [];
+    private List<Location> _locations = [];
     [ObservableProperty]
     private ObservableCollection<Character> _characters = [];
     [ObservableProperty]
@@ -47,10 +47,10 @@ public partial class CharacterViewModel : ObservableObject
             CurrentPage++;
             addCharacters();
         }
-    }    
+    }
     public async void getCharacters()
     {
-        var paginatedCharacters =  await _characterService.GetAll(CurrentPage);
+        var paginatedCharacters = await _characterService.GetAll(CurrentPage);
         Characters = new ObservableCollection<Character>(paginatedCharacters);
         TotalPages = _characterService.TotalPages;
     }
@@ -64,9 +64,9 @@ public partial class CharacterViewModel : ObservableObject
         TotalPages = _characterService.TotalPages;
     }
 
-    public async void getCategories()
+    public async void getLocations()
     {
-        Categories = new(await _locationService.GetAll(CurrentPage));
+        Locations = new(await _locationService.GetAll(CurrentPage));
     }
 
     protected async override void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -92,39 +92,39 @@ public partial class CharacterViewModel : ObservableObject
     [RelayCommand]
     private void Save()
     {
-        //SelectedCharacter ??= new() { Location = new() { Name = "Otros" } };
-        //SelectedCharacter.Location ??= LocationExistsOrCreate("Otros");
+        SelectedCharacter ??= new() { Location = new() { Name = "Otros" } };
+        SelectedCharacter.Location ??= LocationExistsOrCreate("Otros");
 
-        //if (SelectedCharacter.Id != 0)
-        //{
-        //    SelectedCharacter.Location = LocationExistsOrCreate(LocationName ?? "Otros");
-        //    SelectedCharacter.Name = Name;
-        //    SelectedCharacter.Type = Desc;
-        //    SelectedCharacter.Status = Status;
-        //    _characterService.Update(SelectedCharacter);
-        //    MessageBox.Show($"Se ha editado el charactero: {Name}");
-        //}
-        //else
-        //{
-        //    Character pr = new() { Name = Name, Type = Desc, Status = Status, Location = LocationExistsOrCreate(LocationName ?? "Otros") };
-        //    _characterService.Add(pr);
-        //    Characters.Add(pr);
-        //    MessageBox.Show($"Se ha creado el charactero: {Name}");
-        //}
+        if (SelectedCharacter.Id != 0)
+        {
+            SelectedCharacter.Location = LocationExistsOrCreate(LocationName ?? "Otros");
+            SelectedCharacter.Name = Name;
+            SelectedCharacter.Type = Type;
+            SelectedCharacter.Status = Status;
+            _characterService.Update(SelectedCharacter);
+            MessageBox.Show($"Se ha editado el charactero: {Name}");
+        }
+        else
+        {
+            Character pr = new() { Name = Name, Type = Type, Status = Status, Location = LocationExistsOrCreate(LocationName ?? "Otros") };
+            _characterService.Add(pr);
+            Characters.Add(pr);
+            MessageBox.Show($"Se ha creado el charactero: {Name}");
+        }
     }
 
     public Location? LocationExistsOrCreate(string nombre)
     {
-        if (Categories == null)
+        if (Locations == null)
         {
             return null;
         }
-        var location = Categories.Find(c => c.Name?.Equals(nombre) == true);
+        var location = Locations.Find(c => c.Name?.Equals(nombre) == true);
         if (location != null)
         {
             return location;
         }
-        var result = MessageBox.Show($"La categoría '{nombre}' no existe. ¿Desea crearla?", "Categoría no encontrada", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        var result = MessageBox.Show($"La localizacion '{nombre}' no existe. ¿Desea crearla?", "Localizacion no encontrada", MessageBoxButton.YesNo, MessageBoxImage.Question);
         if (result == MessageBoxResult.Yes)
         {
             Location newLocation = new() { Name = nombre };

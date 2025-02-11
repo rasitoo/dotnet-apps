@@ -9,7 +9,7 @@ internal class LocationService(IRestClient<Location> LocationClient) : IService<
     {
         get => LocationClient.Total;
         set => LocationClient.Total = value;
-    }    
+    }
     public int TotalPages
     {
         get => LocationClient.Total;

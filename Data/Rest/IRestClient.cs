@@ -1,6 +1,4 @@
-﻿using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
-
-namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
+﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
 public interface IRestClient<T>
 {

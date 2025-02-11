@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.UI.Controls;
 
-public partial class ListViewCategories : UserControl
+public partial class ListViewLocations : UserControl
 {
-    public ListViewCategories()
+    public ListViewLocations()
     {
         InitializeComponent();
     }
@@ -16,12 +16,12 @@ public partial class ListViewCategories : UserControl
         set { SetValue(ItemsSourceProperty, value); }
     }
     public static readonly DependencyProperty ItemsSourceProperty =
-        DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListViewCategories), new PropertyMetadata(null));
+        DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ListViewLocations), new PropertyMetadata(null));
     public Object SelectedItem
     {
         get { return (Object)GetValue(SelectedItemProperty); }
         set { SetValue(SelectedItemProperty, value); }
     }
     public static readonly DependencyProperty SelectedItemProperty =
-        DependencyProperty.Register("SelectedItem", typeof(Object), typeof(ListViewCategories), new PropertyMetadata(null));
+        DependencyProperty.Register("SelectedItem", typeof(Object), typeof(ListViewLocations), new PropertyMetadata(null));
 }

@@ -13,7 +13,7 @@ public partial class LocationViewModel : ObservableObject
     private const double PageSize = 10;
 
     [ObservableProperty]
-    private ObservableCollection<Location> _categories = [];
+    private ObservableCollection<Location> _locations = [];
     [ObservableProperty]
     private ObservableCollection<Character>? _charactersByLocation = [];
     [ObservableProperty]
@@ -40,7 +40,7 @@ public partial class LocationViewModel : ObservableObject
     }
     public async void LoadLocations()
     {
-        Categories = new(await _locationService.GetAll());
+        Locations = new(await _locationService.GetAll());
     }
     public async void LoadCharactersBySelectedLocation()
     {
@@ -96,16 +96,16 @@ public partial class LocationViewModel : ObservableObject
     [RelayCommand]
     private void Save()
     {
-        if (SelectedItem != null && SelectedItem.Name == "Sin categoría")
+        if (SelectedItem != null && SelectedItem.Name == "Sin localizacion")
         {
-            MessageBox.Show("No se puede crear o editar una categoría llamada 'Sin categoría'.");
+            MessageBox.Show("No se puede crear o editar una localizacion llamada 'Sin localizacion'.");
             return;
         }
         if (SelectedItem != null && SelectedItem.Id != 0)
         {
             SelectedItem.Name = LocationName;
             _locationService.Update(SelectedItem);
-            MessageBox.Show($"Se ha editado la categoría: {SelectedItem.Name}");
+            MessageBox.Show($"Se ha editado la localizacion: {SelectedItem.Name}");
         }
         else
         {
@@ -113,8 +113,8 @@ public partial class LocationViewModel : ObservableObject
             {
                 Location pr = new() { Name = LocationName };
                 _locationService.Add(pr);
-                Categories.Add(pr);
-                MessageBox.Show($"Se ha creado la categoría: {SelectedItem.Name}");
+                Locations.Add(pr);
+                MessageBox.Show($"Se ha creado la localizacion: {SelectedItem.Name}");
             }
         }
     }
@@ -122,44 +122,44 @@ public partial class LocationViewModel : ObservableObject
     [RelayCommand]
     private void Delete()
     {
-        //if (SelectedItem != null && SelectedItem.Id != 0)
-        //{
-        //    if (SelectedItem.Name == "Sin categoría")
-        //    {
-        //        MessageBox.Show("No se puede borrar la categoría 'Sin categoría'.");
-        //        return;
-        //    }
-        //    var result = MessageBox.Show($"¿Está seguro de que desea borrar la categoría: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-        //    if (result == MessageBoxResult.Yes)
-        //    {
-        //        Location ct;
-        //        var characters = _characterService.GetAll(1).Result.Where(p => p.LocationId == SelectedItem.Id).ToList();
-        //        var location = Categories.ToList().Find(c => c.Name?.Equals("Sin categoría") == true);
-        //        if (location != null)
-        //        {
-        //            ct = location;
-        //        }
-        //        else
-        //        {
-        //            ct = new() { Name = "Sin categoría" };
-        //            _locationService.Add(ct);
-        //        }
-        //        foreach (var character in characters)
-        //        {
-        //            character.Location = ct;
-        //            character.LocationId = null;
-        //            _characterService.Update(character);
-        //        }
-        //        _locationService.Delete(SelectedItem);
-        //        LoadLocations();
-        //        Add();
-        //        MessageBox.Show("La categoría ha sido borrada.");
-        //    }
-        //}
-        //else
-        //{
-        //    MessageBox.Show("No hay categoría seleccionada para borrar.");
-        //}
+        if (SelectedItem != null && SelectedItem.Id != 0)
+        {
+            if (SelectedItem.Name == "Sin localizacion")
+            {
+                MessageBox.Show("No se puede borrar la localizacion 'Sin localizacion'.");
+                return;
+            }
+            var result = MessageBox.Show($"¿Está seguro de que desea borrar la localizacion: {SelectedItem.Name}?", "Confirmar borrado", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                Location ct;
+                var characters = _characterService.GetAll(1).Result.Where(p => p.LocationId == SelectedItem.Id).ToList();
+                var location = Locations.ToList().Find(c => c.Name?.Equals("Sin localizacion") == true);
+                if (location != null)
+                {
+                    ct = location;
+                }
+                else
+                {
+                    ct = new() { Name = "Sin localizacion" };
+                    _locationService.Add(ct);
+                }
+                foreach (var character in characters)
+                {
+                    character.Location = ct;
+                    character.LocationId = null;
+                    _characterService.Update(character);
+                }
+                _locationService.Delete(SelectedItem);
+                LoadLocations();
+                Add();
+                MessageBox.Show("La localizacion ha sido borrada.");
+            }
+        }
+        else
+        {
+            MessageBox.Show("No hay localizacion seleccionada para borrar.");
+        }
     }
 
     [RelayCommand]

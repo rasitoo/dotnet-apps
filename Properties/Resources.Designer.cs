@@ -248,5 +248,14 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
                 return ResourceManager.GetString("Type", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a UpdateData.
+        /// </summary>
+        public static string UpdateData {
+            get {
+                return ResourceManager.GetString("UpdateData", resourceCulture);
+            }
+        }
     }
 }

@@ -180,4 +180,7 @@
   <data name="InfPrCt" xml:space="preserve">
     <value>Information about Characters and locations</value>
   </data>
+  <data name="UpdateData" xml:space="preserve">
+    <value>Update data</value>
+  </data>
 </root>

@@ -33,7 +33,7 @@
             <TextBlock Text="{x:Static p:Resources.Location}" 
                        HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Border>
-        <c:ListViewCategories ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}"  Grid.Row="1" VerticalAlignment="Top"/>
+        <c:ListViewLocations ItemsSource="{Binding Locations}" SelectedItem="{Binding SelectedItem}"  Grid.Row="1" VerticalAlignment="Top"/>
         <ScrollViewer Grid.Column="1" Grid.Row="1">
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Padding="5" MaxHeight="700">

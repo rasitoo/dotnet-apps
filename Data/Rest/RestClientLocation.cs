@@ -1,7 +1,6 @@
 ﻿using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using System.Diagnostics;
 using System.Text.Json;
-using System.Windows;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
