@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.OS;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo;
 
