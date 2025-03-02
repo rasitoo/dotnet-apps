@@ -1,4 +1,4 @@
-﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Models;
+﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 
 class Song
 {

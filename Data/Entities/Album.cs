@@ -1,4 +1,4 @@
-﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Models;
+﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 
 class Album
 {
@@ -9,7 +9,7 @@ class Album
     public int? Mbid { get; set; }
     public int? Artist_id { get; set; }
     public Artist? Artist { get; set; }
-    public List<Song>? Songs { get; set; }
+    public List<Genre>? Songs { get; set; }
 
 
 }
