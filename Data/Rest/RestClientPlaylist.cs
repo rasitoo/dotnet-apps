@@ -42,12 +42,55 @@ class RestClientPlaylist(ApiClientService apiClientService) : IRestClient<Playli
 
     public async Task<Playlist?> Get(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.GetJsonAsync($"playlists/{id}");
+            if (response != null)
+            {
+                var jsonPlaylist = response.RootElement;
+                return new Playlist
+                {
+                    Id = jsonPlaylist.GetProperty("id").GetInt32(),
+                    Title = jsonPlaylist.GetProperty("title").GetString(),
+                    Description = jsonPlaylist.GetProperty("description").GetString(),
+                    Songs = new List<Genre>()
+                };
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return null;
     }
 
-    public async Task<List<Playlist>> GetAll(int offset = 0, int Limit = 0)
+    public async Task<List<Playlist>> GetAll(int offset = 0, int limit = 0)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.GetJsonAsync($"playlists?offset={offset}&limit={limit}");
+            if (response != null)
+            {
+                var jsonPlaylists = response.RootElement;
+                var playlists = new List<Playlist>();
+                foreach (var jsonPlaylist in jsonPlaylists.EnumerateArray())
+                {
+                    playlists.Add(new Playlist
+                    {
+                        Id = jsonPlaylist.GetProperty("id").GetInt32(),
+                        Title = jsonPlaylist.GetProperty("title").GetString(),
+                        Description = jsonPlaylist.GetProperty("description").GetString(),
+                        Songs = new List<Genre>()
+                    });
+                }
+                return playlists;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return new List<Playlist>();
     }
 
     public async void Update(Playlist item)

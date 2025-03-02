@@ -42,12 +42,63 @@ class RestClientArtist(ApiClientService apiClientService) : IRestClient<Artist>
 
     public async Task<Artist?> Get(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.GetJsonAsync($"artists/{id}");
+            if (response != null)
+            {
+                var jsonArtist = response.RootElement;
+                return new Artist
+                {
+                    Id = jsonArtist.GetProperty("id").GetInt32(),
+                    Name = jsonArtist.GetProperty("name").GetString(),
+                    Mbid = jsonArtist.GetProperty("mbid").GetString(),
+                    Artist_background = jsonArtist.GetProperty("artist_background").GetString(),
+                    Artist_logo = jsonArtist.GetProperty("artist_logo").GetString(),
+                    Artist_thumbnail = jsonArtist.GetProperty("artist_thumbnail").GetString(),
+                    Artist_banner = jsonArtist.GetProperty("artist_banner").GetString(),
+                    Albums = new List<Album>()
+                };
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return null;
     }
 
-    public async Task<List<Artist>> GetAll(int offset = 0, int Limit = 0)
+    public async Task<List<Artist>> GetAll(int offset = 0, int limit = 0)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.GetJsonAsync($"artists?offset={offset}&limit={limit}");
+            if (response != null)
+            {
+                var jsonArtists = response.RootElement;
+                var artists = new List<Artist>();
+                foreach (var jsonArtist in jsonArtists.EnumerateArray())
+                {
+                    artists.Add(new Artist
+                    {
+                        Id = jsonArtist.GetProperty("id").GetInt32(),
+                        Name = jsonArtist.GetProperty("name").GetString(),
+                        Mbid = jsonArtist.GetProperty("mbid").GetString(),
+                        Artist_background = jsonArtist.GetProperty("artist_background").GetString(),
+                        Artist_logo = jsonArtist.GetProperty("artist_logo").GetString(),
+                        Artist_thumbnail = jsonArtist.GetProperty("artist_thumbnail").GetString(),
+                        Artist_banner = jsonArtist.GetProperty("artist_banner").GetString(),
+                        Albums = new List<Album>()
+                    });
+                }
+                return artists;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return new List<Artist>();
     }
 
     public async void Update(Artist item)

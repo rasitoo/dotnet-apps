@@ -4,7 +4,7 @@ class Artist
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public int? Mbid { get; set; }
+    public string? Mbid { get; set; }
     public string? Artist_background { get; set; }
     public string? Artist_logo { get; set; }
     public string? Artist_thumbnail { get; set; }

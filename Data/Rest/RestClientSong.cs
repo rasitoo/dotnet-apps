@@ -42,12 +42,115 @@ class RestClientSong(ApiClientService apiClientService) : IRestClient<Song>
 
     public async Task<Song?> Get(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.GetJsonAsync($"songs/{id}");
+            if (response != null)
+            {
+                var jsonSong = response.RootElement;
+                return new Song
+                {
+                    Id = jsonSong.GetProperty("id").GetInt32(),
+                    Title = jsonSong.GetProperty("title").GetString(),
+                    Publisher = jsonSong.GetProperty("publisher").GetString(),
+                    Year = jsonSong.GetProperty("year").GetInt32(),
+                    Track_num = jsonSong.GetProperty("track_num").GetInt32(),
+                    File = jsonSong.GetProperty("file").GetString(),
+                    Album_id = jsonSong.GetProperty("album_id").GetInt32(),
+                    Genre_id = jsonSong.GetProperty("genre_id").GetInt32(),
+                    Album = new Album
+                    {
+                        Id = jsonSong.GetProperty("album").GetProperty("id").GetInt32(),
+                        Title = jsonSong.GetProperty("album").GetProperty("title").GetString(),
+                        Year = jsonSong.GetProperty("album").GetProperty("year").GetInt32(),
+                        Picture = jsonSong.GetProperty("album").GetProperty("picture").GetString(),
+                        Mbid = jsonSong.GetProperty("album").GetProperty("mbid").GetString(),
+                        Artist_id = jsonSong.GetProperty("album").GetProperty("artist_id").GetInt32(),
+                        Artist = new Artist
+                        {
+                            Id = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("id").GetInt32(),
+                            Name = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("name").GetString(),
+                            Mbid = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("mbid").GetString(),
+                            Artist_background = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_background").GetString(),
+                            Artist_logo = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_logo").GetString(),
+                            Artist_thumbnail = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
+                            Artist_banner = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_banner").GetString()
+                        },
+                        Songs = new List<Genre>()
+                    },
+                    Genre = new Genre
+                    {
+                        Id = jsonSong.GetProperty("genre").GetProperty("id").GetInt32(),
+                        Name = jsonSong.GetProperty("genre").GetProperty("name").GetString()
+                    },
+                    Playlists = new List<Playlist>()
+                };
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return null;
     }
 
-    public async Task<List<Song>> GetAll(int offset = 0, int Limit = 0)
+    public async Task<List<Song>> GetAll(int offset = 0, int limit = 0)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var response = await apiClientService.GetJsonAsync($"songs?offset={offset}&limit={limit}");
+            if (response != null)
+            {
+                var jsonSongs = response.RootElement;
+                var songs = new List<Song>();
+                foreach (var jsonSong in jsonSongs.EnumerateArray())
+                {
+                    songs.Add(new Song
+                    {
+                        Id = jsonSong.GetProperty("id").GetInt32(),
+                        Title = jsonSong.GetProperty("title").GetString(),
+                        Publisher = jsonSong.GetProperty("publisher").GetString(),
+                        Year = jsonSong.GetProperty("year").GetInt32(),
+                        Track_num = jsonSong.GetProperty("track_num").GetInt32(),
+                        File = jsonSong.GetProperty("file").GetString(),
+                        Album_id = jsonSong.GetProperty("album_id").GetInt32(),
+                        Genre_id = jsonSong.GetProperty("genre_id").GetInt32(),
+                        Album = new Album
+                        {
+                            Id = jsonSong.GetProperty("album").GetProperty("id").GetInt32(),
+                            Title = jsonSong.GetProperty("album").GetProperty("title").GetString(),
+                            Year = jsonSong.GetProperty("album").GetProperty("year").GetInt32(),
+                            Picture = jsonSong.GetProperty("album").GetProperty("picture").GetString(),
+                            Mbid = jsonSong.GetProperty("album").GetProperty("mbid").GetString(),
+                            Artist_id = jsonSong.GetProperty("album").GetProperty("artist_id").GetInt32(),
+                            Artist = new Artist
+                            {
+                                Id = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("id").GetInt32(),
+                                Name = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("name").GetString(),
+                                Mbid = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("mbid").GetString(),
+                                Artist_background = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_background").GetString(),
+                                Artist_logo = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_logo").GetString(),
+                                Artist_thumbnail = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
+                                Artist_banner = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_banner").GetString()
+                            },
+                            Songs = new List<Genre>()
+                        },
+                        Genre = new Genre
+                        {
+                            Id = jsonSong.GetProperty("genre").GetProperty("id").GetInt32(),
+                            Name = jsonSong.GetProperty("genre").GetProperty("name").GetString()
+                        },
+                        Playlists = new List<Playlist>()
+                    });
+                }
+                return songs;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+        return new List<Song>();
     }
 
     public async void Update(Song item)
