@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data;
+using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
+using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages;
 
@@ -39,6 +42,12 @@ public static class MauiProgram
         builder.Services.AddTransient<SongPageModel>();
         builder.Services.AddTransient<PlaylistsPage>();
         builder.Services.AddTransient<PlaylistsPageModel>();
+        builder.Services.AddScoped<ApiClientService>();
+        builder.Services.AddScoped<IRestClient<Album>, RestClientAlbum>();
+        builder.Services.AddScoped<IRestClient<Artist>, RestClientArtist>();
+        builder.Services.AddScoped<IRestClient<Genre>, RestClientGenre>();
+        builder.Services.AddScoped<IRestClient<Playlist>, RestClientPlaylist>();
+        builder.Services.AddScoped<IRestClient<Song>, RestClientSong>();
         return builder.Build();
     }
 }
