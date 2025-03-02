@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
+    xmlns:pages="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="P07_01_DI_Contactos_TAPIADOR_rodrigo">
+    <!--Ejemplo de: https://github.com/dotnet/maui-samples/tree/main/9.0/Navigation/ShellMixedSample-->
+    
+    <FlyoutItem Title="Home">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="home" />
+    </FlyoutItem>
+    <FlyoutItem Title="Search">
+        <ShellContent
+        Title="Search"
+        ContentTemplate="{DataTemplate pages:SearchPage}"
+        Route="search"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Library">
+        <Tab Title="Favorites">
+            <ShellContent
+                Title="Favorites"
+                ContentTemplate="{DataTemplate pages:FavoritesPage}"
+                Route="Favorites"
+                />
+        </Tab>
+        <Tab Title="Playlists">
+            <ShellContent
+             Title="Playlists"
+             ContentTemplate="{DataTemplate pages:PlaylistsPage}"
+             Route="Playlists" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Settings" >
+        <ShellContent
+             Title="Settings"
+             ContentTemplate="{DataTemplate pages:SettingsPage}"
+             Route="Settings" />
+    </FlyoutItem>
+    <!--https://learn.microsoft.com/en-us/previous-versions/xamarin/xamarin-forms/app-fundamentals/shell/flyout-->
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <ContentView>
+                    
+                </ContentView>
+                <Label Text="Xaminals"
+                       TextColor="GhostWhite"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{dd 0:MMMM, yyyy}'}"
+                       TextColor="GhostWhite"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+</Shell>
