@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
-class RestClientSong(ApiClientService apiClientService) : IRestClient<Song>
+public class RestClientSong(ApiClientService apiClientService) : IRestClient<Song>
 {
     public int Offset { get; set; } = 0;
     public int Limit { get; set; } = 100;
@@ -75,8 +75,7 @@ class RestClientSong(ApiClientService apiClientService) : IRestClient<Song>
                             Artist_logo = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_logo").GetString(),
                             Artist_thumbnail = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
                             Artist_banner = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_banner").GetString()
-                        },
-                        Songs = new List<Genre>()
+                        }
                     },
                     Genre = new Genre
                     {
@@ -94,7 +93,7 @@ class RestClientSong(ApiClientService apiClientService) : IRestClient<Song>
         return null;
     }
 
-    public async Task<List<Song>> GetAll(int offset = 0, int limit = 0)
+    public async Task<List<Song>> GetAll(int offset = 0, int limit = 100)
     {
         try
         {
@@ -132,8 +131,7 @@ class RestClientSong(ApiClientService apiClientService) : IRestClient<Song>
                                 Artist_logo = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_logo").GetString(),
                                 Artist_thumbnail = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
                                 Artist_banner = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_banner").GetString()
-                            },
-                            Songs = new List<Genre>()
+                            }
                         },
                         Genre = new Genre
                         {

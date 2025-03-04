@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
-class RestClientGenre(ApiClientService apiClientService) : IRestClient<Genre>
+public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Genre>
 {
     public int Offset { get; set; } = 0;
     public int Limit { get; set; } = 100;
@@ -63,7 +63,7 @@ class RestClientGenre(ApiClientService apiClientService) : IRestClient<Genre>
         return null;
     }
 
-    public async Task<List<Genre>> GetAll(int offset = 0, int limit = 0)
+    public async Task<List<Genre>> GetAll(int offset = 0, int limit = 100)
     {
         try
         {

@@ -136,17 +136,17 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Image 
+                            <!--<Image 
                                Source="{Binding Picture}" 
                                Aspect="AspectFill"
                                HeightRequest="60" 
-                               WidthRequest="60" />
+                               WidthRequest="60" />-->
                             <Label Grid.Row="1" 
                                Text="{Binding Title}" 
                                FontAttributes="Bold" />
-                            <Label Grid.Row="1" 
+                            <!--<Label Grid.Row="1" 
                                Text="{Binding Artist.Name}" 
-                               FontAttributes="None" />
+                               FontAttributes="None" />-->
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -1,8 +1,8 @@
-﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
+﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Services;
 
-public interface IRestClient<T>
+public interface IService<T>
 {
-    public int Offset { get; set; } 
+    public int Offset { get; set; }
     public int Limit { get; set; }
     Task<T?> Get(int id);
     Task<List<T>> GetAll(int offset = 0, int Limit = 0);

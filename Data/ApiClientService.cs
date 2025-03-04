@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data;
 
-class ApiClientService
+public class ApiClientService
 {
     private readonly HttpClient _client;
     private readonly JsonSerializerOptions _serializerOptions;

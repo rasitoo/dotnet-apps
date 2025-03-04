@@ -1,6 +1,6 @@
 ﻿namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 
-class Artist
+public class Artist
 {
     public int Id { get; set; }
     public string Name { get; set; }

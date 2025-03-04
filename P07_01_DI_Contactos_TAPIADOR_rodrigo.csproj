@@ -61,17 +61,11 @@
 
 	<ItemGroup>
 	  <AndroidResource Remove="Schemas\**" />
-	  <AndroidResource Remove="Services\**" />
 	  <Compile Remove="Schemas\**" />
-	  <Compile Remove="Services\**" />
 	  <EmbeddedResource Remove="Schemas\**" />
-	  <EmbeddedResource Remove="Services\**" />
 	  <MauiCss Remove="Schemas\**" />
-	  <MauiCss Remove="Services\**" />
 	  <MauiXaml Remove="Schemas\**" />
-	  <MauiXaml Remove="Services\**" />
 	  <None Remove="Schemas\**" />
-	  <None Remove="Services\**" />
 	</ItemGroup>
 
 	<ItemGroup>

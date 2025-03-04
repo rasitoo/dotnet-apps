@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
-class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Album>
+public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Album>
 {
     public int Offset { get; set; } = 0;
     public int Limit { get; set; } = 100;
@@ -77,7 +77,7 @@ class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Album>
         return null;
     }
 
-    public async Task<List<Album>> GetAll(int offset = 0, int limit = 0)
+    public async Task<List<Album>> GetAll(int offset = 0, int limit = 100)
     {
         try
         {
