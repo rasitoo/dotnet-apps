@@ -9,12 +9,12 @@ public class ApiClientService
     private readonly JsonSerializerOptions _serializerOptions;
     private readonly string url = "http://localhost:8081/";
 
-    public ApiClientService()
+    public ApiClientService(HttpClient client)
     {
-        _client = new HttpClient();
+        _client = client;
         _serializerOptions = new JsonSerializerOptions
         {
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             WriteIndented = true
         };
     }

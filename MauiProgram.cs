@@ -42,7 +42,7 @@ public static class MauiProgram
         builder.Services.AddTransient<SongPageModel>();
         builder.Services.AddTransient<PlaylistsPage>();
         builder.Services.AddTransient<PlaylistsPageModel>();
-        builder.Services.AddScoped<ApiClientService>();
+        builder.Services.AddHttpClient<ApiClientService>();
         builder.Services.AddScoped<IRestClient<Album>, RestClientAlbum>();
         builder.Services.AddScoped<IRestClient<Artist>, RestClientArtist>();
         builder.Services.AddScoped<IRestClient<Genre>, RestClientGenre>();
