@@ -1,16 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
-using P07_01_DI_Contactos_TAPIADOR_rodrigo.Services;
+using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 using System.Collections.ObjectModel;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
 
-public partial class MainPageModel(IService<Artist> artistService, IService<Album> albumservice, IService<Song> songService, IService<Playlist> playlistService) : ObservableObject
+public partial class MainPageModel(IRestClient<Artist> artistService, IRestClient<Album> albumservice, IRestClient<Song> songService, IRestClient<Playlist> playlistService) : ObservableObject
 {
-    private readonly IService<Artist> _artistService = artistService;
-    private readonly IService<Album> _albumService = albumservice;
-    private readonly IService<Song> _songService = songService;
-    private readonly IService<Playlist> _playlistService = playlistService;
+    private readonly IRestClient<Artist> _artistService = artistService;
+    private readonly IRestClient<Album> _albumService = albumservice;
+    private readonly IRestClient<Song> _songService = songService;
+    private readonly IRestClient<Playlist> _playlistService = playlistService;
     [ObservableProperty]
     private ObservableCollection<Artist> _artists = new ObservableCollection<Artist>();
     [ObservableProperty]
