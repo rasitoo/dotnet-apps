@@ -30,18 +30,25 @@ public static class MauiProgram
         //builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
         builder.Services.AddTransient<ArtistPage>();
         builder.Services.AddTransient<ArtistPageModel>();
+
         builder.Services.AddTransient<FavoritesPage>();
         builder.Services.AddTransient<FavoritesPageModel>();
+
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<MainPageModel>();
+
         builder.Services.AddTransient<SearchPage>();
         builder.Services.AddTransient<SearchPageModel>();
+
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<SettingsPageModel>();
+
         builder.Services.AddTransient<SongPage>();
         builder.Services.AddTransient<SongPageModel>();
+
         builder.Services.AddTransient<PlaylistsPage>();
         builder.Services.AddTransient<PlaylistsPageModel>();
+
         builder.Services.AddHttpClient<ApiClientService>();
         builder.Services.AddScoped<IRestClient<Album>, RestClientAlbum>();
         builder.Services.AddScoped<IRestClient<Artist>, RestClientArtist>();

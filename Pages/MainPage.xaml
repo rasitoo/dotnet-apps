@@ -6,6 +6,7 @@
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.MainPage"
              x:DataType="pagemodels:MainPageModel">
     <!--Ejemplo de https://github.com/dotnet/maui-samples/blob/main/9.0/UserInterface/Views/CollectionViewDemos/CollectionViewDemos/Views/Grouping/VerticalListGroupingPage.xaml-->
+    <!--Activity indicator de: https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/activityindicator?view=net-maui-9.0-->
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
@@ -15,36 +16,50 @@
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
+            <ActivityIndicator IsRunning="{Binding ArtistsLoading}" />
             <CollectionView ItemsSource="{Binding Artists}"
-                            IsGrouped="True"
-                            ItemsLayout="HorizontalGrid, 3"
+                            ItemsLayout="HorizontalList"
                             >
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Artist">
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <StackLayout Padding="10" Orientation="Vertical" HorizontalOptions="Center">
                             <Image 
-                               Source="{Binding Artist_logo}" 
+                               Source="{Binding Artist_thumbnail}" 
                                Aspect="AspectFill"
                                HeightRequest="60" 
                                WidthRequest="60" />
-                            <Label Grid.Row="1" 
+                            <Label 
                                Text="{Binding Name}" 
-                               FontAttributes="Bold" /> 
-                        </Grid>
+                               FontAttributes="Bold" 
+                               HorizontalOptions="Center" />
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            <!--<CollectionView
+              x:Name="albums"
+              HorizontalOptions="Start"
+              Margin="10"
+              ItemsSource="{Binding Albums}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Album">
+                        <Border StrokeShape="RoundRectangle 20" Padding="10" Margin="10" BackgroundColor="Transparent">
+                            <StackLayout VerticalOptions="Center" WidthRequest="220" HeightRequest="280">
+                                <Image Source="{Binding Picture}" Aspect="AspectFill" HeightRequest="200" WidthRequest="200" />
+                                <Label Text="{Binding Title}" FontSize="16" TextColor="White" HorizontalOptions="Center" LineBreakMode="WordWrap" />
+                            </StackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>-->
             <Label Text="Discos"
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
+            <ActivityIndicator IsRunning="{Binding AlbumsLoading}" />
             <CollectionView ItemsSource="{Binding Albums}"
                             IsGrouped="True"
                             ItemsLayout="HorizontalGrid, 3"
@@ -79,6 +94,7 @@
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
+            <ActivityIndicator IsRunning="{Binding SongsLoading}" />
             <CollectionView ItemsSource="{Binding Songs}"
                 IsGrouped="True"
                 ItemsLayout="HorizontalGrid, 3"
@@ -121,6 +137,7 @@
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
+            <ActivityIndicator IsRunning="{Binding PlaylistsLoading}" />
             <CollectionView ItemsSource="{Binding Playlists}"
                 IsGrouped="True"
                 ItemsLayout="HorizontalGrid, 3"

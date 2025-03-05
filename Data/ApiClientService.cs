@@ -7,7 +7,7 @@ public class ApiClientService
 {
     private readonly HttpClient _client;
     private readonly JsonSerializerOptions _serializerOptions;
-    private readonly string url = "http://localhost:8081/";
+    private readonly string url = "http://192.168.16.10:8080/";
 
     public ApiClientService(HttpClient client)
     {

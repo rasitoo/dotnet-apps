@@ -8,6 +8,11 @@ public partial class MainPage : ContentPage
     {
         InitializeComponent();
         BindingContext = mainPageModel;
-    }
 
+        AlertAsync(mainPageModel.Albums.Count());
+    }
+    private async void AlertAsync(int v)
+    {
+        await DisplayAlert("Alert", v.ToString(), "OK");
+    }
 }
