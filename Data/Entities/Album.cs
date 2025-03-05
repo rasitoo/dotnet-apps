@@ -9,7 +9,7 @@ public class Album
     public string? Mbid { get; set; }
     public int? Artist_id { get; set; }
     public Artist? Artist { get; set; }
-    public List<Genre>? Songs { get; set; }
+    public List<Song>? Songs { get; set; }
 
 
 }

@@ -27,7 +27,7 @@ public partial class MainPageModel : ObservableObject
     private bool _songsLoading = true;
     [ObservableProperty]
     private bool _artistsLoading = true;
-    public MainPageModel(IRestClient<Artist> artistService, IRestClient<Album> albumservice, IRestClient<Song> songService, IRestClient<Playlist> playlistService) : base()
+    public MainPageModel(IRestClient<Artist> artistService, IRestClient<Album> albumservice, IRestClient<Song> songService, IRestClient<Playlist> playlistService)
     {
         _artistService = artistService;
         _albumService = albumservice;
@@ -39,13 +39,13 @@ public partial class MainPageModel : ObservableObject
 
     private async void LoadAsync()
     {
-        List<Artist> artists = await _artistService.GetAll(0, 100);
-        List<Album> albums = await _albumService.GetAll(0, 100);
-        List<Song> songs = await _songService.GetAll(0, 100);
-        List<Playlist> playlists = await _playlistService.GetAll(0, 100);
+        List<Artist> artists = await _artistService.GetAll(0, 50);
+        List<Album> albums = await _albumService.GetAll(0, 50);
+        List<Song> songs = await _songService.GetAll(0, 50);
+        List<Playlist> playlists = await _playlistService.GetAll(0, 50);
         LoadArtists(artists);
-        LoadPlaylists(playlists);   
         LoadSongs(songs);
+        LoadPlaylists(playlists);
         LoadAlbums(albums);
 
     }
@@ -70,8 +70,16 @@ public partial class MainPageModel : ObservableObject
 
     private void LoadPlaylists(List<Playlist> playlists)
     {
-        Playlists = new(playlists);
+        foreach (var playlist in playlists)
+        {
+            if (playlist.Songs == null)
+            {
+                playlist.Songs = new List<Song>();
+            }
+        }
+        Playlists = new ObservableCollection<Playlist>(playlists);
         PlaylistsLoading = false;
+
     }
 
 }

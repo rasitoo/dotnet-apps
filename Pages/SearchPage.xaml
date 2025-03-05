@@ -12,15 +12,23 @@
         <Label Text="Generos"
                FontAttributes="Bold"
                FontSize="Title"/>
-        <CollectionView ItemsSource="{Binding Genres}"
-                IsGrouped="True"
-                ItemsLayout="VerticalGrid, 3"
-                >
+        <ActivityIndicator IsRunning="{Binding GenresLoading}" IsVisible="{Binding GenresLoading}" />
+        <CollectionView ItemsSource="{Binding Genres}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Horizontal" Span="3" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Genre">
-                    <Label Grid.Row="1" 
-                   Text="{Binding Name}" 
-                   FontAttributes="Bold" />
+                    <Border Padding="20"
+                        StrokeShape="RoundRectangle 10"
+                        Stroke="LightGray"
+                        StrokeThickness="1">
+                        <Label 
+                            Text="{Binding Name}" 
+                            FontAttributes="Bold" 
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

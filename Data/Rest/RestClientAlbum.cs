@@ -12,7 +12,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
     {
         try
         {
-            var response = await apiClientService.PostJsonAsync("albums/", item);
+            var response = await apiClientService.PostJsonAsync("/albums/", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
@@ -28,7 +28,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
     {
         try
         {
-            var response = await apiClientService.DeleteAsync($"albums/{item.Id}");
+            var response = await apiClientService.DeleteAsync($"/albums/{item.Id}");
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
@@ -44,7 +44,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
     {
         try
         {
-            var response = await apiClientService.GetJsonAsync($"albums/{id}");
+            var response = await apiClientService.GetJsonAsync($"/albums/{id}");
             if (response != null)
             {
                 var jsonAlbum = response.RootElement;
@@ -55,18 +55,18 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
                     Artist_id = jsonAlbum.GetProperty("artist_id").GetInt32(),
                     Title = jsonAlbum.GetProperty("title").GetString(),
                     Year = jsonAlbum.GetProperty("year").GetInt32(),
-                    Picture = jsonAlbum.GetProperty("picture").GetString(),
+                    Picture = apiClientService.Url+jsonAlbum.GetProperty("picture").GetString(),
                     Artist = new Artist
                     {
                         Id = jsonAlbum.GetProperty("artist").GetProperty("id").GetInt32(),
                         Name = jsonAlbum.GetProperty("artist").GetProperty("name").GetString(),
                         Mbid = jsonAlbum.GetProperty("artist").GetProperty("mbid").GetString(),
-                        Artist_background = jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
-                        Artist_logo = jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
-                        Artist_thumbnail = jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
-                        Artist_banner = jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
+                        Artist_background = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
+                        Artist_logo = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
+                        Artist_thumbnail = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
+                        Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
                     },
-                    Songs = new List<Genre>()
+                    Songs = new List<Song>()
                 };
             }
         }
@@ -81,7 +81,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
     {
         try
         {
-            var response = await apiClientService.GetJsonAsync($"albums?offset={offset}&limit={limit}");
+            var response = await apiClientService.GetJsonAsync($"/albums?offset={offset}&limit={limit}");
             if (response != null)
             {
                 var jsonAlbums = response.RootElement;
@@ -95,18 +95,18 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
                         Artist_id = jsonAlbum.GetProperty("artist_id").GetInt32(),
                         Title = jsonAlbum.GetProperty("title").GetString(),
                         Year = jsonAlbum.GetProperty("year").GetInt32(),
-                        Picture = jsonAlbum.GetProperty("picture").GetString(),
+                        Picture = apiClientService.Url + jsonAlbum.GetProperty("picture").GetString(),
                         Artist = new Artist
                         {
                             Id = jsonAlbum.GetProperty("artist").GetProperty("id").GetInt32(),
                             Name = jsonAlbum.GetProperty("artist").GetProperty("name").GetString(),
                             Mbid = jsonAlbum.GetProperty("artist").GetProperty("mbid").GetString(),
-                            Artist_background = jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
-                            Artist_logo = jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
-                            Artist_thumbnail = jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
-                            Artist_banner = jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
+                            Artist_background = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
+                            Artist_logo = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
+                            Artist_thumbnail = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
+                            Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
                         },
-                        Songs = new List<Genre>()
+                        Songs = new List<Song>()
                     });
                 }
                 return albums;
@@ -123,7 +123,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
     {
         try
         {
-            var response = await apiClientService.PutJsonAsync($"albums/{item.Id}", item);
+            var response = await apiClientService.PutJsonAsync($"/albums/{item.Id}", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);

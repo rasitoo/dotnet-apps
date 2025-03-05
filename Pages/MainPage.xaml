@@ -9,84 +9,65 @@
     <!--Activity indicator de: https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/activityindicator?view=net-maui-9.0-->
     <ScrollView>
         <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-
+            Padding="15,0"
+            Spacing="20">
             <Label Text="Artistas"
                    FontAttributes="Bold"
-                   FontSize="Title"
-                />
-            <ActivityIndicator IsRunning="{Binding ArtistsLoading}" />
+                   FontSize="Title"/>
+            <ActivityIndicator IsRunning="{Binding ArtistsLoading}" IsVisible="{Binding ArtistsLoading}" />
             <CollectionView ItemsSource="{Binding Artists}"
-                            ItemsLayout="HorizontalList"
-                            >
+                            ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Artist">
                         <StackLayout Padding="10" Orientation="Vertical" HorizontalOptions="Center">
-                            <Image 
-                               Source="{Binding Artist_thumbnail}" 
-                               Aspect="AspectFill"
-                               HeightRequest="60" 
-                               WidthRequest="60" />
+                            <Border
+                                HeightRequest="110"
+                                WidthRequest="110"
+                                StrokeShape="RoundRectangle 70"
+                                Margin="0,0,0,5">
+                                <Image 
+                                    Source="{Binding Artist_thumbnail}" 
+                                    Aspect="AspectFill"
+                                    HeightRequest="100" 
+                                    WidthRequest="100" />
+                            </Border>
                             <Label 
-                               Text="{Binding Name}" 
-                               FontAttributes="Bold" 
-                               HorizontalOptions="Center" />
+                                Text="{Binding Name}" 
+                                FontAttributes="Bold" 
+                                HorizontalTextAlignment="Center"
+                                LineBreakMode="TailTruncation"
+                                WidthRequest="120" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <!--<CollectionView
-              x:Name="albums"
-              HorizontalOptions="Start"
-              Margin="10"
-              ItemsSource="{Binding Albums}">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Album">
-                        <Border StrokeShape="RoundRectangle 20" Padding="10" Margin="10" BackgroundColor="Transparent">
-                            <StackLayout VerticalOptions="Center" WidthRequest="220" HeightRequest="280">
-                                <Image Source="{Binding Picture}" Aspect="AspectFill" HeightRequest="200" WidthRequest="200" />
-                                <Label Text="{Binding Title}" FontSize="16" TextColor="White" HorizontalOptions="Center" LineBreakMode="WordWrap" />
-                            </StackLayout>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>-->
             <Label Text="Discos"
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
-            <ActivityIndicator IsRunning="{Binding AlbumsLoading}" />
+            <ActivityIndicator IsRunning="{Binding AlbumsLoading}" IsVisible="{Binding AlbumsLoading}"/>
             <CollectionView ItemsSource="{Binding Albums}"
-                            IsGrouped="True"
-                            ItemsLayout="HorizontalGrid, 3"
-                            >
+                            ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Album">
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <StackLayout Padding="10" Orientation="Vertical" HorizontalOptions="Center">
                             <Image 
-                               Source="{Binding Picture}" 
-                               Aspect="AspectFill"
-                               HeightRequest="60" 
-                               WidthRequest="60" />
-                            <Label Grid.Row="1" 
-                               Text="{Binding Title}" 
-                               FontAttributes="Bold" />
-                            <Label Grid.Row="1" 
-                               Text="{Binding Artist.Name}" 
-                               FontAttributes="None" />
-                        </Grid>
+                                Source="{Binding Picture}" 
+                                Aspect="AspectFill"
+                                HeightRequest="120" 
+                                WidthRequest="120" />
+                            <Label 
+                                Text="{Binding Title}" 
+                                FontAttributes="Bold" 
+                                LineBreakMode="TailTruncation"
+                                WidthRequest="120" />
+                            <Label 
+                                Text="{Binding Artist.Name}" 
+                                FontSize="Caption"
+                                Opacity="0.8"
+                                LineBreakMode="TailTruncation"
+                                WidthRequest="120" />
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -94,11 +75,11 @@
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
-            <ActivityIndicator IsRunning="{Binding SongsLoading}" />
-            <CollectionView ItemsSource="{Binding Songs}"
-                IsGrouped="True"
-                ItemsLayout="HorizontalGrid, 3"
-                >
+            <ActivityIndicator IsRunning="{Binding SongsLoading}" IsVisible="{Binding SongsLoading}" />
+            <CollectionView ItemsSource="{Binding Songs}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="3" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Song">
                         <Grid Padding="10">
@@ -116,19 +97,22 @@
                                Aspect="AspectFill"
                                HeightRequest="60" 
                                WidthRequest="60" 
-                               Grid.RowSpan="3"/>
-                            <Label Grid.Row="1" 
-                               Grid.Column="2"
+                               Grid.RowSpan="3"
+                               Margin="0,0,10,0"/>
+                            <Label 
+                               Grid.Column="1"
                                Text="{Binding Title}" 
                                FontAttributes="Bold" />
-                            <Label Grid.Row="2" 
-                               Grid.Column="2"
-                               Text="{Binding Album.Artist.Name}" 
-                               FontAttributes="None" />
-                            <Label Grid.Row="2" 
-                               Grid.Column="2"
+                            <Label Grid.Row="1" 
+                               Grid.Column="1"
                                Text="{Binding Album.Title}" 
-                               FontAttributes="None" />
+                               FontSize="Caption"
+                               Opacity="0.95"/>
+                            <Label Grid.Row="2" 
+                               Grid.Column="1"
+                               Text="{Binding Album.Artist.Name}" 
+                               FontSize="Caption"
+                               Opacity="0.7"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -137,11 +121,9 @@
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
-            <ActivityIndicator IsRunning="{Binding PlaylistsLoading}" />
+            <ActivityIndicator IsRunning="{Binding PlaylistsLoading}" IsVisible="{Binding PlaylistsLoading}"/>
             <CollectionView ItemsSource="{Binding Playlists}"
-                IsGrouped="True"
-                ItemsLayout="HorizontalGrid, 3"
-                >
+                            ItemsLayout="HorizontalList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Playlist">
                         <Grid Padding="10">
@@ -170,5 +152,4 @@
             </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

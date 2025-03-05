@@ -7,7 +7,10 @@ public class ApiClientService
 {
     private readonly HttpClient _client;
     private readonly JsonSerializerOptions _serializerOptions;
-    private readonly string url = "http://192.168.16.10:8080/";
+    public string Url
+    {
+        get;
+    } = "http://localhost:8081";
 
     public ApiClientService(HttpClient client)
     {
@@ -22,7 +25,7 @@ public class ApiClientService
     public async Task<JsonDocument> GetJsonAsync(string urlextension)
     {
 
-        var response = await _client.GetAsync(url + urlextension);
+        var response = await _client.GetAsync(Url + urlextension);
         response.EnsureSuccessStatusCode();
         var jsonString = await response.Content.ReadAsStringAsync();
         return JsonDocument.Parse(jsonString);
@@ -32,18 +35,18 @@ public class ApiClientService
     {
         var jsonString = JsonSerializer.Serialize(data, _serializerOptions);
         var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-        return await _client.PostAsync(url + urlextension, content);
+        return await _client.PostAsync(Url + urlextension, content);
     }
 
     public async Task<HttpResponseMessage> DeleteAsync(string urlextension)
     {
-        return await _client.DeleteAsync(url + urlextension);
+        return await _client.DeleteAsync(Url + urlextension);
     }
 
     public async Task<HttpResponseMessage> PutJsonAsync(string urlextension, object data)
     {
         var jsonString = JsonSerializer.Serialize(data, _serializerOptions);
         var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-        return await _client.PutAsync(url + urlextension, content);
+        return await _client.PutAsync(Url + urlextension, content);
     }
 }

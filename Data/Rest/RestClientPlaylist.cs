@@ -12,7 +12,7 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
     {
         try
         {
-            var response = await apiClientService.PostJsonAsync("playlists/", item);
+            var response = await apiClientService.PostJsonAsync("/playlists/", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
@@ -28,7 +28,7 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
     {
         try
         {
-            var response = await apiClientService.DeleteAsync($"playlists/{item.Id}");
+            var response = await apiClientService.DeleteAsync($"/playlists/{item.Id}");
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
@@ -44,7 +44,7 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
     {
         try
         {
-            var response = await apiClientService.GetJsonAsync($"playlists/{id}");
+            var response = await apiClientService.GetJsonAsync($"/playlists/{id}");
             if (response != null)
             {
                 var jsonPlaylist = response.RootElement;
@@ -53,7 +53,7 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
                     Id = jsonPlaylist.GetProperty("id").GetInt32(),
                     Title = jsonPlaylist.GetProperty("title").GetString(),
                     Description = jsonPlaylist.GetProperty("description").GetString(),
-                    Songs = new List<Genre>()
+                    Songs = new List<Song>()
                 };
             }
         }
@@ -68,7 +68,7 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
     {
         try
         {
-            var response = await apiClientService.GetJsonAsync($"playlists?offset={offset}&limit={limit}");
+            var response = await apiClientService.GetJsonAsync($"/playlists?offset={offset}&limit={limit}");
             if (response != null)
             {
                 var jsonPlaylists = response.RootElement;
@@ -80,7 +80,7 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
                         Id = jsonPlaylist.GetProperty("id").GetInt32(),
                         Title = jsonPlaylist.GetProperty("title").GetString(),
                         Description = jsonPlaylist.GetProperty("description").GetString(),
-                        Songs = new List<Genre>()
+                        Songs = new List<Song>()
                     });
                 }
                 return playlists;
@@ -97,7 +97,7 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
     {
         try
         {
-            var response = await apiClientService.PutJsonAsync($"playlists/{item.Id}", item);
+            var response = await apiClientService.PutJsonAsync($"/playlists/{item.Id}", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);

@@ -12,7 +12,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
     {
         try
         {
-            var response = await apiClientService.PostJsonAsync("genres/", item);
+            var response = await apiClientService.PostJsonAsync("/genres/", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
@@ -28,7 +28,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
     {
         try
         {
-            var response = await apiClientService.DeleteAsync($"genres/{item.Id}");
+            var response = await apiClientService.DeleteAsync($"/genres/{item.Id}");
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
@@ -44,7 +44,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
     {
         try
         {
-            var response = await apiClientService.GetJsonAsync($"genres/{id}");
+            var response = await apiClientService.GetJsonAsync($"/genres/{id}");
             if (response != null)
             {
                 var jsonGenre = response.RootElement;
@@ -52,7 +52,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
                 {
                     Id = jsonGenre.GetProperty("id").GetInt32(),
                     Name = jsonGenre.GetProperty("name").GetString(),
-                    Songs = new List<Genre>()
+                    Songs = new List<Song>()
                 };
             }
         }
@@ -67,7 +67,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
     {
         try
         {
-            var response = await apiClientService.GetJsonAsync($"genres?offset={offset}&limit={limit}");
+            var response = await apiClientService.GetJsonAsync($"/genres?offset={offset}&limit={limit}");
             if (response != null)
             {
                 var jsonGenres = response.RootElement;
@@ -78,7 +78,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
                     {
                         Id = jsonGenre.GetProperty("id").GetInt32(),
                         Name = jsonGenre.GetProperty("name").GetString(),
-                        Songs = new List<Genre>()
+                        Songs = new List<Song>()
                     });
                 }
                 return genres;
@@ -94,7 +94,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
     {
         try
         {
-            var response = await apiClientService.PutJsonAsync($"genres/{item.Id}", item);
+            var response = await apiClientService.PutJsonAsync($"/genres/{item.Id}", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
