@@ -6,10 +6,41 @@
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.SongPage"
              Shell.NavBarIsVisible="False"
              x:DataType="pagemodels:SongPageModel">
-    <VerticalStackLayout>
+    <VerticalStackLayout Padding="10" Spacing="10">
+        <Image 
+            Source="{Binding Song.Picture}" 
+            Aspect="AspectFill"
+            HeightRequest="200" 
+            WidthRequest="200" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center" />
         <Label 
-            Text="Song"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            Text="{Binding Song.Title}" 
+            FontSize="Large" 
+            FontAttributes="Bold" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center" />
+        <Label 
+            Text="{Binding Song.Album.Title}" 
+            FontSize="Medium" 
+            HorizontalOptions="Center" 
+            VerticalOptions="Center" />
+        <MediaElement 
+            Source="{Binding Song.File}" 
+            AutoPlay="False" 
+            ShowsPlaybackControls="True" 
+            HeightRequest="50" 
+            HorizontalOptions="FillAndExpand" 
+            VerticalOptions="Center" />
+        <Label 
+            Text="{Binding Song.Publisher}" 
+            FontSize="Small" 
+            HorizontalOptions="Center" 
+            VerticalOptions="End" />
+        <Label 
+            Text="{Binding Song.Year}" 
+            FontSize="Small" 
+            HorizontalOptions="Center" 
+            VerticalOptions="End" />
     </VerticalStackLayout>
 </ContentPage>
