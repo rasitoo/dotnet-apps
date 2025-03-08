@@ -22,12 +22,14 @@
                     <Border Padding="20"
                         StrokeShape="RoundRectangle 10"
                         Stroke="LightGray"
-                        StrokeThickness="1">
+                        StrokeThickness="1"
+                        WidthRequest="150">
                         <Label 
                             Text="{Binding Name}" 
                             FontAttributes="Bold" 
                             HorizontalOptions="Center"
-                            VerticalOptions="Center" />
+                            VerticalOptions="Center"
+                            LineBreakMode="TailTruncation"/>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

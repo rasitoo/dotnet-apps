@@ -109,14 +109,15 @@ public class RestClientSong(ApiClientService apiClientService) : IRestClient<Son
                         Id = jsonSong.GetProperty("id").GetInt32(),
                         Title = jsonSong.GetProperty("title").GetString(),
                         Year = jsonSong.GetProperty("year").GetInt32(),
-                        File = apiClientService.Url + jsonSong.GetProperty("file").GetString(),
+                        File = jsonSong.GetProperty("file").GetString(),
+                        //File = apiClientService.Url + jsonSong.GetProperty("file").GetString(),
                         Album_id = jsonSong.GetProperty("album_id").GetInt32(),
                         Genre_id = jsonSong.GetProperty("genre_id").GetInt32(),
                         Album = new Album
                         {
                             Id = jsonSong.GetProperty("album").GetProperty("id").GetInt32(),
                             Title = jsonSong.GetProperty("album").GetProperty("title").GetString(),
-                            Picture = apiClientService.Url + jsonSong.GetProperty("album").GetProperty("picture").GetString(),
+                            Picture = jsonSong.GetProperty("album").GetProperty("picture").GetString(),
                             Artist_id = jsonSong.GetProperty("album").GetProperty("artist_id").GetInt32(),
                             Artist = new Artist
                             {

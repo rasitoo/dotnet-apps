@@ -11,6 +11,7 @@ public partial class MainPageModel : ObservableObject
     private readonly IRestClient<Album> _albumService;
     private readonly IRestClient<Song> _songService;
     private readonly IRestClient<Playlist> _playlistService;
+
     [ObservableProperty]
     private ObservableCollection<Artist> _artists = new();
     [ObservableProperty]
@@ -19,6 +20,7 @@ public partial class MainPageModel : ObservableObject
     private ObservableCollection<Song> _songs = new();
     [ObservableProperty]
     private ObservableCollection<Playlist> _playlists = new();
+
     [ObservableProperty]
     private bool _playlistsLoading = true;
     [ObservableProperty]
@@ -27,6 +29,49 @@ public partial class MainPageModel : ObservableObject
     private bool _songsLoading = true;
     [ObservableProperty]
     private bool _artistsLoading = true;
+
+    [ObservableProperty]
+    private Artist? _selectedArtist;
+
+    async partial void OnSelectedArtistChanged(Artist value)
+    {
+        if (value != null)
+        {
+            await Shell.Current.GoToAsync($"artist?id={value.Id}");
+            SelectedArtist = null;
+        }
+    }
+
+    [ObservableProperty]
+    private Album? _selectedAlbum = new();
+    async partial void OnSelectedAlbumChanged(Album value)
+    {
+        if(value != null)
+        {
+            await Shell.Current.GoToAsync("album", new ShellNavigationQueryParameters { { "Album", value } });
+        }
+    }
+
+    [ObservableProperty]
+    private Song? _selectedSong = new();
+    async partial void OnSelectedSongChanged(Song value)
+    {
+        if (value != null)
+        {
+            await Shell.Current.GoToAsync("song", new ShellNavigationQueryParameters { { "Song", value } });
+        }
+    }
+
+    [ObservableProperty]
+    private Playlist? _selectedPlaylist = new();
+    async partial void OnSelectedPlaylistChanged(Playlist value)
+    {
+        if (value != null)
+        {
+            await Shell.Current.GoToAsync("playlist", new ShellNavigationQueryParameters { { "Playlist", value } });
+        }
+    }
+
     public MainPageModel(IRestClient<Artist> artistService, IRestClient<Album> albumservice, IRestClient<Song> songService, IRestClient<Playlist> playlistService)
     {
         _artistService = artistService;
@@ -39,10 +84,10 @@ public partial class MainPageModel : ObservableObject
 
     private async void LoadAsync()
     {
-        List<Artist> artists = await _artistService.GetAll(0, 50);
-        List<Album> albums = await _albumService.GetAll(0, 50);
-        List<Song> songs = await _songService.GetAll(0, 50);
-        List<Playlist> playlists = await _playlistService.GetAll(0, 50);
+        List<Artist> artists = await _artistService.GetAll(0, 100);
+        List<Album> albums = await _albumService.GetAll(0, 100);
+        List<Song> songs = await _songService.GetAll(0, 200);
+        List<Playlist> playlists = await _playlistService.GetAll(0, 100);
         LoadArtists(artists);
         LoadSongs(songs);
         LoadPlaylists(playlists);
@@ -77,7 +122,7 @@ public partial class MainPageModel : ObservableObject
                 playlist.Songs = new List<Song>();
             }
         }
-        Playlists = new ObservableCollection<Playlist>(playlists);
+        Playlists = new(playlists);
         PlaylistsLoading = false;
 
     }

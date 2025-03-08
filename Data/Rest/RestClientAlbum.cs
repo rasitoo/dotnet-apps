@@ -55,16 +55,21 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
                     Artist_id = jsonAlbum.GetProperty("artist_id").GetInt32(),
                     Title = jsonAlbum.GetProperty("title").GetString(),
                     Year = jsonAlbum.GetProperty("year").GetInt32(),
-                    Picture = apiClientService.Url+jsonAlbum.GetProperty("picture").GetString(),
+                    Picture = jsonAlbum.GetProperty("picture").GetString(),
+                    //Picture = apiClientService.Url + jsonAlbum.GetProperty("picture").GetString(),
                     Artist = new Artist
                     {
                         Id = jsonAlbum.GetProperty("artist").GetProperty("id").GetInt32(),
                         Name = jsonAlbum.GetProperty("artist").GetProperty("name").GetString(),
                         Mbid = jsonAlbum.GetProperty("artist").GetProperty("mbid").GetString(),
-                        Artist_background = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
-                        Artist_logo = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
-                        Artist_thumbnail = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
+                        Artist_background = jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
+                        Artist_logo = jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
+                        Artist_thumbnail = jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
                         Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
+                        //Artist_background = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
+                        //Artist_logo = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
+                        //Artist_thumbnail = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
+                        //Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
                     },
                     Songs = new List<Song>()
                 };
@@ -95,16 +100,21 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
                         Artist_id = jsonAlbum.GetProperty("artist_id").GetInt32(),
                         Title = jsonAlbum.GetProperty("title").GetString(),
                         Year = jsonAlbum.GetProperty("year").GetInt32(),
-                        Picture = apiClientService.Url + jsonAlbum.GetProperty("picture").GetString(),
+                        Picture = jsonAlbum.GetProperty("picture").GetString(),
+                        //Picture = apiClientService.Url + jsonAlbum.GetProperty("picture").GetString(),
                         Artist = new Artist
                         {
                             Id = jsonAlbum.GetProperty("artist").GetProperty("id").GetInt32(),
                             Name = jsonAlbum.GetProperty("artist").GetProperty("name").GetString(),
                             Mbid = jsonAlbum.GetProperty("artist").GetProperty("mbid").GetString(),
-                            Artist_background = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
-                            Artist_logo = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
-                            Artist_thumbnail = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
+                            Artist_background = jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
+                            Artist_logo = jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
+                            Artist_thumbnail = jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
                             Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
+                            //Artist_background = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
+                            //Artist_logo = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
+                            //Artist_thumbnail = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
+                            //Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
                         },
                         Songs = new List<Song>()
                     });
