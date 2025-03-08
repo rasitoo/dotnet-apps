@@ -12,6 +12,18 @@ public partial class SearchPageModel : ObservableObject
     private ObservableCollection<Genre> _genres = new();
     [ObservableProperty]
     private bool _genresLoading = true;
+
+    [ObservableProperty]
+    private Genre? _selectedGenre;
+
+    async partial void OnSelectedGenreChanged(Genre value)
+    {
+        if (value != null)
+        {
+            await Shell.Current.GoToAsync($"genre?id={value.Id}");
+            SelectedGenre = null;
+        }
+    }
     public SearchPageModel(IRestClient<Genre> genreService)
     {
         _genreService = genreService;

@@ -67,29 +67,33 @@
             FontAttributes="Bold" 
             FontSize="Medium" 
             Margin="10,0,0,0"/>
-            <ActivityIndicator IsRunning="{Binding AlbumsLoading}" IsVisible="{Binding AlbumsLoading}" />
-            <CollectionView ItemsSource="{Binding Artist.Albums}">
+            <ActivityIndicator IsRunning="{Binding AlbumsLoading}" IsVisible="{Binding AlbumsLoading}"/>
+            <CollectionView ItemsSource="{Binding Artist.Albums}"
+                            SelectedItem="{Binding SelectedAlbum}"
+                            SelectionMode="Single"
+                            Margin="10,0,0,0">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal" Span="1" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                    <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="5" VerticalItemSpacing="15"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Album">
-                        <StackLayout Padding="10" Orientation="Vertical" HorizontalOptions="Center">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                             <Image 
                                 Source="{Binding Picture}" 
                                 Aspect="AspectFill"
-                                HeightRequest="100" 
-                                WidthRequest="100" />
+                                HeightRequest="120" 
+                                WidthRequest="120" />
                             <Label 
                                 Text="{Binding Title}" 
                                 FontAttributes="Bold" 
                                 LineBreakMode="TailTruncation"
-                                WidthRequest="100" />
+                                WidthRequest="120" />
                             <Label 
-                                Text="{Binding Year}" 
+                                Text="{Binding Artist.Name}" 
                                 FontSize="Caption"
+                                Opacity="0.8"
                                 LineBreakMode="TailTruncation"
-                                WidthRequest="100" />
+                                WidthRequest="120" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -100,7 +104,9 @@
             FontSize="Medium" 
             Margin="10,0,0,0"/>
             <ActivityIndicator IsRunning="{Binding GenresLoading}" IsVisible="{Binding GenresLoading}" />
-            <CollectionView ItemsSource="{Binding Genres}">
+            <CollectionView ItemsSource="{Binding Genres}"
+                            SelectedItem="{Binding SelectedGenre}"
+                            SelectionMode="Single">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
                 </CollectionView.ItemsLayout>

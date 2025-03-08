@@ -4,8 +4,9 @@
              xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
              xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.PlaylistsPage"
-             Title="PlaylistsPage"
-             x:DataType="pagemodels:PlaylistsPageModel">
+             Shell.NavBarIsVisible="False"
+             x:DataType="pagemodels:PlaylistsPageModel"
+             >
     <VerticalStackLayout
             Padding="30,0"
             Spacing="25">

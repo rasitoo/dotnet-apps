@@ -55,6 +55,9 @@ public static class MauiProgram
         builder.Services.AddTransient<AlbumPage>();
         builder.Services.AddTransient<AlbumPageModel>();
 
+        builder.Services.AddTransient<GenrePage>();
+        builder.Services.AddTransient<GenrePageModel>();
+
         builder.Services.AddHttpClient<ApiClientService>();
         builder.Services.AddScoped<IRestClient<Album>, RestClientAlbum>();
         builder.Services.AddScoped<IRestClient<Artist>, RestClientArtist>();
