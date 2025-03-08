@@ -8,6 +8,14 @@ public partial class GenrePageModel : ObservableObject
 {
     [ObservableProperty]
     private int _id;
+    partial void OnIdChanged(int value)
+    {
+        LoadAsync();
+    }
     [ObservableProperty]
     private Genre _genre;
+    async private void LoadAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -68,7 +68,7 @@ public partial class MainPageModel : ObservableObject
     {
         if (value != null)
         {
-            await Shell.Current.GoToAsync("playlist", new ShellNavigationQueryParameters { { "Playlist", value } });
+            await Shell.Current.GoToAsync($"playlist?id={value.Id}");
         }
     }
 

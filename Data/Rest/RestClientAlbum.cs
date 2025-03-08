@@ -1,5 +1,6 @@
 ﻿using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
@@ -48,6 +49,43 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
             if (response != null)
             {
                 var jsonAlbum = response.RootElement;
+                List<Song> songs = new();
+                Artist artist = new();
+
+                if (jsonAlbum.TryGetProperty("artist", out var jsonArtistElement))
+                {
+                    artist = new Artist
+                    {
+                        Id = jsonArtistElement.GetProperty("id").GetInt32(),
+                        Name = jsonArtistElement.GetProperty("name").GetString() ?? string.Empty,
+                        Mbid = jsonArtistElement.GetProperty("mbid").GetString(),
+                        Artist_background = jsonArtistElement.GetProperty("artist_background").GetString(),
+                        Artist_logo = jsonArtistElement.GetProperty("artist_logo").GetString(),
+                        Artist_thumbnail = jsonArtistElement.GetProperty("artist_thumbnail").GetString(),
+                        Artist_banner = jsonArtistElement.GetProperty("artist_banner").GetString()
+                    };
+
+                }
+                if (jsonAlbum.TryGetProperty("songs", out var jsonSongs))
+                {
+                    foreach (var jsonSong in jsonSongs.EnumerateArray())
+                    {
+                        var song = new Song
+                        {
+                            Id = jsonSong.GetProperty("id").GetInt32(),
+                            Title = jsonSong.GetProperty("title").GetString(),
+                            Publisher = jsonSong.GetProperty("publisher").GetString(),
+                            Year = jsonSong.TryGetProperty("year", out var NumElement) && NumElement.ValueKind != JsonValueKind.Null ? NumElement.GetInt32() : 0,
+                            Track_num = jsonSong.TryGetProperty("track_num", out NumElement) && NumElement.ValueKind != JsonValueKind.Null ? NumElement.GetInt32() : 0,
+                            File = jsonSong.GetProperty("file").GetString(),
+                            Album_id = jsonSong.GetProperty("album_id").GetInt32(),
+                            Genre_id = jsonSong.GetProperty("genre_id").GetInt32(),
+                            Artist = artist,
+                            Picture = jsonAlbum.GetProperty("picture").GetString()
+                        };
+                        songs.Add(song);
+                    }
+                }
                 return new Album
                 {
                     Id = jsonAlbum.GetProperty("id").GetInt32(),
@@ -57,21 +95,9 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
                     Year = jsonAlbum.GetProperty("year").GetInt32(),
                     Picture = jsonAlbum.GetProperty("picture").GetString(),
                     //Picture = apiClientService.Url + jsonAlbum.GetProperty("picture").GetString(),
-                    Artist = new Artist
-                    {
-                        Id = jsonAlbum.GetProperty("artist").GetProperty("id").GetInt32(),
-                        Name = jsonAlbum.GetProperty("artist").GetProperty("name").GetString(),
-                        Mbid = jsonAlbum.GetProperty("artist").GetProperty("mbid").GetString(),
-                        Artist_background = jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
-                        Artist_logo = jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
-                        Artist_thumbnail = jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
-                        Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
-                        //Artist_background = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
-                        //Artist_logo = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
-                        //Artist_thumbnail = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
-                        //Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
-                    },
-                    Songs = new List<Song>()
+                    Artist = artist,
+                    Songs = songs
+
                 };
             }
         }
@@ -93,6 +119,43 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
                 var albums = new List<Album>();
                 foreach (var jsonAlbum in jsonAlbums.EnumerateArray())
                 {
+                    List<Song> songs = new();
+                    Artist artist = new();
+
+                    if (jsonAlbum.TryGetProperty("artist", out var jsonArtistElement))
+                    {
+
+                        artist = new Artist
+                        {
+                            Id = jsonArtistElement.GetProperty("id").GetInt32(),
+                            Name = jsonArtistElement.GetProperty("name").GetString() ?? string.Empty,
+                            Mbid = jsonArtistElement.GetProperty("mbid").GetString(),
+                            Artist_background = jsonArtistElement.GetProperty("artist_background").GetString(),
+                            Artist_logo = jsonArtistElement.GetProperty("artist_logo").GetString(),
+                            Artist_thumbnail = jsonArtistElement.GetProperty("artist_thumbnail").GetString(),
+                            Artist_banner = jsonArtistElement.GetProperty("artist_banner").GetString()
+                        };
+
+                    }
+                    if (jsonAlbum.TryGetProperty("songs", out var jsonSongs))
+                    {
+                        foreach (var jsonSong in jsonSongs.EnumerateArray())
+                        {
+                            var song = new Song
+                            {
+                                Id = jsonSong.GetProperty("id").GetInt32(),
+                                Title = jsonSong.GetProperty("title").GetString(),
+                                Publisher = jsonSong.GetProperty("publisher").GetString(),
+                                Year = jsonSong.TryGetProperty("year", out var NumElement) && NumElement.ValueKind != JsonValueKind.Null ? NumElement.GetInt32() : 0,
+                                Track_num = jsonSong.TryGetProperty("track_num", out NumElement) && NumElement.ValueKind != JsonValueKind.Null ? NumElement.GetInt32() : 0,
+                                File = jsonSong.GetProperty("file").GetString(),
+                                Album_id = jsonSong.GetProperty("album_id").GetInt32(),
+                                Genre_id = jsonSong.GetProperty("genre_id").GetInt32(),
+                                Artist = artist
+                            };
+                            songs.Add(song);
+                        }
+                    }
                     albums.Add(new Album
                     {
                         Id = jsonAlbum.GetProperty("id").GetInt32(),
@@ -102,21 +165,8 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
                         Year = jsonAlbum.GetProperty("year").GetInt32(),
                         Picture = jsonAlbum.GetProperty("picture").GetString(),
                         //Picture = apiClientService.Url + jsonAlbum.GetProperty("picture").GetString(),
-                        Artist = new Artist
-                        {
-                            Id = jsonAlbum.GetProperty("artist").GetProperty("id").GetInt32(),
-                            Name = jsonAlbum.GetProperty("artist").GetProperty("name").GetString(),
-                            Mbid = jsonAlbum.GetProperty("artist").GetProperty("mbid").GetString(),
-                            Artist_background = jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
-                            Artist_logo = jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
-                            Artist_thumbnail = jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
-                            Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
-                            //Artist_background = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_background").GetString(),
-                            //Artist_logo = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_logo").GetString(),
-                            //Artist_thumbnail = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
-                            //Artist_banner = apiClientService.Url + jsonAlbum.GetProperty("artist").GetProperty("artist_banner").GetString()
-                        },
-                        Songs = new List<Song>()
+                        Artist = artist,
+                        Songs = songs
                     });
                 }
                 return albums;
