@@ -43,7 +43,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Image 
-                               Source="{Binding Picture}" 
+                               Source="{Binding Album.Picture}" 
                                Aspect="AspectFill"
                                HeightRequest="60" 
                                WidthRequest="60" 

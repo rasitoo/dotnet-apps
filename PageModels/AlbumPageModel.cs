@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
 
-[QueryProperty(nameof(Album), "Album")]
+[QueryProperty(nameof(Album), "album")]
 public partial class AlbumPageModel : ObservableObject
 {
     [ObservableProperty]
@@ -23,6 +23,7 @@ public partial class AlbumPageModel : ObservableObject
     {
         if (value != null)
         {
+            value.Album = Album;
             await Shell.Current.GoToAsync("song", new ShellNavigationQueryParameters { { "song", value } });
             SelectedSong = null;
         }

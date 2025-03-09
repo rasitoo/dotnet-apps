@@ -4,6 +4,7 @@ using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages;
+using CommunityToolkit.Maui;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo;
 
@@ -14,6 +15,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkitMediaElement()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

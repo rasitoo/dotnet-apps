@@ -7,7 +7,6 @@ public class Song
     public string? Publisher { get; set; }
     public int? Year { get; set; }
     public int? Track_num { get; set; }
-    public string? Picture { get; set; }
     public string File { get; set; }
     public int? Album_id { get; set; }
     public int? Genre_id { get; set; }

@@ -119,7 +119,7 @@ public partial class ArtistPageModel : ObservableObject
                 {
                     foreach (Song song in album.Songs)
                     {
-                        song.Picture = album.Picture;
+                        song.Album = album;
 
                         if (songs.Count < 10)
                         {

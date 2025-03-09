@@ -80,8 +80,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
                             File = jsonSong.GetProperty("file").GetString(),
                             Album_id = jsonSong.GetProperty("album_id").GetInt32(),
                             Genre_id = jsonSong.GetProperty("genre_id").GetInt32(),
-                            Artist = artist,
-                            Picture = jsonAlbum.GetProperty("picture").GetString()
+                            Artist = artist
                         };
                         songs.Add(song);
                     }
