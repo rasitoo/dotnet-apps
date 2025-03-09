@@ -43,7 +43,7 @@
             <SearchBar Placeholder="{local:Localization Search}"
            Text="{Binding SearchText}"
            SearchCommand="{Binding SearchCommand}" />
-                <Label Text="Artistas" FontAttributes="Bold"  />
+            <Label Text="{local:Localization Artists}" FontAttributes="Bold"  />
                 <CollectionView ItemsSource="{Binding FilteredArtists}"
                                 SelectionMode="Single">
                     <CollectionView.ItemTemplate>
@@ -53,7 +53,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Label Text="Álbumes" FontAttributes="Bold"  />
+            <Label Text="{local:Localization Albums}" FontAttributes="Bold"  />
                 <CollectionView ItemsSource="{Binding FilteredAlbums}"
                                 SelectionMode="Single">
                     <CollectionView.ItemTemplate>
@@ -63,7 +63,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Label Text="Canciones" FontAttributes="Bold"  />
+            <Label Text="{local:Localization Songs}" FontAttributes="Bold"  />
                 <CollectionView ItemsSource="{Binding FilteredSongs}"
                                 SelectionMode="Single">
                     <CollectionView.ItemTemplate>
@@ -73,7 +73,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Label Text="Géneros" FontAttributes="Bold"  />
+            <Label Text="{local:Localization Genres}" FontAttributes="Bold"  />
                 <CollectionView ItemsSource="{Binding FilteredGenres}"
                                 SelectionMode="Single">
                     <CollectionView.ItemTemplate>
@@ -83,7 +83,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Label Text="Listas de Reproducción" FontAttributes="Bold"  />
+            <Label Text="{local:Localization Playlists}" FontAttributes="Bold"  />
                 <CollectionView ItemsSource="{Binding FilteredPlaylists}"
                                 SelectionMode="Single">
                     <CollectionView.ItemTemplate>
