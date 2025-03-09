@@ -32,6 +32,7 @@ public partial class FavoritesPageModel : ObservableObject
 
     private void AddSongToFavorites(Song value)
     {
-        FavoriteSongs.Add(value);
+        if(!FavoriteSongs.Contains(value))
+            FavoriteSongs.Add(value);
     }
 }

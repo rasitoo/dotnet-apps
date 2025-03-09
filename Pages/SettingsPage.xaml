@@ -8,10 +8,15 @@
              x:DataType="pagemodels:SettingsPageModel">
 
     <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+         Padding="30,0"
+         Spacing="25">
         <Label Text="Ajustes"
-               FontAttributes="Bold"
-               FontSize="Title"/>
+            FontAttributes="Bold"
+            FontSize="Title"/>
+        <Label Text="Selecciona el idioma:"/>
+        <Picker ItemsSource="{Binding Languages}"
+               SelectedItem="{Binding SelectedLanguage}"/>
+        <Button Text="Cambiar Idioma"
+             Command="{Binding ChangeLanguageCommand}"/>
     </VerticalStackLayout>
 </ContentPage>
