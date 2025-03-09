@@ -4,13 +4,14 @@
              xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
              xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.SettingsPage"
+             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
              Shell.NavBarIsVisible="False"
              x:DataType="pagemodels:SettingsPageModel">
 
     <VerticalStackLayout
          Padding="30,0"
          Spacing="25">
-        <Label Text="Ajustes"
+        <Label Text="{local:Localization Key=Settings}"
             FontAttributes="Bold"
             FontSize="Title"/>
         <Label Text="Selecciona el idioma:"/>
