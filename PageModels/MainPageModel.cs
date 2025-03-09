@@ -48,6 +48,10 @@ public partial class MainPageModel : ObservableObject
     {
         if(value != null)
         {
+            foreach (Song song in value.Songs)
+            {
+                song.Album = value;
+            }
             await Shell.Current.GoToAsync("album", new ShellNavigationQueryParameters { { "album", value } });
             SelectedAlbum = null;
         }

@@ -50,6 +50,7 @@ public partial class ArtistPageModel : ObservableObject
     {
         if (value != null)
         {
+            value.Artist = Artist;
             await Shell.Current.GoToAsync("album", new ShellNavigationQueryParameters { { "album", value } });
             SelectedAlbum = null;
         }

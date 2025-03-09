@@ -64,17 +64,12 @@ public class RestClientSong(ApiClientService apiClientService) : IRestClient<Son
                     {
                         Id = jsonSong.GetProperty("album").GetProperty("id").GetInt32(),
                         Title = jsonSong.GetProperty("album").GetProperty("title").GetString(),
-                        Year = jsonSong.GetProperty("album").GetProperty("year").GetInt32(),
                         Picture = jsonSong.GetProperty("album").GetProperty("picture").GetString(),
-                        Mbid = jsonSong.GetProperty("album").GetProperty("mbid").GetString(),
                         Artist_id = jsonSong.GetProperty("album").GetProperty("artist_id").GetInt32(),
                         Artist = new Artist
                         {
                             Id = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("id").GetInt32(),
-                            Name = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("name").GetString(),
-                            Mbid = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("mbid").GetString(),
-                            Artist_background = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_background").GetString(),
-                            Artist_logo = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_logo").GetString(),
+                            Name = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("name").GetString(),         
                             Artist_thumbnail = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_thumbnail").GetString(),
                             Artist_banner = jsonSong.GetProperty("album").GetProperty("artist").GetProperty("artist_banner").GetString()
                         }
@@ -113,7 +108,6 @@ public class RestClientSong(ApiClientService apiClientService) : IRestClient<Son
                         Publisher = jsonSong.GetProperty("publisher").GetString(),
                         Year = jsonSong.GetProperty("year").GetInt32(),
                         File = jsonSong.GetProperty("file").GetString(),
-                        //File = apiClientService.Url + jsonSong.GetProperty("file").GetString(),
                         Album_id = jsonSong.GetProperty("album_id").GetInt32(),
                         Genre_id = jsonSong.GetProperty("genre_id").GetInt32(),
                         Album = new Album

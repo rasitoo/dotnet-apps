@@ -12,10 +12,13 @@
         <Label Text="Canciones favoritas"
            FontAttributes="Bold"
            FontSize="Title"/>
+        <ActivityIndicator IsRunning="{Binding SongsLoading}" IsVisible="{Binding SongsLoading}" />
         <CollectionView ItemsSource="{Binding FavoriteSongs}"
-                IsGrouped="True"
-                ItemsLayout="HorizontalGrid, 3"
-                >
+                            SelectedItem="{Binding SelectedSong}"
+                            SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Song">
                     <Grid Padding="10">
@@ -29,23 +32,26 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Image 
-                   Source="{Binding Album.Picture}" 
-                   Aspect="AspectFill"
-                   HeightRequest="60" 
-                   WidthRequest="60" 
-                   Grid.RowSpan="3"/>
+                               Source="{Binding Album.Picture}" 
+                               Aspect="AspectFill"
+                               HeightRequest="60" 
+                               WidthRequest="60" 
+                               Grid.RowSpan="3"
+                               Margin="0,0,10,0"/>
+                        <Label 
+                               Grid.Column="1"
+                               Text="{Binding Title}" 
+                               FontAttributes="Bold" />
                         <Label Grid.Row="1" 
-                   Grid.Column="2"
-                   Text="{Binding Title}" 
-                   FontAttributes="Bold" />
+                               Grid.Column="1"
+                               Text="{Binding Album.Title}" 
+                               FontSize="Caption"
+                               Opacity="0.95"/>
                         <Label Grid.Row="2" 
-                   Grid.Column="2"
-                   Text="{Binding Album.Artist.Name}" 
-                   FontAttributes="None" />
-                        <Label Grid.Row="2" 
-                   Grid.Column="2"
-                   Text="{Binding Album.Title}" 
-                   FontAttributes="None" />
+                               Grid.Column="1"
+                               Text="{Binding Album.Artist.Name}" 
+                               FontSize="Caption"
+                               Opacity="0.7"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
