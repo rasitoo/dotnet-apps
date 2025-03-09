@@ -20,7 +20,7 @@
                 SelectedItem="{Binding SelectedPlaylist}"
                 SelectionMode="Single">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Horizontal"  HorizontalItemSpacing="5"/>
+                <GridItemsLayout Orientation="Vertical"  HorizontalItemSpacing="5"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Playlist">
