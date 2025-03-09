@@ -121,6 +121,14 @@
                                Text="{Binding Album.Artist.Name}" 
                                FontSize="Caption"
                                Opacity="0.7"/>
+                            <!--https://learn.microsoft.com/en-us/dotnet/maui/user-interface/context-menu?view=net-maui-9.0-->
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <!--https://stackoverflow.com/questions/2963830/passing-event-args-and-sender-to-the-relaycommand-->
+                                    <MenuFlyoutItem Text="Añadir a Favoritos" Command="{Binding BindingContext.AddToFavoritesCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
+                                    <MenuFlyoutItem Text="Añadir a Playlist" Command="{Binding BindingContext.AddToPlaylistCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

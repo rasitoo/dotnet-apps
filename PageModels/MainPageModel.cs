@@ -1,7 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using CommunityToolkit.Mvvm.Messaging;
+using P07_01_DI_Contactos_TAPIADOR_rodrigo.Messages;
+
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
 
@@ -132,6 +138,24 @@ public partial class MainPageModel : ObservableObject
         Playlists = new(playlists);
         PlaylistsLoading = false;
 
+    }
+    [RelayCommand]
+    private void AddToFavorites(Song song)
+    {
+        if (song != null)
+        {
+            WeakReferenceMessenger.Default.Send(new SongAddedToFavoritesMessage(song));
+        }
+    }
+    [RelayCommand]
+
+    private void AddToPlaylist(Song song)
+    {
+        if (song != null)
+        {
+            // Lógica para añadir la canción a una playlist
+            Debug.WriteLine($"Añadir a Playlist: {song.Title}");
+        }
     }
 
 }

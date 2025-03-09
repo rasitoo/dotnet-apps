@@ -12,7 +12,6 @@
         <Label Text="Canciones favoritas"
            FontAttributes="Bold"
            FontSize="Title"/>
-        <ActivityIndicator IsRunning="{Binding SongsLoading}" IsVisible="{Binding SongsLoading}" />
         <CollectionView ItemsSource="{Binding FavoriteSongs}"
                             SelectedItem="{Binding SelectedSong}"
                             SelectionMode="Single">

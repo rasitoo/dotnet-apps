@@ -5,6 +5,7 @@ using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages;
 using CommunityToolkit.Maui;
+using P07_01_DI_Contactos_TAPIADOR_rodrigo.Messages;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo;
 
@@ -25,19 +26,15 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
-        //Meter singletons, transients de repositories models
-        //
-        //Este codigo añade una vista con su model desde una ruta específica
-        //builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
-        //builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
+
         builder.Services.AddTransient<ArtistPage>();
         builder.Services.AddTransient<ArtistPageModel>();
 
-        builder.Services.AddTransient<FavoritesPage>();
-        builder.Services.AddTransient<FavoritesPageModel>();
+        builder.Services.AddSingleton<FavoritesPage>();
+        builder.Services.AddSingleton<FavoritesPageModel>();
 
-        builder.Services.AddTransient<MainPage>();
-        builder.Services.AddTransient<MainPageModel>();
+        builder.Services.AddSingleton<MainPage>();
+        builder.Services.AddSingleton<MainPageModel>();
 
         builder.Services.AddTransient<SearchPage>();
         builder.Services.AddTransient<SearchPageModel>();
@@ -45,8 +42,8 @@ public static class MauiProgram
         builder.Services.AddTransient<SettingsPage>();
         builder.Services.AddTransient<SettingsPageModel>();
 
-        builder.Services.AddTransient<SongPage>();
-        builder.Services.AddTransient<SongPageModel>();
+        builder.Services.AddSingleton<SongPage>();
+        builder.Services.AddSingleton<SongPageModel>();
 
         builder.Services.AddTransient<PlaylistsPage>();
         builder.Services.AddTransient<PlaylistsPageModel>();
@@ -66,6 +63,10 @@ public static class MauiProgram
         builder.Services.AddScoped<IRestClient<Genre>, RestClientGenre>();
         builder.Services.AddScoped<IRestClient<Playlist>, RestClientPlaylist>();
         builder.Services.AddScoped<IRestClient<Song>, RestClientSong>();
-        return builder.Build();
+        var app = builder.Build();
+
+        var favoritesPageModel = app.Services.GetRequiredService<FavoritesPageModel>();
+
+        return app;
     }
 }
