@@ -142,6 +142,7 @@ public partial class MainPageModel : ObservableObject
     [RelayCommand]
     private void AddToFavorites(Song song)
     {
+    //https://stackoverflow.com/questions/77090721/how-to-use-weakreferencemessenger-in-maui
         if (song != null)
         {
             WeakReferenceMessenger.Default.Send(new SongAddedToFavoritesMessage(song));

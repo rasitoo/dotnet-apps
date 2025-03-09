@@ -6,54 +6,56 @@
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.FavoritesPage"
              Shell.NavBarIsVisible="False"
              x:DataType="pagemodels:FavoritesPageModel">
-    <VerticalStackLayout
+    <ScrollView>
+        <VerticalStackLayout
         Padding="30,0"
         Spacing="25">
-        <Label Text="Canciones favoritas"
+            <Label Text="Canciones favoritas"
            FontAttributes="Bold"
            FontSize="Title"/>
-        <CollectionView ItemsSource="{Binding FavoriteSongs}"
+            <CollectionView ItemsSource="{Binding FavoriteSongs}"
                             SelectedItem="{Binding SelectedSong}"
                             SelectionMode="Single">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Song">
-                    <Grid Padding="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Image 
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Song">
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image 
                                Source="{Binding Album.Picture}" 
                                Aspect="AspectFill"
                                HeightRequest="60" 
                                WidthRequest="60" 
                                Grid.RowSpan="3"
                                Margin="0,0,10,0"/>
-                        <Label 
+                            <Label 
                                Grid.Column="1"
                                Text="{Binding Title}" 
                                FontAttributes="Bold" />
-                        <Label Grid.Row="1" 
+                            <Label Grid.Row="1" 
                                Grid.Column="1"
                                Text="{Binding Album.Title}" 
                                FontSize="Caption"
                                Opacity="0.95"/>
-                        <Label Grid.Row="2" 
+                            <Label Grid.Row="2" 
                                Grid.Column="1"
                                Text="{Binding Album.Artist.Name}" 
                                FontSize="Caption"
                                Opacity="0.7"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
