@@ -11,13 +11,13 @@
     <VerticalStackLayout
          Padding="30,0"
          Spacing="25">
-        <Label Text="{local:Localization Key=Settings}"
+        <Label Text="{local:Localization Settings}"
             FontAttributes="Bold"
             FontSize="Title"/>
-        <Label Text="Selecciona el idioma:"/>
+        <Label Text="{local:Localization SelectLanguage}"/>
         <Picker ItemsSource="{Binding Languages}"
                SelectedItem="{Binding SelectedLanguage}"/>
-        <Button Text="Cambiar Idioma"
+        <Button Text="{local:Localization ChangeLang}"
              Command="{Binding ChangeLanguageCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

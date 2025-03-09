@@ -5,16 +5,17 @@
              xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.PlaylistPage"
              Shell.NavBarIsVisible="False"
+             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
              x:DataType="pagemodels:PlaylistPageModel">
     <VerticalStackLayout Padding="30,0" Spacing="25">
-        <Label Text="Editar Playlist" FontAttributes="Bold" FontSize="Title" />
+        <Label Text="{local:Localization EditPlaylist}" FontAttributes="Bold" FontSize="Title" />
 
         <Entry Text="{Binding Playlist.Title, Mode=TwoWay}" Placeholder="Título" />
         <Editor Text="{Binding Playlist.Description, Mode=TwoWay}" Placeholder="Descripción" />
 
-        <Button Text="Guardar" Command="{Binding SaveCommand}" />
+        <Button Text="{local:Localization Save}" Command="{Binding SaveCommand}" />
 
-        <Label Text="Canciones" FontAttributes="Bold" FontSize="Title" />
+        <Label Text="{local:Localization Songs}" FontAttributes="Bold" FontSize="Title" />
         <CollectionView ItemsSource="{Binding Playlist.Songs}" SelectedItem="{Binding SelectedSong}" SelectionMode="Single">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"  HorizontalItemSpacing="5" VerticalItemSpacing="5"/>

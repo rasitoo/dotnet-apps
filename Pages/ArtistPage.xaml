@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
              xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
+             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.ArtistPage"
              Shell.NavBarIsVisible="False"
              x:DataType="pagemodels:ArtistPageModel">
@@ -19,7 +20,7 @@
             FontSize="Large" 
             Margin="10,0,0,0"/>
             <Label 
-            Text="Top canciones" 
+            Text="{local:Localization TopSongs}" 
             FontAttributes="Bold" 
             FontSize="Medium"
             Margin="10,0,0,0"/>
@@ -63,7 +64,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Label 
-            Text="Álbumes" 
+            Text="{local:Localization Albums}" 
             FontAttributes="Bold" 
             FontSize="Medium" 
             Margin="10,0,0,0"/>
@@ -99,7 +100,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <Label 
-            Text="Géneros" 
+            Text="{local:Localization Genres}" 
             FontAttributes="Bold" 
             FontSize="Medium" 
             Margin="10,0,0,0"/>

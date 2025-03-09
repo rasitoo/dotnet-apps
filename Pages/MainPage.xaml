@@ -4,6 +4,8 @@
              xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
              xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.MainPage"
+             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
+             Shell.NavBarIsVisible="False"
              x:DataType="pagemodels:MainPageModel">
     <!--Ejemplo de https://github.com/dotnet/maui-samples/blob/main/9.0/UserInterface/Views/CollectionViewDemos/CollectionViewDemos/Views/Grouping/VerticalListGroupingPage.xaml-->
     <!--Activity indicator de: https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/activityindicator?view=net-maui-9.0-->
@@ -11,7 +13,7 @@
         <VerticalStackLayout
             Padding="15,0"
             Spacing="20">
-            <Label Text="Artistas"
+            <Label Text="{local:Localization Artists}"
                    FontAttributes="Bold"
                    FontSize="Title"/>
             <ActivityIndicator IsRunning="{Binding ArtistsLoading}" IsVisible="{Binding ArtistsLoading}" />
@@ -43,7 +45,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Text="Discos"
+            <Label Text="{local:Localization Albums}"
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
@@ -77,7 +79,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Text="Canciones"
+            <Label Text="{local:Localization Songs}"
                    FontAttributes="Bold"
                    FontSize="Title"
                 />
@@ -125,14 +127,14 @@
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>
                                     <!--https://stackoverflow.com/questions/2963830/passing-event-args-and-sender-to-the-relaycommand-->
-                                    <MenuFlyoutItem Text="Añadir a Favoritos" Command="{Binding BindingContext.AddToFavoritesCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
+                                    <MenuFlyoutItem Text="{local:Localization AddFav}" Command="{Binding BindingContext.AddToFavoritesCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Text="Playlists"
+            <Label Text="{local:Localization Playlists}"
                    FontAttributes="Bold"
                    FontSize="Title"/>
             <ActivityIndicator IsRunning="{Binding PlaylistsLoading}" IsVisible="{Binding PlaylistsLoading}"/>

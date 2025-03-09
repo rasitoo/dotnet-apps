@@ -61,11 +61,182 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Add to favorites.
+        /// </summary>
+        public static string AddFav {
+            get {
+                return ResourceManager.GetString("AddFav", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Albums.
+        /// </summary>
+        public static string Albums {
+            get {
+                return ResourceManager.GetString("Albums", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Artists.
+        /// </summary>
+        public static string Artists {
+            get {
+                return ResourceManager.GetString("Artists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Change language.
+        /// </summary>
+        public static string ChangeLang {
+            get {
+                return ResourceManager.GetString("ChangeLang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Edit playlist.
+        /// </summary>
+        public static string EditPlaylist {
+            get {
+                return ResourceManager.GetString("EditPlaylist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Favorites.
+        /// </summary>
+        public static string Favorites {
+            get {
+                return ResourceManager.GetString("Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Favorite songs.
+        /// </summary>
+        public static string FavSongs {
+            get {
+                return ResourceManager.GetString("FavSongs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Genres.
+        /// </summary>
+        public static string Genres {
+            get {
+                return ResourceManager.GetString("Genres", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Library.
+        /// </summary>
+        public static string Library {
+            get {
+                return ResourceManager.GetString("Library", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Made by Rodrigo Tapiador.
+        /// </summary>
+        public static string MadeBy {
+            get {
+                return ResourceManager.GetString("MadeBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a My playlists.
+        /// </summary>
+        public static string MyPlaylists {
+            get {
+                return ResourceManager.GetString("MyPlaylists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a New playlist.
+        /// </summary>
+        public static string NewPlaylist {
+            get {
+                return ResourceManager.GetString("NewPlaylist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Playlists.
+        /// </summary>
+        public static string Playlists {
+            get {
+                return ResourceManager.GetString("Playlists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Select language:.
+        /// </summary>
+        public static string SelectLanguage {
+            get {
+                return ResourceManager.GetString("SelectLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Settings.
         /// </summary>
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Songs.
+        /// </summary>
+        public static string Songs {
+            get {
+                return ResourceManager.GetString("Songs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Top songs.
+        /// </summary>
+        public static string TopSongs {
+            get {
+                return ResourceManager.GetString("TopSongs", resourceCulture);
             }
         }
     }

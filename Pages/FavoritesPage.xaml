@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
              xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
+             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
              x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.FavoritesPage"
              Shell.NavBarIsVisible="False"
              x:DataType="pagemodels:FavoritesPageModel">
@@ -10,7 +11,7 @@
         <VerticalStackLayout
         Padding="30,0"
         Spacing="25">
-            <Label Text="Canciones favoritas"
+            <Label Text="{local:Localization FavSongs}"
            FontAttributes="Bold"
            FontSize="Title"/>
             <CollectionView ItemsSource="{Binding FavoriteSongs}"

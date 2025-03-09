@@ -120,4 +120,61 @@
   <data name="Settings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Seleccione el idioma:</value>
+  </data>
+  <data name="Artists" xml:space="preserve">
+    <value>Artistas</value>
+  </data>
+  <data name="Albums" xml:space="preserve">
+    <value>Álbumes</value>
+  </data>
+  <data name="Songs" xml:space="preserve">
+    <value>Canciones</value>
+  </data>
+  <data name="AddFav" xml:space="preserve">
+    <value>Añadir a favoritos</value>
+  </data>
+  <data name="Playlists" xml:space="preserve">
+    <value>Listas de reproducción</value>
+  </data>
+  <data name="Genres" xml:space="preserve">
+    <value>Géneros</value>
+  </data>
+  <data name="MyPlaylists" xml:space="preserve">
+    <value>Mis listas de reproducción</value>
+  </data>
+  <data name="NewPlaylist" xml:space="preserve">
+    <value>Nueva lista de reproducción</value>
+  </data>
+  <data name="EditPlaylist" xml:space="preserve">
+    <value>Editar lista de reproducción</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="FavSongs" xml:space="preserve">
+    <value>Canciones favoritas</value>
+  </data>
+  <data name="TopSongs" xml:space="preserve">
+    <value>Top canciones</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>Biblioteca</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favoritos</value>
+  </data>
+  <data name="MadeBy" xml:space="preserve">
+    <value>Hecho por Rodrigo Tapiador</value>
+  </data>
+  <data name="ChangeLang" xml:space="preserve">
+    <value>Cambiar idioma</value>
+  </data>
 </root>
