@@ -49,6 +49,7 @@ public partial class MainPageModel : ObservableObject
         if(value != null)
         {
             await Shell.Current.GoToAsync("album", new ShellNavigationQueryParameters { { "album", value } });
+            SelectedAlbum = null;
         }
     }
 
@@ -59,6 +60,7 @@ public partial class MainPageModel : ObservableObject
         if (value != null)
         {
             await Shell.Current.GoToAsync("song", new ShellNavigationQueryParameters { { "song", value } });
+            SelectedSong = null;
         }
     }
 
@@ -69,6 +71,7 @@ public partial class MainPageModel : ObservableObject
         if (value != null)
         {
             await Shell.Current.GoToAsync($"playlist?id={value.Id}");
+            SelectedPlaylist = null;
         }
     }
 

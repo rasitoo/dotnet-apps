@@ -108,6 +108,7 @@ public class RestClientSong(ApiClientService apiClientService) : IRestClient<Son
                     {
                         Id = jsonSong.GetProperty("id").GetInt32(),
                         Title = jsonSong.GetProperty("title").GetString(),
+                        Publisher = jsonSong.GetProperty("publisher").GetString(),
                         Year = jsonSong.GetProperty("year").GetInt32(),
                         File = jsonSong.GetProperty("file").GetString(),
                         //File = apiClientService.Url + jsonSong.GetProperty("file").GetString(),

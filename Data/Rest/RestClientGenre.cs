@@ -1,5 +1,6 @@
 ﻿using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
@@ -47,12 +48,31 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
             var response = await apiClientService.GetJsonAsync($"/genres/{id}");
             if (response != null)
             {
+                List<Song> songs = new();
                 var jsonGenre = response.RootElement;
+                if (jsonGenre.TryGetProperty("songs", out var jsonSongs))
+                {
+                    foreach (var jsonSong in jsonSongs.EnumerateArray())
+                    {
+                        var song = new Song
+                        {
+                            Id = jsonSong.GetProperty("id").GetInt32(),
+                            Title = jsonSong.GetProperty("title").GetString(),
+                            Publisher = jsonSong.GetProperty("publisher").GetString(),
+                            Year = jsonSong.TryGetProperty("year", out var NumElement) && NumElement.ValueKind != JsonValueKind.Null ? NumElement.GetInt32() : 0,
+                            Track_num = jsonSong.TryGetProperty("track_num", out NumElement) && NumElement.ValueKind != JsonValueKind.Null ? NumElement.GetInt32() : 0,
+                            File = jsonSong.GetProperty("file").GetString(),
+                            Album_id = jsonSong.GetProperty("album_id").GetInt32(),
+                            Genre_id = jsonSong.GetProperty("genre_id").GetInt32()
+                        };
+                        songs.Add(song);
+                    }
+                }
                 return new Genre
                 {
                     Id = jsonGenre.GetProperty("id").GetInt32(),
                     Name = jsonGenre.GetProperty("name").GetString(),
-                    Songs = new List<Song>()
+                    Songs = songs
                 };
             }
         }

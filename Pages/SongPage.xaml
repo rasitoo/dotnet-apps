@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
-             xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
-             x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.SongPage"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Shell.NavBarIsVisible="False"
-             x:DataType="pagemodels:SongPageModel">
-    <VerticalStackLayout Padding="10" Spacing="10">
-        <Image 
-            Source="{Binding Song.Album.Picture}" 
-            Aspect="AspectFill"
-            HeightRequest="200" 
-            WidthRequest="200" 
-            HorizontalOptions="Center" 
-            VerticalOptions="Center" />
-        <Label 
-            Text="{Binding Song.Title}" 
-            FontSize="Large" 
-            FontAttributes="Bold" 
-            HorizontalOptions="Center" 
-            VerticalOptions="Center" />
-        <Label 
-            Text="{Binding Song.Album.Title}" 
-            FontSize="Medium" 
-            HorizontalOptions="Center" 
-            VerticalOptions="Center" />
-        <toolkit:MediaElement x:Name="mediaElement"
-            Source="{Binding Song.File}" 
-            ShouldAutoPlay="False" 
-            ShouldShowPlaybackControls="True"
-            VerticalOptions="Center" />
-        <Label 
-            Text="{Binding Song.Publisher}" 
-            FontSize="Small" 
-            HorizontalOptions="Center" 
-            VerticalOptions="End" />
-        <Label 
-            Text="{Binding Song.Year}" 
-            FontSize="Small" 
-            HorizontalOptions="Center" 
-            VerticalOptions="End" />
-    </VerticalStackLayout>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+            xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"  
+            xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"  
+            x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.SongPage"  
+            xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"  
+            Shell.NavBarIsVisible="False"  
+            x:DataType="pagemodels:SongPageModel">  
+   <VerticalStackLayout Padding="10" Spacing="10">  
+       <Image  
+           Source="{Binding Song.Album.Picture}"  
+           Aspect="AspectFill"  
+           HeightRequest="200"  
+           WidthRequest="200"  
+           HorizontalOptions="Center"  
+           VerticalOptions="Center" />  
+       <Label  
+           Text="{Binding Song.Title}"  
+           FontSize="Large"  
+           FontAttributes="Bold"  
+           HorizontalOptions="Center"  
+           VerticalOptions="Center" />  
+       <Label  
+           Text="{Binding Song.Album.Title}"  
+           FontSize="Medium"  
+           HorizontalOptions="Center"  
+           VerticalOptions="Center" />  
+       <toolkit:MediaElement x:Name="mediaElement"  
+           Source="{Binding Song.File}"  
+           ShouldAutoPlay="False"  
+           ShouldShowPlaybackControls="True"  
+           VerticalOptions="Center" />  
+       <Grid HorizontalOptions="Center" VerticalOptions="End">  
+           <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>  
+           <Label  
+               Text="{Binding Song.Publisher}"  
+               FontSize="Caption"  
+               HorizontalOptions="Center"
+               Grid.Column="0"
+               />  
+           <Label  
+               Text="©️"  
+               FontSize="Caption"  
+               HorizontalOptions="Center"  
+               Grid.Column="1" />  
+           <Label  
+               Text="{Binding Song.Year}"  
+               FontSize="Caption"  
+               HorizontalOptions="Center"  
+               Grid.Column="2" />  
+       </Grid>  
+   </VerticalStackLayout>  
 </ContentPage>
