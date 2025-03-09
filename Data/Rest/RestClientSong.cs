@@ -8,7 +8,7 @@ public class RestClientSong(ApiClientService apiClientService) : IRestClient<Son
     public int Offset { get; set; } = 0;
     public int Limit { get; set; } = 100;
 
-    public async void Add(Song item)
+    public async Task<Song?> Add(Song item)
     {
         try
         {
@@ -22,6 +22,8 @@ public class RestClientSong(ApiClientService apiClientService) : IRestClient<Son
         {
             Debug.WriteLine(@"\tERROR {0}", ex.Message);
         }
+        return null;
+
     }
 
     public async void Delete(Song item)
@@ -149,7 +151,7 @@ public class RestClientSong(ApiClientService apiClientService) : IRestClient<Son
     {
         try
         {
-            var response = await apiClientService.PutJsonAsync($"/songs/{item.Id}", item);
+            var response = await apiClientService.PatchJsonAsync($"/songs/{item.Id}", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);

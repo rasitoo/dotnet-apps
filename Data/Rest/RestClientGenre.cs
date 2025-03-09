@@ -9,7 +9,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
     public int Offset { get; set; } = 0;
     public int Limit { get; set; } = 100;
 
-    public async void Add(Genre item)
+    public async Task<Genre?> Add(Genre item)
     {
         try
         {
@@ -23,6 +23,8 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
         {
             Debug.WriteLine(@"\tERROR {0}", ex.Message);
         }
+        return null;
+
     }
 
     public async void Delete(Genre item)
@@ -114,7 +116,7 @@ public class RestClientGenre(ApiClientService apiClientService) : IRestClient<Ge
     {
         try
         {
-            var response = await apiClientService.PutJsonAsync($"/genres/{item.Id}", item);
+            var response = await apiClientService.PatchJsonAsync($"/genres/{item.Id}", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);

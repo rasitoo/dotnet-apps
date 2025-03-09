@@ -1,5 +1,6 @@
 ﻿using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
 
@@ -8,20 +9,30 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
     public int Offset { get; set; } = 0;
     public int Limit { get; set; } = 100;
 
-    public async void Add(Playlist item)
+    public async Task<Playlist?> Add(Playlist item)
     {
         try
         {
             var response = await apiClientService.PostJsonAsync("/playlists/", item);
-            if (!response.IsSuccessStatusCode)
+            if (response != null && response.IsSuccessStatusCode)
             {
-                Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var jsonPlaylist = JsonDocument.Parse(jsonString).RootElement;
+                return new Playlist
+                {
+                    Id = jsonPlaylist.GetProperty("id").GetInt32(),
+                    Title = jsonPlaylist.GetProperty("title").GetString(),
+                    Description = jsonPlaylist.GetProperty("description").GetString(),
+                    Songs = new List<Song>()
+                };
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(@"\tERROR {0}", ex.Message);
         }
+        return null;
+
     }
 
     public async void Delete(Playlist item)
@@ -97,7 +108,7 @@ public class RestClientPlaylist(ApiClientService apiClientService) : IRestClient
     {
         try
         {
-            var response = await apiClientService.PutJsonAsync($"/playlists/{item.Id}", item);
+            var response = await apiClientService.PatchJsonAsync($"/playlists/{item.Id}", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);

@@ -9,7 +9,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
     public int Offset { get; set; } = 0;
     public int Limit { get; set; } = 100;
 
-    public async void Add(Album item)
+    public async Task<Album?> Add(Album item)
     {
         try
         {
@@ -23,6 +23,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
         {
             Debug.WriteLine(@"\tERROR {0}", ex.Message);
         }
+        return null;
     }
 
     public async void Delete(Album item)
@@ -182,7 +183,7 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
     {
         try
         {
-            var response = await apiClientService.PutJsonAsync($"/albums/{item.Id}", item);
+            var response = await apiClientService.PatchJsonAsync($"/albums/{item.Id}", item);
             if (!response.IsSuccessStatusCode)
             {
                 Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);

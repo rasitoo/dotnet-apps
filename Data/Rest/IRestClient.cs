@@ -6,7 +6,7 @@ public interface IRestClient<T>
     public int Limit { get; set; }
     Task<T?> Get(int id);
     Task<List<T>> GetAll(int offset = 0, int Limit = 0);
-    void Add(T item);
+    Task<T?> Add(T item);
     void Delete(T item);
     void Update(T item);
 }

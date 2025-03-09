@@ -41,10 +41,14 @@ public class ApiClientService
         return await _client.DeleteAsync(Url + urlextension);
     }
 
-    public async Task<HttpResponseMessage> PutJsonAsync(string urlextension, object data)
+    public async Task<HttpResponseMessage> PatchJsonAsync(string urlextension, object data)
     {
         var jsonString = JsonSerializer.Serialize(data, _serializerOptions);
         var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-        return await _client.PutAsync(Url + urlextension, content);
+        var request = new HttpRequestMessage(new HttpMethod("PATCH"), Url + urlextension)
+        {
+            Content = content
+        };
+        return await _client.SendAsync(request);
     }
 }
