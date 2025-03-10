@@ -177,4 +177,7 @@
   <data name="ChangeLang" xml:space="preserve">
     <value>Cambiar idioma</value>
   </data>
+  <data name="AddToPlaylist" xml:space="preserve">
+    <value>Añadir a lista de reproducción</value>
+  </data>
 </root>

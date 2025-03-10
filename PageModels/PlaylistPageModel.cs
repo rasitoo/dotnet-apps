@@ -2,12 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities;
 using P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Rest;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
 
 [QueryProperty(nameof(Id), "id")]
-public partial class PlaylistPageModel(IRestClient<Playlist> playlistRestClient) : ObservableObject
+[QueryProperty(nameof(MessagedSong), "song")]
+public partial class PlaylistPageModel(IRestClient<Playlist> playlistRestClient, IRestClient<Song> songRestClient) : ObservableObject
 {
     [ObservableProperty]
     private int _id;
@@ -25,17 +27,43 @@ public partial class PlaylistPageModel(IRestClient<Playlist> playlistRestClient)
 
     [ObservableProperty]
     private Playlist _playlist = new();
+    [ObservableProperty]
+    private ObservableCollection<Song> _songs = new();
     private async void LoadAsync()
     {
         Playlist = await playlistRestClient.Get(Id);
+        if (Playlist.Songs == null)
+        {
+            Playlist.Songs = new();
+        }
+        Songs = new(Playlist.Songs);
+    }
+    [ObservableProperty]
+    private Song? _messagedSong;
+    partial void OnMessagedSongChanged(Song value)
+    {
+        if (value != null)
+        {
+
+            if (Playlist.Songs == null)
+            {
+                Playlist.Songs = new List<Song>();
+            }
+            if (!Playlist.Songs.Contains(value))
+            {
+                Playlist.Songs.Add(value);
+                songRestClient.UpdatePlaylist(value.Id, Playlist.Id);
+                Songs.Add(value);
+            }
+        }
     }
     [RelayCommand]
     private async Task Save()
     {
         if (Id == 0)
         {
-           Playlist = await playlistRestClient.Add(Playlist);
-           Id = Playlist.Id;        
+            Playlist = await playlistRestClient.Add(Playlist);
+            Id = Playlist.Id;
         }
         else
         {

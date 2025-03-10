@@ -9,4 +9,5 @@ public interface IRestClient<T>
     Task<T?> Add(T item);
     void Delete(T item);
     void Update(T item);
+    void UpdatePlaylist(int id1, int id2);
 }

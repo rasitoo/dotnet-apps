@@ -156,4 +156,20 @@ public class RestClientSong(ApiClientService apiClientService) : IRestClient<Son
             Debug.WriteLine(@"\tERROR {0}", ex.Message);
         }
     }
+
+    public async void UpdatePlaylist(int id1, int id2)
+    {
+        try
+        {
+            var response = await apiClientService.PatchJsonAsync($"/songs/{id1}/playlists/{id2}", null);
+            if (!response.IsSuccessStatusCode)
+            {
+                Debug.WriteLine(@"\tERROR {0}", response.ReasonPhrase);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(@"\tERROR {0}", ex.Message);
+        }
+    }
 }

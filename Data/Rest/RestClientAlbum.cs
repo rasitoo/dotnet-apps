@@ -180,4 +180,9 @@ public class RestClientAlbum(ApiClientService apiClientService) : IRestClient<Al
             Debug.WriteLine(@"\tERROR {0}", ex.Message);
         }
     }
+
+    public void UpdatePlaylist(int id1, int id2)
+    {
+        throw new NotImplementedException();
+    }
 }

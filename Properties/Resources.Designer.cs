@@ -70,6 +70,15 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Add to playlist.
+        /// </summary>
+        public static string AddToPlaylist {
+            get {
+                return ResourceManager.GetString("AddToPlaylist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Albums.
         /// </summary>
         public static string Albums {

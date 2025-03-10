@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
+[QueryProperty(nameof(MessagedSong), "song")]
 
 public partial class PlaylistsPageModel : ObservableObject
 {
@@ -15,13 +16,23 @@ public partial class PlaylistsPageModel : ObservableObject
     [ObservableProperty]
     private bool _playlistsLoading = true;
     [ObservableProperty]
+    private Song? _messagedSong = new();
+    [ObservableProperty]
     private Playlist? _selectedPlaylist = new();
     async partial void OnSelectedPlaylistChanged(Playlist value)
     {
         if (value != null)
         {
-            await Shell.Current.GoToAsync($"playlist?id={value.Id}");
-            SelectedPlaylist = null;
+            if (MessagedSong != null)
+            {
+                await Shell.Current.GoToAsync($"playlist?id={value.Id}", new ShellNavigationQueryParameters { { "song", MessagedSong } });
+                SelectedPlaylist = null;
+            }
+            else
+            {
+                await Shell.Current.GoToAsync($"playlist?id={value.Id}", new ShellNavigationQueryParameters { { "song", MessagedSong } });
+                SelectedPlaylist = null;
+            }
         }
     }
     public PlaylistsPageModel(IRestClient<Playlist> playlistRestClient)

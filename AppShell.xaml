@@ -27,14 +27,14 @@
             <ShellContent
                 Title="{local:Localization Favorites}"
                 ContentTemplate="{DataTemplate pages:FavoritesPage}"
-                Route="Favorites"
+                Route="favorites"
                 />
         </Tab>
         <Tab Title="{local:Localization Playlists}">
             <ShellContent
              Title="{local:Localization Playlists}"
              ContentTemplate="{DataTemplate pages:PlaylistsPage}"
-             Route="Playlists" />
+             Route="playlists" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem Title="{local:Localization Settings}" >

@@ -16,6 +16,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo
             Routing.RegisterRoute("genre", typeof(GenrePage));
             Routing.RegisterRoute("artist", typeof(ArtistPage));
             Routing.RegisterRoute("playlist", typeof(PlaylistPage));
+            Routing.RegisterRoute("playlists", typeof(PlaylistsPage));
         }
     }
 }

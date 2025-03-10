@@ -45,11 +45,11 @@ public static class MauiProgram
         builder.Services.AddSingleton<SongPage>();
         builder.Services.AddSingleton<SongPageModel>();
 
-        builder.Services.AddTransient<PlaylistsPage>();
-        builder.Services.AddTransient<PlaylistsPageModel>();
+        builder.Services.AddSingleton<PlaylistsPage>();
+        builder.Services.AddSingleton<PlaylistsPageModel>();
 
-        builder.Services.AddTransient<PlaylistPage>();
-        builder.Services.AddTransient<PlaylistPageModel>();
+        builder.Services.AddSingleton<PlaylistPage>();
+        builder.Services.AddSingleton<PlaylistPageModel>();
 
         builder.Services.AddTransient<AlbumPage>();
         builder.Services.AddTransient<AlbumPageModel>();
@@ -66,6 +66,7 @@ public static class MauiProgram
         var app = builder.Build();
 
         var favoritesPageModel = app.Services.GetRequiredService<FavoritesPageModel>();
+        var playlistPageModel = app.Services.GetRequiredService<PlaylistPageModel>();
 
         return app;
     }

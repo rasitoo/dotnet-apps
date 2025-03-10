@@ -128,6 +128,7 @@
                                 <MenuFlyout>
                                     <!--https://stackoverflow.com/questions/2963830/passing-event-args-and-sender-to-the-relaycommand-->
                                     <MenuFlyoutItem Text="{local:Localization AddFav}" Command="{Binding BindingContext.AddToFavoritesCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
+                                    <MenuFlyoutItem Text="{local:Localization AddToPlaylist}" Command="{Binding BindingContext.AddToPlaylistCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
                         </Grid>

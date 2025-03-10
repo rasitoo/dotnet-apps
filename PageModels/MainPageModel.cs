@@ -150,12 +150,11 @@ public partial class MainPageModel : ObservableObject
     }
     [RelayCommand]
 
-    private void AddToPlaylist(Song song)
+    private async void AddToPlaylist(Song song)
     {
         if (song != null)
         {
-            // Lógica para añadir la canción a una playlist
-            Debug.WriteLine($"Añadir a Playlist: {song.Title}");
+            await Shell.Current.GoToAsync("playlists", new ShellNavigationQueryParameters { { "song", song } });
         }
     }
 
