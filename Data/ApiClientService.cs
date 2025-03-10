@@ -7,8 +7,8 @@ public class ApiClientService
 {
     private readonly HttpClient _client;
     private readonly JsonSerializerOptions _serializerOptions;
-    //public string Url { get; } = "http://192.168.16.10:8080";
-    public string Url { get; } = "http://localhost:8081";
+    public string Url { get; } = "http://192.168.16.10:8080";
+    //public string Url { get; } = "http://localhost:8081";
 
     public ApiClientService(HttpClient client)
     {

@@ -9,7 +9,7 @@ namespace P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels;
 
 [QueryProperty(nameof(Id), "id")]
 [QueryProperty(nameof(MessagedSong), "song")]
-public partial class PlaylistPageModel(IRestClient<Playlist> playlistRestClient, IRestClient<Song> songRestClient) : ObservableObject
+public partial class PlaylistPageModel(IRestClient<Playlist> playlistRestClient, IRestClient<Song> songRestClient, IRestClient<Album> albumRestClient) : ObservableObject
 {
     [ObservableProperty]
     private int _id;
@@ -29,12 +29,29 @@ public partial class PlaylistPageModel(IRestClient<Playlist> playlistRestClient,
     private Playlist _playlist = new();
     [ObservableProperty]
     private ObservableCollection<Song> _songs = new();
+    [ObservableProperty]
+    private Song? _selectedSong = new();
+    async partial void OnSelectedSongChanged(Song value)
+    {
+        if (value != null)
+        {
+            await Shell.Current.GoToAsync("song", new ShellNavigationQueryParameters { { "song", value } });
+            SelectedSong = null;
+        }
+    }
     private async void LoadAsync()
     {
         Playlist = await playlistRestClient.Get(Id);
         if (Playlist.Songs == null)
         {
             Playlist.Songs = new();
+        }
+        else
+        {
+            foreach (var song in Playlist.Songs)
+            {
+                song.Album = await albumRestClient.Get(song.Album_id ?? 0);
+            }
         }
         Songs = new(Playlist.Songs);
     }

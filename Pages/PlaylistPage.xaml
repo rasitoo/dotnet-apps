@@ -27,8 +27,26 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Label Text="{Binding Title}" FontAttributes="Bold" />
-                        <Label Grid.Row="1" Text="{Binding Artist}" FontSize="Caption" Opacity="0.95" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Image 
+                           Source="{Binding Album.Picture}" 
+                           Aspect="AspectFill"
+                           HeightRequest="60" 
+                           WidthRequest="60" 
+                           Grid.RowSpan="3"
+                           Margin="0,0,10,0"/>
+                        <Label 
+                           Grid.Column="1"
+                           Text="{Binding Title}" 
+                           FontAttributes="Bold" />
+                        <Label Grid.Row="1" 
+                           Grid.Column="1"
+                           Text="{Binding Album.Title}" 
+                           FontSize="Caption"
+                           Opacity="0.95"/>
                         <FlyoutBase.ContextFlyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem Text="{local:Localization AddFav}" Command="{Binding BindingContext.AddToFavoritesCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />

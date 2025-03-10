@@ -149,7 +149,6 @@ public partial class MainPageModel : ObservableObject
         }
     }
     [RelayCommand]
-
     private async void AddToPlaylist(Song song)
     {
         if (song != null)
