@@ -8,39 +8,41 @@
              xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
              x:DataType="pagemodels:PlaylistsPageModel"
              >
-    <VerticalStackLayout
+    <ScrollView>
+        <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-        <Label Text="{local:Localization MyPlaylists}"
+            <Label Text="{local:Localization MyPlaylists}"
                FontAttributes="Bold"
                FontSize="Title"/>
-        <Button Text="{local:Localization NewPlaylist}"
+            <Button Text="{local:Localization NewPlaylist}"
          Command="{Binding CreatePlaylistCommand}" />
-        <ActivityIndicator IsRunning="{Binding PlaylistsLoading}" IsVisible="{Binding PlaylistsLoading}"/>
-        <CollectionView ItemsSource="{Binding Playlists}"
+            <ActivityIndicator IsRunning="{Binding PlaylistsLoading}" IsVisible="{Binding PlaylistsLoading}"/>
+            <CollectionView ItemsSource="{Binding Playlists}"
                 SelectedItem="{Binding SelectedPlaylist}"
                 SelectionMode="Single">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"  HorizontalItemSpacing="5"/>
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Playlist">
-                    <Grid Padding="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"  HorizontalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Playlist">
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
                             <Label 
                                Text="{Binding Title}" 
                                FontAttributes="Bold" />
                             <Label Grid.Row="1" 
                                Text="{Binding Description}" 
                                FontSize="Caption"
-                               Opacity="0.95"/> 
+                               Opacity="0.95"/>
 
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </VerticalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

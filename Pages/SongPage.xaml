@@ -7,53 +7,55 @@
             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"  
             Shell.NavBarIsVisible="False"  
             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
-            x:DataType="pagemodels:SongPageModel">  
-   <VerticalStackLayout Padding="10" Spacing="10">  
-       <Image  
+            x:DataType="pagemodels:SongPageModel">
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Image  
            Source="{Binding Song.Album.Picture}"  
            Aspect="AspectFill"  
            HeightRequest="200"  
            WidthRequest="200"  
            HorizontalOptions="Center"  
-           VerticalOptions="Center" />  
-       <Label  
+           VerticalOptions="Center" />
+            <Label  
            Text="{Binding Song.Title}"  
            FontSize="Large"  
            FontAttributes="Bold"  
            HorizontalOptions="Center"  
-           VerticalOptions="Center" />  
-       <Label  
+           VerticalOptions="Center" />
+            <Label  
            Text="{Binding Song.Album.Title}"  
            FontSize="Medium"  
            HorizontalOptions="Center"  
-           VerticalOptions="Center" />  
-       <toolkit:MediaElement x:Name="mediaElement"  
+           VerticalOptions="Center" />
+            <toolkit:MediaElement x:Name="mediaElement"  
            Source="{Binding Song.File}"  
            ShouldAutoPlay="False"  
            ShouldShowPlaybackControls="True"  
-           VerticalOptions="Center" />  
-       <Grid HorizontalOptions="Center" VerticalOptions="End">  
-           <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>  
-           <Label  
+           VerticalOptions="Center" />
+            <Grid HorizontalOptions="Center" VerticalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label  
                Text="{Binding Song.Publisher}"  
                FontSize="Caption"  
                HorizontalOptions="Center"
                Grid.Column="0"
-               />  
-           <Label  
+               />
+                <Label  
                Text="©️"  
                FontSize="Caption"  
                HorizontalOptions="Center"  
-               Grid.Column="1" />  
-           <Label  
+               Grid.Column="1" />
+                <Label  
                Text="{Binding Song.Year}"  
                FontSize="Caption"  
                HorizontalOptions="Center"  
-               Grid.Column="2" />  
-       </Grid>  
-   </VerticalStackLayout>  
+               Grid.Column="2" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -7,17 +7,18 @@
              xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
              Shell.NavBarIsVisible="False"
              x:DataType="pagemodels:SettingsPageModel">
-
-    <VerticalStackLayout
+    <ScrollView>
+        <VerticalStackLayout
          Padding="30,0"
          Spacing="25">
-        <Label Text="{local:Localization Settings}"
+            <Label Text="{local:Localization Settings}"
             FontAttributes="Bold"
             FontSize="Title"/>
-        <Label Text="{local:Localization SelectLanguage}"/>
-        <Picker ItemsSource="{Binding Languages}"
+            <Label Text="{local:Localization SelectLanguage}"/>
+            <Picker ItemsSource="{Binding Languages}"
                SelectedItem="{Binding SelectedLanguage}"/>
-        <Button Text="{local:Localization ChangeLang}"
+            <Button Text="{local:Localization ChangeLang}"
              Command="{Binding ChangeLanguageCommand}"/>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
