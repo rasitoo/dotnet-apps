@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
+    xmlns:pages="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="P07_01_DI_Contactos_TAPIADOR_rodrigo">
+    <!--Ejemplo de: https://github.com/dotnet/maui-samples/tree/main/9.0/Navigation/ShellMixedSample-->
+
+    <FlyoutItem Title="{local:Localization Home}">
+        <ShellContent
+            Title="{local:Localization Home}"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="home" />
+    </FlyoutItem>
+    <FlyoutItem Title="{local:Localization Search}">
+        <ShellContent
+        Title="{local:Localization Search}"
+        ContentTemplate="{DataTemplate pages:SearchPage}"
+        Route="search"/>
+    </FlyoutItem>
+    <FlyoutItem Title="{local:Localization Library}">
+        <Tab Title="{local:Localization Favorites}">
+            <ShellContent
+                Title="{local:Localization Favorites}"
+                ContentTemplate="{DataTemplate pages:FavoritesPage}"
+                Route="favorites"
+                />
+        </Tab>
+        <Tab Title="{local:Localization Playlists}">
+            <ShellContent
+             Title="{local:Localization Playlists}"
+             ContentTemplate="{DataTemplate pages:PlaylistsPage}"
+             Route="playlists" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="{local:Localization Settings}" >
+        <ShellContent
+             Title="{local:Localization Settings}"
+             ContentTemplate="{DataTemplate pages:SettingsPage}"
+             Route="Settings" />
+    </FlyoutItem>
+    <!--https://learn.microsoft.com/en-us/previous-versions/xamarin/xamarin-forms/app-fundamentals/shell/flyout-->
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout>
+                <ContentView>
+                    
+                </ContentView>
+                <Label Text="{local:Localization MadeBy}"
+                       TextColor="GhostWhite"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+                <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{dd 0:MMMM, yyyy}'}"
+                       TextColor="GhostWhite"
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+</Shell>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
+             xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
+             x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.SearchPage"
+             Shell.NavBarIsVisible="False"
+             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
+             x:DataType="pagemodels:SearchPageModel">
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Label Text="{local:Localization Genres}"
+               FontAttributes="Bold"
+               FontSize="Title"/>
+            <ActivityIndicator IsRunning="{Binding GenresLoading}" IsVisible="{Binding GenresLoading}" />
+            <CollectionView ItemsSource="{Binding Genres}"
+                        SelectedItem="{Binding SelectedGenre}"
+                        SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="3" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Genre">
+                        <Border Padding="20"
+                        StrokeShape="RoundRectangle 10"
+                        Stroke="LightGray"
+                        StrokeThickness="1"
+                        WidthRequest="150">
+                            <Label 
+                            Text="{Binding Name}" 
+                            FontAttributes="Bold" 
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            LineBreakMode="TailTruncation"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <SearchBar Placeholder="{local:Localization Search}"
+           Text="{Binding SearchText}"
+           SearchCommand="{Binding SearchCommand}" />
+            <Label Text="{local:Localization Artists}" FontAttributes="Bold"  />
+                <CollectionView ItemsSource="{Binding FilteredArtists}"
+                                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Artist">
+                            <Label Text="{Binding Name}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            <Label Text="{local:Localization Albums}" FontAttributes="Bold"  />
+                <CollectionView ItemsSource="{Binding FilteredAlbums}"
+                                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Album">
+                            <Label Text="{Binding Title}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            <Label Text="{local:Localization Songs}" FontAttributes="Bold"  />
+                <CollectionView ItemsSource="{Binding FilteredSongs}"
+                                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Song">
+                            <Label Text="{Binding Title}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            <Label Text="{local:Localization Genres}" FontAttributes="Bold"  />
+                <CollectionView ItemsSource="{Binding FilteredGenres}"
+                                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Genre">
+                            <Label Text="{Binding Name}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            <Label Text="{local:Localization Playlists}" FontAttributes="Bold"  />
+                <CollectionView ItemsSource="{Binding FilteredPlaylists}"
+                                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Playlist">
+                            <Label Text="{Binding Title}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,8 @@
+﻿<maui:MauiWinUIApplication
+    x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.WinUI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:maui="using:Microsoft.Maui"
+    xmlns:local="using:P07_01_DI_Contactos_TAPIADOR_rodrigo.WinUI">
+
+</maui:MauiWinUIApplication>

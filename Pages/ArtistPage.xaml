@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--https://stackoverflow.com/questions/71806578/maui-how-to-remove-the-title-bar-and-fix-the-window-size-->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
+             xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
+             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
+             x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.ArtistPage"
+             Shell.NavBarIsVisible="False"
+             x:DataType="pagemodels:ArtistPageModel">
+    <ScrollView>
+        <VerticalStackLayout Spacing="15">
+            <Image 
+            Source="{Binding Artist.Artist_banner}" 
+            Aspect="AspectFill"
+            HorizontalOptions="Center" />
+            <Label 
+            Text="{Binding Artist.Name}" 
+            FontAttributes="Bold" 
+            FontSize="Large" 
+            Margin="10,0,0,0"/>
+            <Label 
+            Text="{local:Localization TopSongs}" 
+            FontAttributes="Bold" 
+            FontSize="Medium"
+            Margin="10,0,0,0"/>
+            <ActivityIndicator IsRunning="{Binding SongsLoading}" IsVisible="{Binding SongsLoading}" />
+            <CollectionView ItemsSource="{Binding TopSongs}"
+                SelectedItem="{Binding SelectedSong}"
+                SelectionMode="Single"
+                HorizontalOptions="Start">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Song">
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image 
+                               Source="{Binding Album.Picture}" 
+                               Aspect="AspectFill"
+                               HeightRequest="60" 
+                               WidthRequest="60" 
+                               Grid.RowSpan="3"
+                               Margin="0,0,10,0"/>
+                            <Label 
+                               Grid.Column="1"
+                               Text="{Binding Title}" 
+                               FontAttributes="Bold" />
+                            <Label Grid.Row="1" 
+                               Grid.Column="1"
+                               Text="{Binding Album.Title}" 
+                               FontSize="Caption"
+                               Opacity="0.95"/>
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Text="{local:Localization AddFav}" Command="{Binding BindingContext.AddToFavoritesCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
+                                    <MenuFlyoutItem Text="{local:Localization AddToPlaylist}" Command="{Binding BindingContext.AddToPlaylistCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label 
+            Text="{local:Localization Albums}" 
+            FontAttributes="Bold" 
+            FontSize="Medium" 
+            Margin="10,0,0,0"/>
+            <ActivityIndicator IsRunning="{Binding AlbumsLoading}" IsVisible="{Binding AlbumsLoading}"/>
+            <CollectionView ItemsSource="{Binding Artist.Albums}"
+                            SelectedItem="{Binding SelectedAlbum}"
+                            SelectionMode="Single"
+                            Margin="10,0,0,0">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="5" VerticalItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Album">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                            <Image 
+                                Source="{Binding Picture}" 
+                                Aspect="AspectFill"
+                                HeightRequest="120" 
+                                WidthRequest="120" />
+                            <Label 
+                                Text="{Binding Title}" 
+                                FontAttributes="Bold" 
+                                LineBreakMode="TailTruncation"
+                                WidthRequest="120" />
+                            <Label 
+                                Text="{Binding Artist.Name}" 
+                                FontSize="Caption"
+                                Opacity="0.8"
+                                LineBreakMode="TailTruncation"
+                                WidthRequest="120" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label 
+            Text="{local:Localization Genres}" 
+            FontAttributes="Bold" 
+            FontSize="Medium" 
+            Margin="10,0,0,0"/>
+            <ActivityIndicator IsRunning="{Binding GenresLoading}" IsVisible="{Binding GenresLoading}" />
+            <CollectionView ItemsSource="{Binding Genres}"
+                            SelectedItem="{Binding SelectedGenre}"
+                            SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Genre">
+                        <Border Padding="20"
+                             StrokeShape="RoundRectangle 10"
+                             Stroke="LightGray"
+                             StrokeThickness="1"
+                             WidthRequest="150">
+                            <Label 
+                                 Text="{Binding Name}" 
+                                 FontAttributes="Bold" 
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 LineBreakMode="TailTruncation"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

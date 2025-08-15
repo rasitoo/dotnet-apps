@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.Data.Entities"
+             xmlns:pagemodels="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo.PageModels"
+             x:Class="P07_01_DI_Contactos_TAPIADOR_rodrigo.Pages.MainPage"
+             xmlns:local="clr-namespace:P07_01_DI_Contactos_TAPIADOR_rodrigo"
+             Shell.NavBarIsVisible="False"
+             x:DataType="pagemodels:MainPageModel">
+    <!--Ejemplo de https://github.com/dotnet/maui-samples/blob/main/9.0/UserInterface/Views/CollectionViewDemos/CollectionViewDemos/Views/Grouping/VerticalListGroupingPage.xaml-->
+    <!--Activity indicator de: https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/activityindicator?view=net-maui-9.0-->
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="15,0"
+            Spacing="20">
+            <Label Text="{local:Localization Artists}"
+                   FontAttributes="Bold"
+                   FontSize="Title"/>
+            <ActivityIndicator IsRunning="{Binding ArtistsLoading}" IsVisible="{Binding ArtistsLoading}" />
+            <CollectionView ItemsSource="{Binding Artists}"
+                            SelectedItem="{Binding SelectedArtist}"
+                            SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="5" VerticalItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Artist">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                            <Border
+                                HeightRequest="100"
+                                WidthRequest="100"
+                                StrokeShape="RoundRectangle 70"
+                                Margin="0,0,0,5">
+                                <Image 
+                                    Source="{Binding Artist_thumbnail}" 
+                                    Aspect="AspectFill"/>
+                            </Border>
+                            <Label 
+                                Text="{Binding Name}" 
+                                FontAttributes="Bold" 
+                                HorizontalTextAlignment="Center"
+                                LineBreakMode="TailTruncation"
+                                WidthRequest="120" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{local:Localization Albums}"
+                   FontAttributes="Bold"
+                   FontSize="Title"
+                />
+            <ActivityIndicator IsRunning="{Binding AlbumsLoading}" IsVisible="{Binding AlbumsLoading}"/>
+            <CollectionView ItemsSource="{Binding Albums}"
+                            SelectedItem="{Binding SelectedAlbum}"
+                            SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="5" VerticalItemSpacing="15"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Album">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                            <Image 
+                                Source="{Binding Picture}" 
+                                Aspect="AspectFill"
+                                HeightRequest="120" 
+                                WidthRequest="120" />
+                            <Label 
+                                Text="{Binding Title}" 
+                                FontAttributes="Bold" 
+                                LineBreakMode="TailTruncation"
+                                WidthRequest="120" />
+                            <Label 
+                                Text="{Binding Artist.Name}" 
+                                FontSize="Caption"
+                                Opacity="0.8"
+                                LineBreakMode="TailTruncation"
+                                WidthRequest="120" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{local:Localization Songs}"
+                   FontAttributes="Bold"
+                   FontSize="Title"
+                />
+            <ActivityIndicator IsRunning="{Binding SongsLoading}" IsVisible="{Binding SongsLoading}" />
+            <CollectionView ItemsSource="{Binding Songs}"
+                            SelectedItem="{Binding SelectedSong}"
+                            SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" Span="3" HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Song">
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Image 
+                               Source="{Binding Album.Picture}" 
+                               Aspect="AspectFill"
+                               HeightRequest="60" 
+                               WidthRequest="60" 
+                               Grid.RowSpan="3"
+                               Margin="0,0,10,0"/>
+                            <Label 
+                               Grid.Column="1"
+                               Text="{Binding Title}" 
+                               FontAttributes="Bold" />
+                            <Label Grid.Row="1" 
+                               Grid.Column="1"
+                               Text="{Binding Album.Title}" 
+                               FontSize="Caption"
+                               Opacity="0.95"/>
+                            <Label Grid.Row="2" 
+                               Grid.Column="1"
+                               Text="{Binding Album.Artist.Name}" 
+                               FontSize="Caption"
+                               Opacity="0.7"/>
+                            <!--https://learn.microsoft.com/en-us/dotnet/maui/user-interface/context-menu?view=net-maui-9.0-->
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <!--https://stackoverflow.com/questions/2963830/passing-event-args-and-sender-to-the-relaycommand-->
+                                    <MenuFlyoutItem Text="{local:Localization AddFav}" Command="{Binding BindingContext.AddToFavoritesCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
+                                    <MenuFlyoutItem Text="{local:Localization AddToPlaylist}" Command="{Binding BindingContext.AddToPlaylistCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}" CommandParameter="{Binding}" />
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{local:Localization Playlists}"
+                   FontAttributes="Bold"
+                   FontSize="Title"/>
+            <ActivityIndicator IsRunning="{Binding PlaylistsLoading}" IsVisible="{Binding PlaylistsLoading}"/>
+            <CollectionView ItemsSource="{Binding Playlists}"
+                            SelectedItem="{Binding SelectedPlaylist}"
+                            SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal"  HorizontalItemSpacing="5" VerticalItemSpacing="5"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Playlist">
+                        <Border Padding="20"
+                             StrokeShape="RoundRectangle 10"
+                             Stroke="LightGray"
+                             StrokeThickness="1"
+                             WidthRequest="150">
+                            <Label 
+                                 Text="{Binding Title}" 
+                                 FontAttributes="Bold" 
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 LineBreakMode="TailTruncation"/>   
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
