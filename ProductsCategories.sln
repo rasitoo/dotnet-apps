@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{A0A07AFE-1C38-49FC-BBE1-42F12EA5F44C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P07_01_DI_Contactos_TAPIADOR_rodrigo", "WPF\apirest\P07_01_DI_Contactos_TAPIADOR_rodrigo.csproj", "{CEE09D03-6957-4083-84A8-094EDC3D2617}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P05_01_DI_Productos_TAPIADOR_rodrigo", "WPF\base\P05_01_DI_Productos_TAPIADOR_rodrigo.csproj", "{79E1535F-DDF5-4A1B-9ED6-59A5369E5FCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P06_01_DI_Contactos_TAPIADOR_rodrigo", "WPF\sqlserver\P06_01_DI_Contactos_TAPIADOR_rodrigo.csproj", "{20881F7F-EAE5-4B7B-803F-AFF33A2C36D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P03_02_DI_Contactos_TAPIADOR_rodrigo", "WinForms\P03_02_DI_Contactos_TAPIADOR_rodrigo.csproj", "{5B919240-E282-46B4-A2B8-6409E6DABD88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P07_01_DI_Contactos_TAPIADOR_rodrigo", "maui\P07_01_DI_Contactos_TAPIADOR_rodrigo.csproj", "{85A58AA8-9DED-4918-832B-60DE1B67F85C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CEE09D03-6957-4083-84A8-094EDC3D2617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEE09D03-6957-4083-84A8-094EDC3D2617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEE09D03-6957-4083-84A8-094EDC3D2617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEE09D03-6957-4083-84A8-094EDC3D2617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E1535F-DDF5-4A1B-9ED6-59A5369E5FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E1535F-DDF5-4A1B-9ED6-59A5369E5FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E1535F-DDF5-4A1B-9ED6-59A5369E5FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E1535F-DDF5-4A1B-9ED6-59A5369E5FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20881F7F-EAE5-4B7B-803F-AFF33A2C36D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20881F7F-EAE5-4B7B-803F-AFF33A2C36D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20881F7F-EAE5-4B7B-803F-AFF33A2C36D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20881F7F-EAE5-4B7B-803F-AFF33A2C36D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B919240-E282-46B4-A2B8-6409E6DABD88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B919240-E282-46B4-A2B8-6409E6DABD88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B919240-E282-46B4-A2B8-6409E6DABD88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B919240-E282-46B4-A2B8-6409E6DABD88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85A58AA8-9DED-4918-832B-60DE1B67F85C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85A58AA8-9DED-4918-832B-60DE1B67F85C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85A58AA8-9DED-4918-832B-60DE1B67F85C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85A58AA8-9DED-4918-832B-60DE1B67F85C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CEE09D03-6957-4083-84A8-094EDC3D2617} = {A0A07AFE-1C38-49FC-BBE1-42F12EA5F44C}
+		{79E1535F-DDF5-4A1B-9ED6-59A5369E5FCF} = {A0A07AFE-1C38-49FC-BBE1-42F12EA5F44C}
+		{20881F7F-EAE5-4B7B-803F-AFF33A2C36D1} = {A0A07AFE-1C38-49FC-BBE1-42F12EA5F44C}
+	EndGlobalSection
+EndGlobal
